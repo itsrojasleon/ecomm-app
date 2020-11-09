@@ -11,7 +11,7 @@ exports.up = (pgm) => {
       username VARCHAR(30) NOT NULL,
       bio VARCHAR(400),
       avatar VARCHAR(200),
-      password VARCHAR(50),
+      password VARCHAR(100),
       status VARCHAR(15)
     );
   `);

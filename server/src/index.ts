@@ -1,18 +1,16 @@
 import { app } from './app';
-import { Pool } from 'pg';
+import { pool } from './pool';
 
 const main = async () => {
   try {
-    const pool = new Pool({
+    await pool.connect({
       host: 'localhost',
       port: 5432,
       database: 'instagram-clone',
       user: 'rojasleon',
       password: 'password'
     });
-    const client = await pool.connect();
-    const { rows } = await client.query('SELECT 1 + 1;');
-    console.log(rows[0]['?column?']);
+    console.log('Connected to Postgres');
   } catch (err) {
     console.error(err);
   }
