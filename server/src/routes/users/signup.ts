@@ -30,7 +30,6 @@ router.post(
     const { email, password, username } = req.body;
 
     const existingUser = await UserRepo.findByEmail(email);
-    console.log(existingUser);
 
     if (existingUser) {
       throw new BadRequestError('Email in use');

@@ -40,7 +40,7 @@ class UserRepo {
       [email, passwordHashed, username]
     );
 
-    return toCamelCase(rows);
+    return toCamelCase(rows)[0];
   }
 
   static async count() {
