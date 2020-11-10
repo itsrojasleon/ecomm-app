@@ -8,12 +8,12 @@ exports.up = (pgm) => {
       id SERIAL PRIMARY KEY,
       created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-      email VARCHAR(60),
-      password VARCHAR(200),
+      email VARCHAR(60) UNIQUE NOT NULL,
+      password VARCHAR(200) NOT NULL,
       bio VARCHAR(400),
       avatar VARCHAR(200),
       status VARCHAR(15),
-      username VARCHAR(30) NOT NULL
+      username VARCHAR(30) UNIQUE NOT NULL
     );
   `);
 };

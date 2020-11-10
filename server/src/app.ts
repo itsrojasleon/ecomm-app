@@ -7,7 +7,6 @@ import { currentUserRouter } from './routes/users/currentuser';
 import { signupRouter } from './routes/users/signup';
 import { signinRouter } from './routes/users/signin';
 import { signoutRouter } from './routes/users/signout';
-
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
 
