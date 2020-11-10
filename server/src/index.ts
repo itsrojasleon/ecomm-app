@@ -3,13 +3,7 @@ import { pool } from './pool';
 
 const main = async () => {
   try {
-    await pool.connect({
-      host: 'localhost',
-      port: 5432,
-      database: 'instagram-clone',
-      user: 'rojasleon',
-      password: 'password'
-    });
+    await pool.connect();
     console.log('Connected to Postgres');
   } catch (err) {
     console.error(err);

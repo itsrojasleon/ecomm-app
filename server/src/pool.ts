@@ -1,22 +1,11 @@
-import pg from 'pg';
+import { Pool } from 'pg';
 
-class Pool {
-  private _pool: any;
-
-  connect(options: any) {
-    this._pool = new pg.Pool(options);
-    return this._pool.query('SELECT 1 + 1;');
-  }
-
-  close() {
-    return this._pool.end();
-  }
-
-  query(sql: string, params: any) {
-    return this._pool.query(sql, params);
-  }
-}
-
-const pool = new Pool();
+const pool = new Pool({
+  host: 'localhost',
+  port: 5432,
+  database: 'instagram-clone',
+  user: 'rojasleon',
+  password: 'password'
+});
 
 export { pool };

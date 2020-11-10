@@ -1,4 +1,6 @@
-const toCamelCase = (rows: any) => {
+import { QueryResultRow } from 'pg';
+
+const toCamelCase = (rows: QueryResultRow) => {
   return rows.map((row: any) => {
     const replaced: any = {};
 

@@ -8,6 +8,7 @@ import { signinRouter } from './routes/users/signin';
 import { signoutRouter } from './routes/users/signout';
 
 import { NotFoundError } from './errors/not-found';
+import { errorHandler } from './middlewares/error-handler';
 
 const app = express();
 
@@ -36,5 +37,7 @@ app.use(signoutRouter);
 app.all('*', () => {
   throw new NotFoundError();
 });
+
+app.use(errorHandler);
 
 export { app };
