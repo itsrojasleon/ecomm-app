@@ -3,7 +3,7 @@ import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import { BadRequestError } from '../../errors/bad-request';
 import { validateRequest } from '../../middlewares/validate-request';
-import { UserRepo } from '../../repos/user-repo';
+import { User } from '../../models/user';
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.post(
   [
     body('email')
       .isEmail()
-      .isLength({ min: 10, max: 60 })
+      .isLength({ min: 10, max: 120 })
       .withMessage('Email must be valid'),
     body('password')
       .trim()
@@ -20,7 +20,7 @@ router.post(
       .withMessage('Password must be between 5 and 30 characters'),
     body('username')
       .trim()
-      .isLength({ min: 5, max: 40 })
+      .isLength({ min: 5, max: 50 })
       .withMessage(
         'username must be provided and be between 5 and 25 characters'
       )
@@ -29,13 +29,18 @@ router.post(
   async (req: Request, res: Response) => {
     const { email, password, username } = req.body;
 
-    const existingUser = await UserRepo.findByEmail(email);
+    const existingEmail = await User.findOne({ where: { email } });
+    const existingUsername = await User.findOne({ where: { username } });
 
-    if (existingUser) {
-      throw new BadRequestError('Email in use');
+    if (existingEmail) {
+      throw new BadRequestError('Email is already in use');
     }
 
-    const user = await UserRepo.insertAtSignup(email, password, username);
+    if (existingUsername) {
+      throw new BadRequestError('Username is already in use');
+    }
+
+    const user = await User.create({ email, username, password });
 
     // Generate JWT
     const userJwt = jwt.sign(

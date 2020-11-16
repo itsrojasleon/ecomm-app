@@ -3,8 +3,8 @@ import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import { validateRequest } from '../../middlewares/validate-request';
 import { BadRequestError } from '../../errors/bad-request';
-import { UserRepo } from '../../repos/user-repo';
 import { PasswordManager } from '../../services/password-manager';
+import { User } from '../../models/user';
 
 const router = express.Router();
 
@@ -18,7 +18,7 @@ router.post(
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
-    const existingUser = await UserRepo.findByEmail(email);
+    const existingUser = await User.findOne({ where: { email } });
 
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials');

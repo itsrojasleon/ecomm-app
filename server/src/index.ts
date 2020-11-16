@@ -1,9 +1,9 @@
 import { app } from './app';
-import { pool } from './pool';
+import { sequelize } from './sequelize';
 
 const main = async () => {
   try {
-    await pool.connect();
+    await sequelize.authenticate();
     console.log('Connected to Postgres');
   } catch (err) {
     console.error(err);
