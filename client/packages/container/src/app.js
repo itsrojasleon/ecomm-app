@@ -24,6 +24,9 @@ const App = () => {
           <Route path="/auth">
             <AuthApp />
           </Route>
+          <Route path="/">
+            <div>Home page brother</div>
+          </Route>
         </Switch>
       </Suspense>
     </Router>

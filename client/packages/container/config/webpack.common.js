@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 module.exports = {
   module: {
     rules: [
@@ -11,7 +13,10 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-react', '@babel/preset-env'],
-            plugins: ['@babel/plugin-transform-runtime']
+            plugins: [
+              '@babel/plugin-transform-runtime',
+              isDevelopment && 'react-refresh/babel'
+            ].filter(Boolean)
           }
         }
       },

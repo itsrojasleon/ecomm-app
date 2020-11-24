@@ -3,6 +3,7 @@ import { Router, Switch, Route } from 'react-router-dom';
 import '../styles/tailwind.css';
 
 const Signup = lazy(() => import('./pages/signup'));
+const Signin = lazy(() => import('./pages/signin'));
 
 const App = ({ history, onSignin }) => {
   return (
@@ -10,7 +11,7 @@ const App = ({ history, onSignin }) => {
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route path="/auth/signin">
-            <div className="bg-purple-500">Signin</div>
+            <Signin />
           </Route>
           <Route path="/auth/signup">
             <Signup />

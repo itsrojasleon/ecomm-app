@@ -19,7 +19,7 @@ app.use(
     credentials: true,
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
-      if (['http://localhost:3000'].indexOf(origin) === -1) {
+      if (['http://localhost:3000', 'http://localhost:8080', 'http://localhost:8082'].indexOf(origin) === -1) {
         const msg =
           'The CORS policy for this site does not allow access from the specified Origin.';
         return callback(new Error(msg), true);
