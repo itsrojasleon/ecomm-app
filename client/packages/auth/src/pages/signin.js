@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { instagramClone } from '../../api/instagram-clone';
 
-const Signin = () => {
+const Signin = ({ onSignin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await instagramClone.post('/api/users/signin', {
-      email,
-      password
-    });
+    await onSignin({ email, password });
   };
 
   return (

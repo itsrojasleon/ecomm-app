@@ -1,41 +1,43 @@
-import React, { lazy, Suspense, useState, useEffect } from 'react';
+import React, { lazy, Suspense, useState, useEffect, useContext } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import '../styles/tailwind.css';
-import { instagramClone } from '../api/instagram-clone';
+import { Context as AuthContext } from './context/auth';
 import Nav from './components/nav';
 const AuthApp = lazy(() => import('./components/auth-app'));
 
 const history = createBrowserHistory();
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const {
+    state: { currentUser },
+    fetchUser,
+    signup,
+    signin,
+    signout
+  } = useContext(AuthContext);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const {
-        data: { currentUser }
-      } = await instagramClone.get('/api/users/currentuser');
-
-      setCurrentUser(currentUser);
-    };
-
     fetchUser();
-  }, []);
+  }, [currentUser]);
 
   return (
     <Router history={history}>
-      <Nav currentUser={currentUser} />
+      <Nav currentUser={currentUser} onSignout={signout} />
       <Suspense fallback={<h1>Loading...</h1>}>
         <Switch>
           <Route path="/auth">
             <>
               {currentUser && <Redirect to="/" />}
-              <AuthApp />
+              <AuthApp onSignin={signin} onSignup={signup} />
             </>
           </Route>
           <Route exact path="/">
-            <div>{JSON.stringify(currentUser)}</div>
+            <h1 className="font-bold text-4xl">
+              {currentUser
+                ? JSON.stringify(currentUser)
+                : "You're not authenticated"}
+            </h1>
           </Route>
         </Switch>
       </Suspense>
