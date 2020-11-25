@@ -6,6 +6,7 @@
     "build": "webpack --config config/webpack.prod.js"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",

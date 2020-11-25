@@ -1,16 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const NavItem = ({ href, isActive, children }) => {
+const NavItem = ({ href, children }) => {
   return (
     <li>
-      <Link
+      <NavLink
         to={href}
-        className={`block px-4 py-2 rounded-md ${
-          isActive ? 'bg-yellow-100 text-yellow-700' : ''
-        }`}>
+        activeClassName="bg-yellow-100 text-yellow-700"
+        className="block px-4 py-2 rounded-md">
         {children}
-      </Link>
+      </NavLink>
     </li>
   );
 };

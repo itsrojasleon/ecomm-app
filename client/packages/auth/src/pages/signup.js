@@ -10,13 +10,11 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { data } = await instagramClone.post('/api/users/signup', {
+    await instagramClone.post('/api/users/signup', {
       email,
       password,
       username
     });
-
-    console.log(data);
   };
 
   return (
