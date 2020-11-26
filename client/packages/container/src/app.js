@@ -5,6 +5,7 @@ import '../styles/tailwind.css';
 import { Context as AuthContext } from './context/auth';
 import Nav from './components/nav';
 const AuthApp = lazy(() => import('./components/auth-app'));
+const ProductsApp = lazy(() => import('./components/products-app'));
 
 const history = createBrowserHistory();
 
@@ -19,7 +20,9 @@ const App = () => {
 
   useEffect(() => {
     fetchUser();
-  }, [currentUser]);
+  }, []);
+
+  console.error(currentUser);
 
   return (
     <Router history={history}>
@@ -32,7 +35,10 @@ const App = () => {
               <AuthApp onSignin={signin} onSignup={signup} />
             </>
           </Route>
-          <Route exact path="/">
+          <Route path="/products">
+            <ProductsApp />
+          </Route>
+          <Route path="/">
             <h1 className="font-bold text-4xl">
               {currentUser
                 ? JSON.stringify(currentUser)
