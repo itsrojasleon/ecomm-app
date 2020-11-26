@@ -3,10 +3,18 @@ import 'express-async-errors';
 import cors from 'cors';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
+
+// auth routes
 import { currentUserRouter } from './routes/users/currentuser';
 import { signupRouter } from './routes/users/signup';
 import { signinRouter } from './routes/users/signin';
 import { signoutRouter } from './routes/users/signout';
+
+// product routes
+import { indexProductRouter } from './routes/products/index';
+import { createProductRouter } from './routes/products/new';
+import { showProductRouter } from './routes/products/show';
+
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
 
@@ -19,7 +27,7 @@ app.use(
     credentials: true,
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
-      if (['http://localhost:3000', 'http://localhost:8080', 'http://localhost:8082'].indexOf(origin) === -1) {
+      if (['http://localhost:8080'].indexOf(origin) === -1) {
         const msg =
           'The CORS policy for this site does not allow access from the specified Origin.';
         return callback(new Error(msg), true);
@@ -34,6 +42,10 @@ app.use(currentUserRouter);
 app.use(signupRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
+
+app.use(indexProductRouter);
+app.use(createProductRouter);
+app.use(showProductRouter);
 
 app.all('*', () => {
   throw new NotFoundError();
