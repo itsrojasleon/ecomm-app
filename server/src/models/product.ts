@@ -1,5 +1,4 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import { User } from './user';
 import { sequelize } from '../sequelize';
 
 interface ProductAttrs {
