@@ -6,7 +6,7 @@ const NavItem = ({ href, children }) => {
     <li>
       <NavLink
         to={href}
-        className="block px-4 py-2 rounded-md hover:bg-yellow-100 hover:text-yellow-700">
+        className="block px-4 py-2 rounded-md hover:bg-gray-100">
         {children}
       </NavLink>
     </li>

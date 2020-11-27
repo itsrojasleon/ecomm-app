@@ -27,26 +27,28 @@ const App = () => {
   return (
     <Router history={history}>
       <Nav currentUser={currentUser} onSignout={signout} />
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <Switch>
-          <Route path="/auth">
-            <>
-              {currentUser && <Redirect to="/" />}
-              <AuthApp onSignin={signin} onSignup={signup} />
-            </>
-          </Route>
-          <Route path="/products">
-            <ProductsApp />
-          </Route>
-          <Route path="/">
-            <h1 className="font-bold text-4xl">
-              {currentUser
-                ? JSON.stringify(currentUser)
-                : "You're not authenticated"}
-            </h1>
-          </Route>
-        </Switch>
-      </Suspense>
+      <div className="w-11/12 m-auto">
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Switch>
+            <Route path="/auth">
+              <>
+                {currentUser && <Redirect to="/" />}
+                <AuthApp onSignin={signin} onSignup={signup} />
+              </>
+            </Route>
+            <Route path="/products">
+              <ProductsApp />
+            </Route>
+            <Route path="/">
+              <h1 className="font-bold text-4xl">
+                {currentUser
+                  ? JSON.stringify(currentUser)
+                  : "You're not authenticated"}
+              </h1>
+            </Route>
+          </Switch>
+        </Suspense>
+      </div>
     </Router>
   );
 };

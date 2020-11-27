@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import ProductItem from '../components/product-item';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,13 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  return <div>{JSON.stringify(products)}</div>;
+  return (
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
+      {products.map((product) => (
+        <ProductItem key={product.id} {...product} />
+      ))}
+    </div>
+  );
 };
 
 export default Products;
