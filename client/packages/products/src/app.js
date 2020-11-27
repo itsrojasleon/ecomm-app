@@ -4,6 +4,7 @@ import '../styles/tailwind.css';
 
 const Products = lazy(() => import('./pages'));
 const New = lazy(() => import('./pages/new'));
+const Owner = lazy(() => import('./pages/owner'));
 
 const App = ({ history }) => {
   return (
@@ -13,6 +14,7 @@ const App = ({ history }) => {
           <Route exact path="/products">
             <Products />
           </Route>
+          <Route path="/products/owner" component={Owner} />
           <Route path="/products/new">
             <New />
           </Route>
