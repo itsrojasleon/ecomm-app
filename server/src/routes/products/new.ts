@@ -12,7 +12,6 @@ router.post(
   currentUser,
   requireAuth,
   [
-    body('userId').isNumeric().withMessage('You must provide an userId'),
     body('name')
       .isLength({ min: 1, max: 148 })
       .withMessage('You must provide a name'),
@@ -24,6 +23,8 @@ router.post(
   validateRequest,
   async (req: Request, res: Response) => {
     const { name, price, description } = req.body;
+
+    console.log(name, price, description, req.currentUser!.id);
 
     const product = await Product.create({
       name,

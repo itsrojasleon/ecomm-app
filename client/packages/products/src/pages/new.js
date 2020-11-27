@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const New = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { data } = await axios.post(
+    await axios.post(
       'http://localhost:4000/api/products',
       { name, price, description },
       { withCredentials: true }
     );
 
-    console.log(data);
+    history.push('/products');
   };
 
   return (

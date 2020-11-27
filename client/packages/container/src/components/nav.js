@@ -22,7 +22,9 @@ const Nav = ({ currentUser, onSignout }) => {
   const links = [
     { href: '/', label: 'Home' },
     !currentUser && { href: '/auth/signup', label: 'Signup' },
-    !currentUser && { href: '/auth/signin', label: 'Signin' }
+    !currentUser && { href: '/auth/signin', label: 'Signin' },
+    currentUser && { href: '/products', label: 'Products' },
+    currentUser && { href: '/products/new', label: 'Sell' }
   ]
     .filter(Boolean)
     .map(({ href, label }) => (
