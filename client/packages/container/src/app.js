@@ -1,11 +1,13 @@
-import React, { lazy, Suspense, useState, useEffect, useContext } from 'react';
+import React, { lazy, Suspense, useEffect, useContext } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import '../styles/tailwind.css';
 import { Context as AuthContext } from './context/auth';
 import Nav from './components/nav';
+
 const AuthApp = lazy(() => import('./components/auth-app'));
 const ProductsApp = lazy(() => import('./components/products-app'));
+const WishlistApp = lazy(() => import('./components/wishlist-app'));
 
 const history = createBrowserHistory();
 
@@ -22,8 +24,6 @@ const App = () => {
     fetchUser();
   }, []);
 
-  console.error(currentUser);
-
   return (
     <Router history={history}>
       <Nav currentUser={currentUser} onSignout={signout} />
@@ -36,9 +36,8 @@ const App = () => {
                 <AuthApp onSignin={signin} onSignup={signup} />
               </>
             </Route>
-            <Route path="/products">
-              <ProductsApp />
-            </Route>
+            <Route path="/products" component={ProductsApp} />
+            <Route path="/wishlist" component={WishlistApp} />
             <Route path="/">
               <h1 className="font-bold text-4xl">
                 {currentUser
