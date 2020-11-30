@@ -36,11 +36,10 @@ const Heart = () => (
 
 const Nav = ({ currentUser, onSignout }) => {
   const links = [
-    { href: '/', label: 'Home' },
     !currentUser && { href: '/auth/signup', label: 'Signup' },
     !currentUser && { href: '/auth/signin', label: 'Signin' },
-    currentUser && { href: '/products', label: 'Products' },
-    currentUser && { href: '/products/new', label: 'Sell' },
+    currentUser && { href: '/', label: 'Products' },
+    currentUser && { href: '/products/create', label: 'Sell' },
     currentUser && { href: '/cart', label: 'Cart' }
   ]
     .filter(Boolean)

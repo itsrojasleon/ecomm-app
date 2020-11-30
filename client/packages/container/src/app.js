@@ -34,15 +34,13 @@ const App = () => {
         <Suspense fallback={<h1>Loading...</h1>}>
           <Switch>
             <Route path="/auth">
-              <>
-                {currentUser && <Redirect to="/" />}
-                <AuthApp />
-              </>
+              {currentUser && <Redirect to="/" />}
+              <AuthApp />
             </Route>
-            <Route path="/products" component={ProductsApp} />
-            <Route exact path="/">
-              {JSON.stringify(currentUser)}
+            <Route path="/wishlist">
+              <div>Hello</div>
             </Route>
+            <Route path="/" component={ProductsApp} />
           </Switch>
         </Suspense>
       </div>

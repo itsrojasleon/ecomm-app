@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import ProductItem from '../components/product-item';
+import { ecomm } from '../../api/ecomm';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data } = await axios.get('http://localhost:4000/api/products', {
-        withCredentials: true
-      });
+      const { data } = await ecomm.get('/api/products');
 
       setProducts(data);
     };

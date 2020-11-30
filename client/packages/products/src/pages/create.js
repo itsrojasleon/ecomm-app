@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import { ecomm } from '../../api/ecomm';
 
-const New = () => {
+const Create = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -11,13 +11,13 @@ const New = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post(
-      'http://localhost:4000/api/products',
-      { name, price, description },
-      { withCredentials: true }
-    );
+    await ecomm.post('/api/products', {
+      name,
+      price,
+      description
+    });
 
-    history.push('/products');
+    history.push('/');
   };
 
   return (
@@ -85,4 +85,4 @@ const New = () => {
   );
 };
 
-export default New;
+export default Create;
