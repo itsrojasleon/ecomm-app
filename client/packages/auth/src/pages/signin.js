@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ecomm } from '../../api/ecomm';
 
-const Signin = ({ onSignin }) => {
+const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await onSignin({ email, password });
+    await ecomm.post('/api/users/signin', { email, password });
   };
 
   return (

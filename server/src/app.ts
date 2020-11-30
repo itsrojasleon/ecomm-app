@@ -33,7 +33,7 @@ app.use(
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
       if (
-        ['http://localhost:8080', 'http://localhost:8081'].indexOf(origin) ===
+        ['http://localhost:8080', 'http://localhost:8081', 'http://localhost:8082'].indexOf(origin) ===
         -1
       ) {
         const msg =

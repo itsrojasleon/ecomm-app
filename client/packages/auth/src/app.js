@@ -1,19 +1,15 @@
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
-import '../styles/tailwind.css';
 import Signup from './pages/signup';
 import Signin from './pages/signin';
+import '../styles/tailwind.css';
 
-const App = ({ history, onSignin, onSignup }) => {
+const App = ({ history }) => {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/auth/signin">
-          <Signin onSignin={onSignin} />
-        </Route>
-        <Route path="/auth/signup">
-          <Signup onSignup={onSignup} />
-        </Route>
+        <Route path="/auth/signin" component={Signin} />
+        <Route path="/auth/signup" component={Signup} />
       </Switch>
     </Router>
   );

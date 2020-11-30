@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ecomm } from '../../api/ecomm';
 
-const Signup = ({ onSignup }) => {
+const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -9,7 +10,7 @@ const Signup = ({ onSignup }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await onSignup({ email, password, username });
+    await ecomm.post('/api/users/signup', { email, password, username });
   };
 
   return (

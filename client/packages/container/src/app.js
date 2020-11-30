@@ -1,49 +1,47 @@
-import React, { lazy, Suspense, useEffect, useContext } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import '../styles/tailwind.css';
-import { Context as AuthContext } from './context/auth';
 import Nav from './components/nav';
+import { ecomm } from '../api/ecomm';
+import '../styles/tailwind.css';
 
 const AuthApp = lazy(() => import('./components/auth-app'));
 const ProductsApp = lazy(() => import('./components/products-app'));
-const WishlistApp = lazy(() => import('./components/wishlist-app'));
 
 const history = createBrowserHistory();
 
 const App = () => {
-  const {
-    state: { currentUser },
-    fetchUser,
-    signup,
-    signin,
-    signout
-  } = useContext(AuthContext);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
+    const fetchUser = async () => {
+      const { data } = await ecomm.get('/api/users/currentuser');
+
+      setCurrentUser(data.currentUser);
+    };
+
     fetchUser();
   }, []);
 
+  const handleSignout = async () => {
+    await ecomm.post('/api/users/signout');
+  };
+
   return (
     <Router history={history}>
-      <Nav currentUser={currentUser} onSignout={signout} />
+      <Nav currentUser={currentUser} onSignout={handleSignout} />
       <div className="w-11/12 m-auto">
         <Suspense fallback={<h1>Loading...</h1>}>
           <Switch>
             <Route path="/auth">
               <>
                 {currentUser && <Redirect to="/" />}
-                <AuthApp onSignin={signin} onSignup={signup} />
+                <AuthApp />
               </>
             </Route>
             <Route path="/products" component={ProductsApp} />
-            <Route path="/wishlist" component={WishlistApp} />
-            <Route path="/">
-              <h1 className="font-bold text-4xl">
-                {currentUser
-                  ? JSON.stringify(currentUser)
-                  : "You're not authenticated"}
-              </h1>
+            <Route exact path="/">
+              {JSON.stringify(currentUser)}
             </Route>
           </Switch>
         </Suspense>

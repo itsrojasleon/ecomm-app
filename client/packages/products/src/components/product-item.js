@@ -13,10 +13,12 @@ const ProductList = ({ name, price, description, createdAt }) => {
       <form className="flex-auto pl-6">
         <div className="flex flex-wrap items-baseline">
           <h1 className="w-full flex-none font-semibold mb-2.5">{name}</h1>
-          <div className="text-4xl leading-7 font-bold text-gray-600">
+          <div className="text-4xl leading-7 font-bold text-indigo-600">
             ${parseFloat(price).toFixed(2)}
           </div>
-          <div className="text-sm font-medium text-gray-400 ml-3">In stock</div>
+          <div className="text-sm font-medium text-indigo-400 ml-3">
+            In stock
+          </div>
         </div>
         <div className="flex items-baseline my-8">
           <p>{description}</p>
@@ -24,18 +26,18 @@ const ProductList = ({ name, price, description, createdAt }) => {
         <div className="flex space-x-3 mb-4 text-sm font-semibold">
           <div className="flex-auto flex space-x-3">
             <button
-              className="w-1/2 flex items-center justify-center rounded-full bg-gray-700 text-white"
+              className="w-1/2 flex items-center justify-center rounded-full bg-indigo-700 text-white"
               type="submit">
               Buy now
             </button>
             <button
-              className="w-1/2 flex items-center justify-center rounded-full bg-gray-50 text-gray-700"
+              className="w-1/2 flex items-center justify-center rounded-full bg-indigo-50 text-indigo-700"
               type="button">
               Add to cart
             </button>
           </div>
           <button
-            className="flex-none flex items-center justify-center w-9 h-9 rounded-full bg-gray-50 text-gray-700"
+            className="flex-none flex items-center justify-center w-9 h-9 rounded-full bg-indigo-50 text-indigo-700"
             type="button"
             aria-label="like">
             <svg width="20" height="20" fill="currentColor">

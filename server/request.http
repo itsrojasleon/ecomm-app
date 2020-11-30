@@ -8,7 +8,7 @@ Content-Type: application/json
 {
   "email": "test@test.com",
   "password": "password",
-  "username": "rojasle1on"
+  "username": "rojasleon"
 }
 
 ###
@@ -35,9 +35,6 @@ Content-Type: application/json
   "price": 20,
   "description": "Enjoy like a kid"
 }
-
-###
-http://localhost:4000/api/products
 
 ###
 http://localhost:4000/api/products/users/1
