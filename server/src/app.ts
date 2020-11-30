@@ -11,9 +11,10 @@ import { signinRouter } from './routes/users/signin';
 import { signoutRouter } from './routes/users/signout';
 
 // product routes
-// import { indexProductRouter } from './routes/products/index';
-import { createProductRouter } from './routes/products/new';
-import { showProductRouter } from './routes/products/show';
+import { indexProductsRouter } from './routes/products/index';
+import { createProductsRouter } from './routes/products/new';
+import { showProductsRouter } from './routes/products/show';
+import { userProductsRouter } from './routes/products/user';
 
 // wishlist routes
 // import { indexWishlistRouter } from './routes/wishlist/index';
@@ -50,9 +51,10 @@ app.use(signupRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 
-// app.use(indexProductRouter);
-app.use(createProductRouter);
-app.use(showProductRouter);
+app.use(indexProductsRouter);
+app.use(createProductsRouter);
+app.use(showProductsRouter);
+app.use(userProductsRouter);
 
 // app.use(indexWishlistRouter);
 // app.use(createWishlistRouter);

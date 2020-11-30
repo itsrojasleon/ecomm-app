@@ -5,9 +5,7 @@ import { Product } from '../../models/product';
 const router = express.Router();
 
 router.get('/api/products/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  const product = await Product.findByPk(id);
+  const product = await Product.findByPk(req.params.id);
 
   if (!product) {
     throw new NotFoundError();
@@ -16,4 +14,4 @@ router.get('/api/products/:id', async (req: Request, res: Response) => {
   res.send(product);
 });
 
-export { router as showProductRouter };
+export { router as showProductsRouter };

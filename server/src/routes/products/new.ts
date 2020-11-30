@@ -15,7 +15,7 @@ router.post(
     body('name')
       .isLength({ min: 1, max: 148 })
       .withMessage('You must provide a name'),
-    body('price').not().isEmpty().withMessage('You must provide a price'),
+    body('price').isFloat({ gt: 0 }).withMessage('You must provide a price'),
     body('description')
       .isLength({ min: 1, max: 500 })
       .withMessage('You must provide a valid description')
@@ -35,4 +35,4 @@ router.post(
   }
 );
 
-export { router as createProductRouter };
+export { router as createProductsRouter };
