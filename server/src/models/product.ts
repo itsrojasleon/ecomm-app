@@ -1,59 +1,27 @@
-import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../sequelize';
+import {
+  Table,
+  Column,
+  Model,
+  ForeignKey,
+  BelongsTo
+} from 'sequelize-typescript';
+import { User } from './user';
 
-interface ProductAttrs {
-  id: number;
-  userId: number;
-  name: string;
-  price: number;
-  description: string;
-}
-
-interface ProductCreationAttrs extends Optional<ProductAttrs, 'id'> {}
-
-class Product
-  extends Model<ProductAttrs, ProductCreationAttrs>
-  implements ProductAttrs {
-  id!: number;
-  userId!: number;
+@Table({ underscored: true })
+export class Product extends Model<Product> {
+  @Column
   name!: string;
+
+  @Column
   price!: number;
+
+  @Column
   description!: string;
-  readonly createdAt!: Date;
-  readonly updatedAt!: Date;
+
+  @ForeignKey(() => User)
+  @Column
+  userId!: number;
+
+  @BelongsTo(() => User)
+  user!: User;
 }
-
-Product.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    name: {
-      type: DataTypes.STRING(148),
-      allowNull: false
-    },
-    price: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    description: {
-      type: DataTypes.STRING(500),
-      allowNull: false
-    }
-  },
-  {
-    sequelize,
-    tableName: 'products',
-    underscored: true
-  }
-);
-
-(async () => await Product.sync())();
-
-export { Product };

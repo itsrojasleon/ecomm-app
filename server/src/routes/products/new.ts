@@ -24,8 +24,6 @@ router.post(
   async (req: Request, res: Response) => {
     const { name, price, description } = req.body;
 
-    console.log(name, price, description, req.currentUser!.id);
-
     const product = await Product.create({
       name,
       price,

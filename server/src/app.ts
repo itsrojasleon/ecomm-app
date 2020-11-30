@@ -11,9 +11,13 @@ import { signinRouter } from './routes/users/signin';
 import { signoutRouter } from './routes/users/signout';
 
 // product routes
-import { indexProductRouter } from './routes/products/index';
+// import { indexProductRouter } from './routes/products/index';
 import { createProductRouter } from './routes/products/new';
 import { showProductRouter } from './routes/products/show';
+
+// wishlist routes
+// import { indexWishlistRouter } from './routes/wishlist/index';
+// import { createWishlistRouter } from './routes/wishlist/new';
 
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
@@ -27,7 +31,10 @@ app.use(
     credentials: true,
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
-      if (['http://localhost:8080'].indexOf(origin) === -1) {
+      if (
+        ['http://localhost:8080', 'http://localhost:8081'].indexOf(origin) ===
+        -1
+      ) {
         const msg =
           'The CORS policy for this site does not allow access from the specified Origin.';
         return callback(new Error(msg), true);
@@ -43,9 +50,12 @@ app.use(signupRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 
-app.use(indexProductRouter);
+// app.use(indexProductRouter);
 app.use(createProductRouter);
 app.use(showProductRouter);
+
+// app.use(indexWishlistRouter);
+// app.use(createWishlistRouter);
 
 app.all('*', () => {
   throw new NotFoundError();

@@ -19,7 +19,8 @@ const main = async () => {
   // }
 
   try {
-    await sequelize.authenticate();
+    await sequelize.sync({});
+    // await sequelize.authenticate();
     console.log('Connected to Postgres');
   } catch (err) {
     console.error(err);
