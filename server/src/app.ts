@@ -15,10 +15,7 @@ import { indexProductsRouter } from './routes/products/index';
 import { createProductsRouter } from './routes/products/new';
 import { showProductsRouter } from './routes/products/show';
 import { userProductsRouter } from './routes/products/user';
-
-// wishlist routes
-// import { indexWishlistRouter } from './routes/wishlist/index';
-// import { createWishlistRouter } from './routes/wishlist/new';
+import { updateProductsRouter } from './routes/products/update';
 
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
@@ -33,8 +30,11 @@ app.use(
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
       if (
-        ['http://localhost:8080', 'http://localhost:8081', 'http://localhost:8082'].indexOf(origin) ===
-        -1
+        [
+          'http://localhost:8080',
+          'http://localhost:8081',
+          'http://localhost:8082'
+        ].indexOf(origin) === -1
       ) {
         const msg =
           'The CORS policy for this site does not allow access from the specified Origin.';
@@ -55,9 +55,7 @@ app.use(indexProductsRouter);
 app.use(createProductsRouter);
 app.use(showProductsRouter);
 app.use(userProductsRouter);
-
-// app.use(indexWishlistRouter);
-// app.use(createWishlistRouter);
+app.use(updateProductsRouter);
 
 app.all('*', () => {
   throw new NotFoundError();

@@ -3,7 +3,8 @@ import {
   Column,
   Model,
   ForeignKey,
-  BelongsTo
+  BelongsTo,
+  Default
 } from 'sequelize-typescript';
 import { User } from './user';
 
@@ -17,6 +18,10 @@ export class Product extends Model<Product> {
 
   @Column
   description!: string;
+
+  @Default(false)
+  @Column
+  wishlisted!: boolean;
 
   @ForeignKey(() => User)
   @Column
