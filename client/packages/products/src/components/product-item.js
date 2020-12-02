@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ecomm } from '../../api/ecomm';
 
-const ProductList = ({ id, name, price, description, createdAt }) => {
+const ProductList = ({ id, name, price, description, wishlisted }) => {
+  const [liked, setLiked] = useState(false);
+  const [errors, setErrors] = useState([]);
+
+  const handleWishlist = async () => {
+    try {
+      setLiked(!liked);
+      await ecomm.put(`/api/products/${id}`, {
+        name,
+        price,
+        description,
+        wishlisted: !liked
+      });
+    } catch (err) {
+      setErrors(err.response.data.errors);
+    }
+  };
+
   return (
     <div className="flex p-6 shadow-lg">
       {/* <div className="flex-none w-44 relative">
@@ -40,7 +58,10 @@ const ProductList = ({ id, name, price, description, createdAt }) => {
             </button>
           </div>
           <button
-            className="flex-none flex items-center justify-center w-9 h-9 rounded-full bg-gray-50 text-gray-700"
+            onClick={handleWishlist}
+            className={`flex-none flex items-center justify-center w-9 h-9 rounded-full bg-gray-50 ${
+              liked ? 'text-red-700' : 'text-gray-700'
+            }`}
             type="button"
             aria-label="like">
             <svg width="20" height="20" fill="currentColor">

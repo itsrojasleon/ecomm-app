@@ -4,6 +4,7 @@ import { ecomm } from '../../api/ecomm';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [wishlists, setWishlists] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -20,6 +21,7 @@ const Products = () => {
       {products.map((product) => (
         <ProductItem key={product.id} {...product} />
       ))}
+      {JSON.stringify(wishlists)}
     </div>
   );
 };
