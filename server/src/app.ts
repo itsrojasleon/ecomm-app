@@ -16,6 +16,10 @@ import { createProductsRouter } from './routes/products/new';
 import { showProductsRouter } from './routes/products/show';
 import { updateProductsRouter } from './routes/products/update';
 
+// wishlist routes
+import { createWishlistsRouter } from './routes/wishlists/new';
+import { indexWishlistsRouter } from './routes/wishlists';
+
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
 
@@ -54,6 +58,9 @@ app.use(indexProductsRouter);
 app.use(createProductsRouter);
 app.use(showProductsRouter);
 app.use(updateProductsRouter);
+
+app.use(indexWishlistsRouter);
+app.use(createWishlistsRouter);
 
 app.all('*', () => {
   throw new NotFoundError();

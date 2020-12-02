@@ -3,25 +3,26 @@ import {
   Column,
   Model,
   ForeignKey,
-  BelongsTo
+  BelongsTo,
+  Unique
 } from 'sequelize-typescript';
+import { Product } from './product';
 import { User } from './user';
 
 @Table({ underscored: true })
-export class Product extends Model<Product> {
-  @Column
-  name!: string;
-
-  @Column
-  price!: number;
-
-  @Column
-  description!: string;
-
+export class Wishlist extends Model<Wishlist> {
   @ForeignKey(() => User)
   @Column
   userId!: number;
 
+  @ForeignKey(() => Product)
+  @Unique
+  @Column
+  productId!: number;
+
   @BelongsTo(() => User)
   user!: User;
+
+  @BelongsTo(() => Product)
+  product!: Product;
 }

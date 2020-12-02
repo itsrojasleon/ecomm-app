@@ -26,18 +26,4 @@ router.get(
   }
 );
 
-// user wishlist
-router.get(
-  '/api/products/wishlist',
-  currentUser,
-  requireAuth,
-  async (req: Request, res: Response) => {
-    const products = await Product.findAll({
-      where: { userId: req.currentUser!.id, wishlisted: true }
-    });
-
-    res.send(products);
-  }
-);
-
 export { router as indexProductsRouter };

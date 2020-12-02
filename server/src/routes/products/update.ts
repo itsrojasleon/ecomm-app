@@ -18,10 +18,7 @@ router.put(
     body('price').isFloat({ gt: 0 }).withMessage('You must provide a price'),
     body('description')
       .isLength({ min: 1, max: 500 })
-      .withMessage('You must provide a valid description'),
-    body('wishlisted')
-      .isBoolean()
-      .withMessage('You must provide a boolean value for wishlisted')
+      .withMessage('You must provide a valid description')
   ],
   validateRequest,
   async (req: Request, res: Response) => {
@@ -32,10 +29,9 @@ router.put(
       {
         name,
         price,
-        description,
-        wishlisted
+        description
       },
-      { where: { id, userId: req.currentUser!.id }, returning: true }
+      { where: { id, userId: req.currentUser!.id } }
     );
 
     res.sendStatus(204);
