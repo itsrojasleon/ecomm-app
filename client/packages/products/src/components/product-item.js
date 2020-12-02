@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ecomm } from '../../api/ecomm';
 
 const ProductList = ({ id, name, price, description, wishlisted }) => {
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(wishlisted);
   const [errors, setErrors] = useState([]);
 
   const handleWishlist = async () => {
