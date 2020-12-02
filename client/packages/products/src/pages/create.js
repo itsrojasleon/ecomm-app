@@ -6,6 +6,7 @@ const Create = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
+
   const history = useHistory();
 
   const handleSubmit = async (e) => {

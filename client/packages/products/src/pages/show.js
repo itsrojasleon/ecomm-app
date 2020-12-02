@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ProductItem from '../components/product-item';
+// import ProductItem from '../components/product-item';
 import { ecomm } from '../../api/ecomm';
 
 const Show = () => {
-  const [product, setProduct] = useState({});
+  // const [product, setProduct] = useState({});
   const [errors, setErrors] = useState([]);
   const { id } = useParams();
 
@@ -32,11 +32,7 @@ const Show = () => {
     );
   }
 
-  return (
-    <>
-      <ProductItem {...product} />
-    </>
-  );
+  return <>{/* <ProductItem {...product} /> */}</>;
 };
 
 export default Show;

@@ -3,9 +3,11 @@ import {
   Column,
   Model,
   ForeignKey,
-  BelongsTo
+  BelongsTo,
+  HasOne
 } from 'sequelize-typescript';
 import { User } from './user';
+import { Wishlist } from './wishlist';
 
 @Table({ underscored: true })
 export class Product extends Model<Product> {
@@ -18,10 +20,16 @@ export class Product extends Model<Product> {
   @Column
   description!: string;
 
+  @HasOne(() => Wishlist)
+  wishlist!: Wishlist;
+
   @ForeignKey(() => User)
   @Column
   userId!: number;
 
   @BelongsTo(() => User)
   user!: User;
+
+  // @BelongsToMany(() => Wishlist)
+  // wishlist!:
 }
