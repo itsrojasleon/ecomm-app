@@ -14,7 +14,6 @@ import { signoutRouter } from './routes/users/signout';
 import { indexProductsRouter } from './routes/products/index';
 import { createProductsRouter } from './routes/products/new';
 import { showProductsRouter } from './routes/products/show';
-import { userProductsRouter } from './routes/products/user';
 import { updateProductsRouter } from './routes/products/update';
 
 import { NotFoundError } from './errors/not-found';
@@ -54,7 +53,6 @@ app.use(signoutRouter);
 app.use(indexProductsRouter);
 app.use(createProductsRouter);
 app.use(showProductsRouter);
-app.use(userProductsRouter);
 app.use(updateProductsRouter);
 
 app.all('*', () => {

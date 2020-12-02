@@ -7,7 +7,7 @@ const Products = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data } = await ecomm.get('/api/products');
+      const { data } = await ecomm.get('/api/products/wishlist');
 
       setProducts(data);
     };
