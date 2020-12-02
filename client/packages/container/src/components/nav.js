@@ -64,7 +64,9 @@ const Nav = ({ currentUser, onSignout }) => {
           )}
           {currentUser && (
             <>
-              <Link to="/wishlist" className="block px-4 py-2 rounded-md">
+              <Link
+                to="/products/wishlist"
+                className="block px-4 py-2 rounded-md">
                 <Heart />
               </Link>
               <Link to="/profile" className="block px-4 py-2 rounded-md">
