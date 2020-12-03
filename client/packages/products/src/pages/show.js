@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Product from '../components/product';
 // import ProductItem from '../components/product-item';
 import { ecomm } from '../../api/ecomm';
 
 const Show = () => {
-  // const [product, setProduct] = useState({});
+  const [product, setProduct] = useState({});
   const [errors, setErrors] = useState([]);
   const { id } = useParams();
 
@@ -32,7 +33,9 @@ const Show = () => {
     );
   }
 
-  return <>{/* <ProductItem {...product} /> */}</>;
+  if (Object.values(product).length === 0) return <div>No product</div>;
+
+  return <Product {...product} />;
 };
 
 export default Show;
