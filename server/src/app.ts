@@ -17,11 +17,13 @@ import { showProductsRouter } from './routes/products/show';
 import { updateProductsRouter } from './routes/products/update';
 
 // wishlist routes
-import { createWishlistsRouter } from './routes/wishlist/new';
-import { indexWishlistsRouter } from './routes/wishlist';
+import { createWishlistRouter } from './routes/wishlist/new';
+import { indexWishlistRouter } from './routes/wishlist';
 
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
+import { updateUserRouter } from './routes/users/update';
+import { indexUserRouter } from './routes/users';
 
 const app = express();
 
@@ -36,7 +38,9 @@ app.use(
         [
           'http://localhost:8080',
           'http://localhost:8081',
-          'http://localhost:8082'
+          'http://localhost:8082',
+          'http://localhost:8083',
+          'http://localhost:8084'
         ].indexOf(origin) === -1
       ) {
         const msg =
@@ -53,14 +57,16 @@ app.use(currentUserRouter);
 app.use(signupRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
+app.use(indexUserRouter);
+app.use(updateUserRouter);
 
 app.use(indexProductsRouter);
 app.use(createProductsRouter);
 app.use(showProductsRouter);
 app.use(updateProductsRouter);
 
-app.use(indexWishlistsRouter);
-app.use(createWishlistsRouter);
+app.use(indexWishlistRouter);
+app.use(createWishlistRouter);
 
 app.all('*', () => {
   throw new NotFoundError();

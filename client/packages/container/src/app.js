@@ -8,6 +8,7 @@ import '../styles/tailwind.css';
 const AuthApp = lazy(() => import('./components/auth-app'));
 const ProductsApp = lazy(() => import('./components/products-app'));
 const WishlistApp = lazy(() => import('./components/wishlist-app'));
+const UsersApp = lazy(() => import('./components/users-app'));
 
 const history = createBrowserHistory();
 
@@ -31,7 +32,6 @@ const App = () => {
   return (
     <Router history={history}>
       <Nav currentUser={currentUser} onSignout={handleSignout} />
-      {/* <WishlistApp /> */}
       <div className="w-11/12 m-auto">
         <Suspense fallback={<h1>Loading...</h1>}>
           <Switch>
@@ -41,6 +41,9 @@ const App = () => {
             </Route>
             <Route path="/wishlist" component={WishlistApp} />
             <Route path="/products" component={ProductsApp} />
+            <Route path="/users">
+              <UsersApp currentUser={currentUser} />
+            </Route>
             <Route exact path="/">
               <div>Home</div>
             </Route>

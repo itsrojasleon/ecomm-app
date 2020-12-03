@@ -11,13 +11,13 @@ router.get(
   currentUser,
   requireAuth,
   async (req: Request, res: Response) => {
-    const wishlists = await Wishlist.findAll({
+    const wishlist = await Wishlist.findAll({
       where: { userId: parseInt(req.currentUser!.id) },
       include: [Product]
     });
 
-    res.send(wishlists);
+    res.send(wishlist);
   }
 );
 
-export { router as indexWishlistsRouter };
+export { router as indexWishlistRouter };

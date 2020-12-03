@@ -61,7 +61,9 @@ const Nav = ({ currentUser, onSignout }) => {
               <Link to="/wishlist" className="block px-4 py-2 rounded-md">
                 <Heart />
               </Link>
-              <Link to="/profile" className="block px-4 py-2 rounded-md">
+              <Link
+                to={`/users/${currentUser.username}`}
+                className="block px-4 py-2 rounded-md">
                 <User />
               </Link>
               <button

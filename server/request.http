@@ -23,6 +23,19 @@ Content-Type: application/json
 ###
 POST http://localhost:4000/api/users/signout HTTP/1.1
 
+###
+PUT http://localhost:4000/api/users/rojasleon HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "newrojasleon",
+  "name": "Juan Luis Rojas León",
+  "bio": "This is my bio"
+}
+
+###
+http://localhost:4000/api/users/newrojasleon
+
 
 
 
@@ -59,9 +72,9 @@ http://localhost:4000/api/products/1
 
 
 
-# Wishlists
+# Wishlist
 ###
-POST http://localhost:4000/api/wishlists HTTP/1.1
+POST http://localhost:4000/api/wishlist HTTP/1.1
 Content-Type: application/json
 
 {
@@ -69,4 +82,4 @@ Content-Type: application/json
 }
 
 ###
-http://localhost:4000/api/wishlists
+http://localhost:4000/api/wishlist

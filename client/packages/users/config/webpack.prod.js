@@ -6,14 +6,14 @@ const prodConfig = {
   mode: 'production',
   output: {
     filename: '[name].[contenthash].js',
-    publicPath: '/wishlist/latest/'
+    publicPath: '/users/latest/'
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'wishlist',
+      name: 'users',
       filename: 'remoteEntry.js',
       exposes: {
-        './WishlistApp': './src/bootstrap'
+        './UsersApp': './src/bootstrap'
       },
       shared: packageJson.dependencies
     })

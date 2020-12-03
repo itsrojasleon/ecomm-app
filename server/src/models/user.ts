@@ -19,6 +19,12 @@ export class User extends Model<User> {
   @Column
   username!: string;
 
+  @Column
+  name!: string;
+
+  @Column
+  bio!: string;
+
   @HasMany(() => Product)
   products!: Product[];
 

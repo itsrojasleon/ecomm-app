@@ -37,4 +37,4 @@ router.post(
   }
 );
 
-export { router as createWishlistsRouter };
+export { router as createWishlistRouter };
