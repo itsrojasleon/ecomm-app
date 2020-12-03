@@ -17,8 +17,8 @@ import { showProductsRouter } from './routes/products/show';
 import { updateProductsRouter } from './routes/products/update';
 
 // wishlist routes
-import { createWishlistsRouter } from './routes/wishlists/new';
-import { indexWishlistsRouter } from './routes/wishlists';
+import { createWishlistsRouter } from './routes/wishlist/new';
+import { indexWishlistsRouter } from './routes/wishlist';
 
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';

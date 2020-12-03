@@ -8,7 +8,7 @@ import { Wishlist } from '../../models/wishlist';
 const router = express.Router();
 
 router.post(
-  '/api/wishlists',
+  '/api/wishlist',
   currentUser,
   requireAuth,
   [

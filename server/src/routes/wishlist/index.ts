@@ -7,7 +7,7 @@ import { Wishlist } from '../../models/wishlist';
 const router = express.Router();
 
 router.get(
-  '/api/wishlists',
+  '/api/wishlist',
   currentUser,
   requireAuth,
   async (req: Request, res: Response) => {
