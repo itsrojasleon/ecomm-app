@@ -41,7 +41,7 @@ const Product = ({ id, name, price, description, wishlist }) => {
             <button
               className="w-1/2 flex items-center justify-center rounded-md border border-gray-300"
               type="button">
-              Add to bag
+              Add to cart
             </button>
           </div>
           <button

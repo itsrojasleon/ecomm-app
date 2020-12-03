@@ -40,7 +40,13 @@ const App = () => {
               <AuthApp />
             </Route>
             <Route path="/wishlist" component={WishlistApp} />
-            <Route path="/" component={ProductsApp} />
+            <Route path="/products" component={ProductsApp} />
+            <Route exact path="/">
+              <div>Home</div>
+            </Route>
+            <Route path="*">
+              <Redirect to="/" />
+            </Route>
           </Switch>
         </Suspense>
       </div>

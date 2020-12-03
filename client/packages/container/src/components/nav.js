@@ -36,9 +36,10 @@ const Heart = () => (
 
 const Nav = ({ currentUser, onSignout }) => {
   const links = [
+    { href: '/', label: 'Home' },
     !currentUser && { href: '/auth/signup', label: 'Signup' },
     !currentUser && { href: '/auth/signin', label: 'Signin' },
-    currentUser && { href: '/', label: 'Products' },
+    currentUser && { href: '/products', label: 'Products' },
     currentUser && { href: '/products/create', label: 'Sell' },
     currentUser && { href: '/cart', label: 'Cart' }
   ]
@@ -56,13 +57,6 @@ const Nav = ({ currentUser, onSignout }) => {
         <div className="flex gap-3">
           {links}
           {currentUser && (
-            <button
-              className="block px-4 py-2 rounded-md bg-red-100 text-red-700"
-              onClick={onSignout}>
-              Logout
-            </button>
-          )}
-          {currentUser && (
             <>
               <Link to="/wishlist" className="block px-4 py-2 rounded-md">
                 <Heart />
@@ -70,6 +64,11 @@ const Nav = ({ currentUser, onSignout }) => {
               <Link to="/profile" className="block px-4 py-2 rounded-md">
                 <User />
               </Link>
+              <button
+                className="block px-4 py-2 rounded-md bg-red-100 text-red-700"
+                onClick={onSignout}>
+                Logout
+              </button>
             </>
           )}
         </div>

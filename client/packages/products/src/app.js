@@ -9,9 +9,9 @@ const App = ({ history }) => {
   return (
     <Router history={history}>
       <Switch>
-        <Route exact path="/products/create" component={Create} />
+        <Route path="/products/create" component={Create} />
         <Route path="/products/:id" component={Show} />
-        <Route path="/" component={Products} />
+        <Route path="/products" component={Products} />
       </Switch>
     </Router>
   );
