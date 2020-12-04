@@ -10,6 +10,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
+    "swr": "^0.3.9",
     "tailwindcss": "^2.0.1"
   },
   "devDependencies": {

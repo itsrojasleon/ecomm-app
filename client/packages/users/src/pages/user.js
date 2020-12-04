@@ -25,7 +25,7 @@ const User = ({ currentUser }) => {
 
   return (
     <div>
-      <UserDetails {...user} currentUser={currentUser} />
+      <UserDetails user={user} currentUser={currentUser} />
     </div>
   );
 };

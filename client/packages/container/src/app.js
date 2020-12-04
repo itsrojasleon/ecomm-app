@@ -14,7 +14,6 @@ const history = createBrowserHistory();
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
-
   useEffect(() => {
     const fetchUser = async () => {
       const { data } = await ecomm.get('/api/users/currentuser');
@@ -23,12 +22,14 @@ const App = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [history.location.pathname]);
 
   const handleSignout = async () => {
     await ecomm.post('/api/users/signout');
   };
 
+  // There's a huge bug
+  console.log(history.location.pathname);
   return (
     <Router history={history}>
       <Nav currentUser={currentUser} onSignout={handleSignout} />
