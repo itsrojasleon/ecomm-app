@@ -13,8 +13,8 @@ import { signoutRouter } from './routes/users/signout';
 // product routes
 import { indexProductsRouter } from './routes/products/index';
 import { createProductsRouter } from './routes/products/new';
-import { showProductsRouter } from './routes/products/show';
 import { updateProductsRouter } from './routes/products/update';
+import { showProductsRouter } from './routes/products/show';
 
 // wishlist routes
 import { createWishlistRouter } from './routes/wishlist/new';

@@ -29,8 +29,6 @@ const App = () => {
     await ecomm.post('/api/users/signout');
   };
 
-  // There's a huge bug
-  // console.log(history.location.pathname);
   return (
     <Router history={history}>
       <Nav currentUser={currentUser} onSignout={handleSignout} />

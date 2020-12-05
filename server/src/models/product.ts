@@ -9,7 +9,7 @@ import {
 import { User } from './user';
 import { Wishlist } from './wishlist';
 
-@Table({ underscored: true })
+@Table({ underscored: true, version: true })
 export class Product extends Model<Product> {
   @Column
   name!: string;

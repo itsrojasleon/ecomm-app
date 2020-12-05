@@ -4,6 +4,7 @@ import { validateRequest } from '../../middlewares/validate-request';
 import { requireAuth } from '../../middlewares/require-auth';
 import { currentUser } from '../../middlewares/currentuser';
 import { Product } from '../../models/product';
+import { NotFoundError } from '../../errors/not-found';
 
 const router = express.Router();
 
@@ -22,17 +23,19 @@ router.put(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { name, price, description, wishlisted } = req.body;
-    const { id } = req.params;
+    const { name, price, description } = req.body;
 
-    await Product.update(
-      {
-        name,
-        price,
-        description
-      },
-      { where: { id, userId: req.currentUser!.id } }
-    );
+    const product = await Product.findByPk(req.params.id);
+
+    if (!product) {
+      throw new NotFoundError();
+    }
+
+    await product.update({
+      name,
+      price,
+      description
+    });
 
     res.sendStatus(204);
   }

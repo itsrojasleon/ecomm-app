@@ -8,7 +8,6 @@ const UserDetails = ({ user, currentUser }) => {
   const [isUpdating, setUpdating] = useState(false);
 
   const [name, setName] = useState(user.name || '');
-  const [username, setUsername] = useState(user.username || '');
   const [bio, setBio] = useState(user.bio || '');
 
   const isOwner = currentUser.id === user.id;
@@ -17,7 +16,7 @@ const UserDetails = ({ user, currentUser }) => {
     e.preventDefault();
 
     try {
-      await ecomm.put(`/api/users/${user.username}`, { name, username, bio });
+      await ecomm.put(`/api/users/${user.username}`, { name, bio });
       history.push('/');
     } catch (err) {
       console.error(err.response.data);
@@ -55,17 +54,6 @@ const UserDetails = ({ user, currentUser }) => {
           onChange={(e) => setName(e.target.value)}
           className="rounded-md w-full px-3 py-2 border border-gray-200 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-indigo-500 sm:text-sm"
           placeholder="enter your name"
-        />
-      </div>
-      <div className="pb-3">
-        <label className="font-medium pb-2" htmlFor="name">
-          Username
-        </label>
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="rounded-md w-full px-3 py-2 border border-gray-200 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-indigo-500 sm:text-sm"
-          placeholder="enter your username"
         />
       </div>
       <div className="pb-3">

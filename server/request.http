@@ -59,12 +59,12 @@ Content-Type: application/json
 
 {
   "name": "A new product",
-  "price": 10,
-  "description": "This is a really good product",
+  "price": 15,
+  "description": "This is a really good product"
 }
 
 ###
-http://localhost:4000/api/products/users/1
+# http://localhost:4000/api/products/users/1
 
 ###
 http://localhost:4000/api/products/1
