@@ -6,8 +6,9 @@ import {
   BelongsTo
 } from 'sequelize-typescript';
 import { User } from './user';
+import { Product } from './product';
 
-enum OrderStatus {
+export enum OrderStatus {
   // When the order has been created but the product it is
   // trying to order has not been reserved.
   Created = 'created',
@@ -26,21 +27,15 @@ enum OrderStatus {
 }
 
 @Table({ underscored: true })
-export class Product extends Model<Product> {
+export class Order extends Model<Order> {
   @Column
   status!: OrderStatus;
-
-  @Column
-  expiresAt!: number;
-
-  @Column
-  description!: string;
 
   @ForeignKey(() => User)
   @Column
   userId!: number;
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => Product)
   @Column
   productId!: number;
 
