@@ -20,15 +20,19 @@ import { showProductsRouter } from './routes/products/show';
 import { createWishlistRouter } from './routes/wishlist/new';
 import { indexWishlistRouter } from './routes/wishlist';
 
-// users routes
+// user routes
 import { updateUserRouter } from './routes/users/update';
 import { indexUserRouter } from './routes/users';
 
-// orders routes
+// order routes
 import { newOrderRouter } from './routes/orders/new';
+
+// cart routes
+import { newCartRouter } from './routes/cart/new';
 
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
+import { indexCartRouter } from './routes/cart';
 
 const app = express();
 
@@ -74,6 +78,9 @@ app.use(indexWishlistRouter);
 app.use(createWishlistRouter);
 
 app.use(newOrderRouter);
+
+app.use(newCartRouter);
+app.use(indexCartRouter);
 
 app.all('*', () => {
   throw new NotFoundError();
