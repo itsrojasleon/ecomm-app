@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ecomm } from '../../api/ecomm';
 
 const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const history = useHistory();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await ecomm.post('/api/users/signin', { email, password });
+    try {
+      await ecomm.post('/api/users/signin', { email, password });
+      history.push('/');
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

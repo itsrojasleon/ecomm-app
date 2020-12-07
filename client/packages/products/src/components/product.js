@@ -5,10 +5,18 @@ import { ecomm } from '../../api/ecomm';
 const Product = ({ id, name, price, description, wishlist }) => {
   const [wishlisted, setWishlisted] = useState(Boolean(wishlist));
 
-  const handleWishlist = async () => {
+  const addToWishlist = async () => {
     try {
       setWishlisted(!wishlisted);
       await ecomm.post('/api/wishlist', { productId: id });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const addToCart = async () => {
+    try {
+      await ecomm.post('/api/cart', { productId: id, quantity: 1 });
     } catch (err) {
       console.error(err);
     }
@@ -39,13 +47,14 @@ const Product = ({ id, name, price, description, wishlist }) => {
               Buy now
             </button>
             <button
+              onClick={addToCart}
               className="w-1/2 flex items-center justify-center rounded-md border border-gray-300"
               type="button">
               Add to cart
             </button>
           </div>
           <button
-            onClick={handleWishlist}
+            onClick={addToWishlist}
             className={`flex-none flex items-center justify-center w-9 h-9 rounded-md border-gray-400 border ${
               wishlisted ? 'text-red-500' : 'text-gray-300'
             }`}

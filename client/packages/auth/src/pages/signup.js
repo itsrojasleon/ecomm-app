@@ -10,7 +10,12 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await ecomm.post('/api/users/signup', { email, password, username });
+    try {
+      await ecomm.post('/api/users/signup', { email, password, username });
+      history.push('/');
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

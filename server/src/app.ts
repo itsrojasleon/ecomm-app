@@ -26,13 +26,14 @@ import { indexUserRouter } from './routes/users';
 
 // order routes
 import { newOrderRouter } from './routes/orders/new';
+import { indexCartRouter } from './routes/cart';
+import { deleteCartRouter } from './routes/cart/delete';
 
 // cart routes
 import { newCartRouter } from './routes/cart/new';
 
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
-import { indexCartRouter } from './routes/cart';
 
 const app = express();
 
@@ -49,7 +50,8 @@ app.use(
           'http://localhost:8081',
           'http://localhost:8082',
           'http://localhost:8083',
-          'http://localhost:8084'
+          'http://localhost:8084',
+          'http://localhost:8085'
         ].indexOf(origin) === -1
       ) {
         const msg =
@@ -81,6 +83,7 @@ app.use(newOrderRouter);
 
 app.use(newCartRouter);
 app.use(indexCartRouter);
+app.use(deleteCartRouter);
 
 app.all('*', () => {
   throw new NotFoundError();
