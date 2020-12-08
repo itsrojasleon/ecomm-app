@@ -6,33 +6,37 @@ const CartItem = ({ id, product, quantity }) => {
   const { removeItem, increase, decrease } = useContext(Context);
 
   return (
-    <div className="flex">
-      {/* add image */}
-      <form className="flex-auto p-6 shadow">
-        <div className="flex justify-between items-center">
-          <div>
-            <Link
-              to={`/products/${product.id}`}
-              className="text-xl font-semibold">
-              {product.name}
-            </Link>
-            <div>quantity: {quantity}</div>
-            <div className="flex flex-col">
-              <p onClick={() => increase(id)}>+</p>
-              <p onClick={() => decrease(id)}>-</p>
-            </div>
-            <p
-              onClick={() => removeItem(id)}
-              className="text-red-500 hover:underline cursor-pointer text-sm">
-              Delete
-            </p>
-          </div>
-          <div className="text-xl font-semibold">
-            ${product.price * quantity}
-          </div>
+    <tr>
+      <td className="border border-gray-100 px-4 py-2">
+        <p>{product.name}</p>
+        <p
+          className="text-red-500 text-xs cursor-pointer my-3"
+          onClick={removeItem}>
+          Remove
+        </p>
+      </td>
+      <td className="border border-gray-100 px-4 py-2">
+        <div className="flex items-center justify-center gap-5">
+          <button
+            className="text-xl text-gray-400 hover:text-black"
+            onClick={decrease}>
+            -
+          </button>
+          <p>{quantity}</p>
+          <button
+            className="text-xl text-gray-400 hover:text-black"
+            onClick={increase}>
+            +
+          </button>
         </div>
-      </form>
-    </div>
+      </td>
+      <td className="border border-gray-100 px-4 py-2 text-center">
+        $ {product.price.toFixed(2)}
+      </td>
+      <td className="border border-gray-100 px-4 py-2 text-right">
+        $ {(product.price * quantity).toFixed(2)}
+      </td>
+    </tr>
   );
 };
 
