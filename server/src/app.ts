@@ -26,11 +26,12 @@ import { indexUserRouter } from './routes/users';
 
 // order routes
 import { newOrderRouter } from './routes/orders/new';
-import { indexCartRouter } from './routes/cart';
-import { deleteCartRouter } from './routes/cart/delete';
 
 // cart routes
+import { indexCartRouter } from './routes/cart';
 import { newCartRouter } from './routes/cart/new';
+import { updateCartRouter } from './routes/cart/update';
+import { deleteCartRouter } from './routes/cart/delete';
 
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
@@ -84,6 +85,7 @@ app.use(newOrderRouter);
 app.use(newCartRouter);
 app.use(indexCartRouter);
 app.use(deleteCartRouter);
+app.use(updateCartRouter);
 
 app.all('*', () => {
   throw new NotFoundError();

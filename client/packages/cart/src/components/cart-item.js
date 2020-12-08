@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Context } from '../context/cart-context';
 
 const CartItem = ({ id, product, quantity }) => {
-  const { removeItem } = useContext(Context);
+  const { removeItem, increase } = useContext(Context);
   const [qty, setQty] = useState(parseInt(quantity));
 
   return (
@@ -17,8 +17,9 @@ const CartItem = ({ id, product, quantity }) => {
               className="text-xl font-semibold">
               {product.name}
             </Link>
+            <div>quantity: {quantity}</div>
             <div className="flex flex-col">
-              <button>+</button>
+              <div onClick={() => increase(id)}>+</div>
               <button>-</button>
             </div>
             <p
