@@ -30,7 +30,8 @@ import { newOrderRouter } from './routes/orders/new';
 // cart routes
 import { indexCartRouter } from './routes/cart';
 import { newCartRouter } from './routes/cart/new';
-import { updateCartRouter } from './routes/cart/update';
+import { increaseCartRouter } from './routes/cart/increase';
+import { decreaseCartRouter } from './routes/cart/decrease';
 import { deleteCartRouter } from './routes/cart/delete';
 
 import { NotFoundError } from './errors/not-found';
@@ -85,7 +86,8 @@ app.use(newOrderRouter);
 app.use(newCartRouter);
 app.use(indexCartRouter);
 app.use(deleteCartRouter);
-app.use(updateCartRouter);
+app.use(increaseCartRouter);
+app.use(decreaseCartRouter);
 
 app.all('*', () => {
   throw new NotFoundError();

@@ -4,13 +4,15 @@ import {
   Model,
   ForeignKey,
   BelongsTo,
-  Unique
+  Unique,
+  Min
 } from 'sequelize-typescript';
 import { User } from './user';
 import { Product } from './product';
 
 @Table({ underscored: true, tableName: 'cart' })
 export class Cart extends Model<Cart> {
+  @Min(0)
   @Column
   quantity!: number;
 

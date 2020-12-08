@@ -7,7 +7,7 @@ import { Cart } from '../../models/cart';
 const router = express.Router();
 
 router.put(
-  '/api/cart/:id',
+  '/api/cart/decrease/:id',
   currentUser,
   requireAuth,
   async (req: Request, res: Response) => {
@@ -17,10 +17,10 @@ router.put(
       throw new BadRequestError('Item not found');
     }
 
-    await item.increment('quantity');
+    await item.decrement('quantity');
 
     res.send(item);
   }
 );
 
-export { router as updateCartRouter };
+export { router as decreaseCartRouter };

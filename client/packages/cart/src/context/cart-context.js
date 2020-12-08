@@ -8,6 +8,7 @@ const cartActions = {
   fetchItems: 'fetch_items',
   removeItem: 'remove_item',
   increase: 'increase',
+  decrease: 'decrease',
   isLoading: 'is_loading',
   error: 'error'
 };
@@ -35,6 +36,17 @@ const cartReducer = (state, { type, payload }) => {
         items: state.items.map((item) => {
           return item.id === payload
             ? { ...item, quantity: item.quantity + 1 }
+            : item;
+        })
+      };
+    case cartActions.decrease:
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          // Do nothing if quantity is less than 1
+          if (item.quantity < 1) return;
+          return item.id === payload
+            ? { ...item, quantity: item.quantity - 1 }
             : item;
         })
       };
@@ -67,14 +79,24 @@ const removeItem = (dispatch) => async (id) => {
 // Increase product's quantity by one
 const increase = (dispatch) => async (id) => {
   try {
-    await ecomm.put(`/api/cart/${id}`);
+    await ecomm.put(`/api/cart/increase/${id}`);
     dispatch({ type: cartActions.increase, payload: id });
   } catch (err) {
     dispatch({ type: cartActions.error, payload: err });
   }
 };
 
-const actions = { fetchItems, removeItem, increase };
+// Decrease product's quantity by one
+const decrease = (dispatch) => async (id) => {
+  try {
+    await ecomm.put(`/api/cart/decrease/${id}`);
+    dispatch({ type: cartActions.decrease, payload: id });
+  } catch (err) {
+    dispatch({ type: cartActions.error, payload: err });
+  }
+};
+
+const actions = { fetchItems, removeItem, increase, decrease };
 
 export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
