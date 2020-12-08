@@ -7,6 +7,7 @@ Context.displayName = 'CartContext';
 const cartActions = {
   fetchItems: 'fetch_items',
   removeItem: 'remove_item',
+  increase: 'increase',
   isLoading: 'is_loading',
   error: 'error'
 };
@@ -28,6 +29,11 @@ const cartReducer = (state, action) => {
         ...state,
         items: state.items.filter((item) => item.id !== action.payload)
       };
+    case cartActions.increase:
+      return {
+        ...state
+        // items: state.items.map((item) => item.id === action.payload ? )
+      };
     case cartActions.error:
       return { ...state, error: action.payload, isLoading: false };
     default:
@@ -38,9 +44,7 @@ const cartReducer = (state, action) => {
 const fetchItems = (dispatch) => async () => {
   try {
     dispatch({ type: cartActions.isLoading });
-
     const { data } = await ecomm.get('/api/cart');
-
     dispatch({ type: cartActions.fetchItems, payload: data });
   } catch (err) {
     dispatch({ type: cartActions.error, payload: err });
@@ -50,11 +54,15 @@ const fetchItems = (dispatch) => async () => {
 const removeItem = (dispatch) => async (id) => {
   try {
     await ecomm.delete(`/api/cart/${id}`);
-
     dispatch({ type: cartActions.removeItem, payload: id });
   } catch (err) {
     dispatch({ type: cartActions.error, payload: err });
   }
+};
+
+// Increase product's quantity
+const increase = (dispatch) => async (id) => {
+  dispatch({ type: cartActions.increase, payload: id });
 };
 
 const actions = { fetchItems, removeItem };

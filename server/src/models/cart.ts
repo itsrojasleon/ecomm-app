@@ -9,8 +9,6 @@ import {
 import { User } from './user';
 import { Product } from './product';
 
-// I think it make sense if we call the table name as cart
-// instead of carts
 @Table({ underscored: true, tableName: 'cart' })
 export class Cart extends Model<Cart> {
   @Column
