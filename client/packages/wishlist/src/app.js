@@ -7,7 +7,7 @@ const App = ({ history }) => {
   return (
     <Router history={history}>
       <Switch>
-        <Route exact path="/wishlist" component={Wishlist} />
+        <Route path="/wishlist" component={Wishlist} />
       </Switch>
     </Router>
   );

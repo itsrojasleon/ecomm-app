@@ -9,7 +9,10 @@ const App = ({ history }) => {
     <Provider>
       <Router history={history}>
         <Switch>
-          <Route exact path="/cart" component={Cart} />
+          <Route path="/cart/fuck">
+            <div>Fuck</div>
+          </Route>
+          <Route path="/cart" component={Cart} />
         </Switch>
       </Router>
     </Provider>
