@@ -14,14 +14,14 @@ const Cart = () => {
   if (state.items.length === 0) return 'No products added to the cart';
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap shadow-lg">
       <table className="table-auto w-full lg:w-8/12 w-full">
         <thead>
           <tr>
             {['product details', 'quantity', 'price', 'total'].map((title) => (
               <th
                 key={title}
-                className="px-6 py-3 text-gray-500 font-medium capitalize">
+                className="px-6 py-3 border border-gray-100 text-gray-500 font-medium capitalize">
                 {title}
               </th>
             ))}
@@ -34,7 +34,7 @@ const Cart = () => {
         </tbody>
       </table>
       {/* Total */}
-      <div className="lg:w-4/12 w-full bg-gray-100 p-3 flex justify-between flex-col">
+      <div className="lg:w-4/12 w-full gap-6 lg:gap-0 bg-gray-100 p-3 flex justify-between flex-col">
         <h2 className="text-xl font-semibold">Order summary</h2>
         <div className="flex justify-between font-semibold uppercase">
           <p>Total cost</p>

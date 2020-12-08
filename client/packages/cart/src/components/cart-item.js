@@ -19,13 +19,13 @@ const CartItem = ({ id, product, quantity }) => {
         <div className="flex items-center justify-center gap-5">
           <button
             className="text-xl text-gray-400 hover:text-black"
-            onClick={decrease}>
+            onClick={() => decrease(id)}>
             -
           </button>
           <p>{quantity}</p>
           <button
             className="text-xl text-gray-400 hover:text-black"
-            onClick={increase}>
+            onClick={() => increase(id)}>
             +
           </button>
         </div>
