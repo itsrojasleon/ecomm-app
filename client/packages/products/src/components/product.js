@@ -42,13 +42,8 @@ const Product = ({ id, name, price, description, wishlist }) => {
         <div className="flex space-x-3 mb-4 text-sm font-medium">
           <div className="flex-auto flex space-x-3">
             <button
-              className="w-1/2 flex items-center justify-center rounded-md bg-black text-white"
-              type="submit">
-              Buy now
-            </button>
-            <button
               onClick={addToCart}
-              className="w-1/2 flex items-center justify-center rounded-md border border-gray-300"
+              className="w-1/2 flex items-center justify-center rounded-md bg-black text-white"
               type="button">
               Add to cart
             </button>
