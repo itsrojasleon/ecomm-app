@@ -49,9 +49,9 @@ const App = () => {
             <Route exact path="/">
               <div>Home</div>
             </Route>
-            <Route path="*">
+            {/* <Route path="*">
               <Redirect to="/" />
-            </Route>
+            </Route> */}
           </Switch>
         </Suspense>
       </div>
