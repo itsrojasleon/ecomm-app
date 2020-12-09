@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import NavItem from './nav-item';
 
 const User = () => (
@@ -73,17 +73,17 @@ const Nav = ({ currentUser, onSignout }) => {
           {links}
           {currentUser && (
             <>
-              <Link to="/wishlist" className="block px-4 py-2 rounded-md">
+              <NavLink to="/wishlist" className="block px-4 py-2 rounded-md">
                 <Heart />
-              </Link>
-              <Link to="/cart" className="block px-4 py-2 rounded-md">
+              </NavLink>
+              <NavLink to="/cart" className="block px-4 py-2 rounded-md">
                 <Cart />
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to={`/users/${currentUser.username}`}
                 className="block px-4 py-2 rounded-md">
                 <User />
-              </Link>
+              </NavLink>
               <button
                 className="block px-4 py-2 rounded-md bg-red-100 text-red-700"
                 onClick={onSignout}>

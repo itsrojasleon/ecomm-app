@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
-import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import Nav from './components/nav';
 import { ecomm } from '../api/ecomm';
@@ -11,7 +11,7 @@ const WishlistApp = lazy(() => import('./components/wishlist-app'));
 const UsersApp = lazy(() => import('./components/users-app'));
 const CartApp = lazy(() => import('./components/cart-app'));
 
-const history = createBrowserHistory();
+// const history = createBrowserHistory();
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -31,7 +31,7 @@ const App = () => {
   };
 
   return (
-    <Router history={history}>
+    <BrowserRouter>
       <Nav currentUser={currentUser} onSignout={handleSignout} />
       <div className="w-11/12 m-auto">
         <Suspense fallback={<h1>Loading...</h1>}>
@@ -40,22 +40,23 @@ const App = () => {
               {currentUser && <Redirect to="/" />}
               <AuthApp />
             </Route>
-            <Route path="/wishlist" component={WishlistApp} />
             <Route path="/products" component={ProductsApp} />
+            <Route path="/cart" component={CartApp} />
+            <Route path="/wishlist" component={WishlistApp} />
+
             <Route path="/users">
               <UsersApp currentUser={currentUser} />
             </Route>
-            <Route path="/cart" component={CartApp} />
             <Route exact path="/">
               <div>Home</div>
             </Route>
-            {/* <Route path="*">
+            <Route path="*">
               <Redirect to="/" />
-            </Route> */}
+            </Route>
           </Switch>
         </Suspense>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 };
 
