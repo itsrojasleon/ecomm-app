@@ -11,7 +11,7 @@ const CartItem = ({ id, product, quantity }) => {
         <p>{product.name}</p>
         <p
           className="text-red-500 text-xs cursor-pointer my-3"
-          onClick={removeItem}>
+          onClick={() => removeItem(id)}>
           Remove
         </p>
       </td>
@@ -33,7 +33,7 @@ const CartItem = ({ id, product, quantity }) => {
       <td className="border border-gray-100 px-4 py-2 text-center">
         $ {product.price.toFixed(2)}
       </td>
-      <td className="border border-gray-100 px-4 py-2 text-right">
+      <td className="border border-gray-100 px-4 py-2 text-center">
         $ {(product.price * quantity).toFixed(2)}
       </td>
     </tr>

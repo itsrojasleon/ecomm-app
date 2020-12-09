@@ -23,4 +23,16 @@ router.delete(
   }
 );
 
+// remove all the items
+router.delete(
+  '/api/cart',
+  currentUser,
+  requireAuth,
+  async (req: Request, res: Response) => {
+    await Cart.destroy({ where: { userId: req.currentUser!.id } });
+
+    res.sendStatus(200);
+  }
+);
+
 export { router as deleteCartRouter };

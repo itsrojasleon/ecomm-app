@@ -7,6 +7,7 @@ Context.displayName = 'CartContext';
 const cartActions = {
   fetchItems: 'fetch_items',
   removeItem: 'remove_item',
+  removeAll: 'remove_all',
   increase: 'increase',
   decrease: 'decrease',
   isLoading: 'is_loading',
@@ -30,6 +31,8 @@ const cartReducer = (state, { type, payload }) => {
         ...state,
         items: state.items.filter((item) => item.id !== payload)
       };
+    case cartActions.removeAll:
+      return { ...state, items: [] };
     case cartActions.increase:
       return {
         ...state,
@@ -76,6 +79,15 @@ const removeItem = (dispatch) => async (id) => {
   }
 };
 
+const removeAll = (dispatch) => async () => {
+  try {
+    await ecomm.delete('/api/cart');
+    dispatch({ type: cartActions.removeAll });
+  } catch (err) {
+    dispatch({ type: cartActions.error, payload: err });
+  }
+};
+
 // Increase product's quantity by one
 const increase = (dispatch) => async (id) => {
   try {
@@ -96,7 +108,7 @@ const decrease = (dispatch) => async (id) => {
   }
 };
 
-const actions = { fetchItems, removeItem, increase, decrease };
+const actions = { fetchItems, removeItem, increase, decrease, removeAll };
 
 export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
