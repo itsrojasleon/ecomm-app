@@ -1,32 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { ecomm } from '../../api/ecomm';
 import UserDetails from '../components/user-details';
+import { Context } from '../context/users-context';
 
 const User = ({ currentUser }) => {
-  const [user, setUser] = useState({});
+  const { state, fetchUser } = useContext(Context);
   const { username } = useParams();
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const { data } = await ecomm.get(`/api/users/${username}`);
-
-        setUser(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchUser();
+    fetchUser(username);
   }, []);
 
-  if (Object.values(user).length === 0) return 'mmmmm';
+  if (Object.values(state.user).length === 0) return 'mmmmm';
 
   return (
-    <div>
-      <UserDetails user={user} currentUser={currentUser} />
-    </div>
+    <>
+      <UserDetails user={state.user} currentUser={currentUser} />
+    </>
   );
 };
 

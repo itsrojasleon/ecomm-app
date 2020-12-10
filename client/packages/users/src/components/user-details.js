@@ -1,26 +1,22 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
 import { convertDate } from '../utils/date';
-import { ecomm } from '../../api/ecomm';
+import { Context } from '../context/users-context';
 
 const UserDetails = ({ user, currentUser }) => {
-  const history = useHistory();
   const [isUpdating, setUpdating] = useState(false);
-
   const [name, setName] = useState(user.name || '');
   const [bio, setBio] = useState(user.bio || '');
 
+  const { updateUser } = useContext(Context);
+
   const isOwner = currentUser.id === user.id;
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      await ecomm.put(`/api/users/${user.username}`, { name, bio });
-      history.push('/');
-    } catch (err) {
-      console.error(err.response.data);
-    }
+    updateUser({ username: user.username, bio, name });
+
+    setUpdating(false);
   };
 
   const renderContent = () => (
