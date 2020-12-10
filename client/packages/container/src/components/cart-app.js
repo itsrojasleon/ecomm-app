@@ -18,7 +18,11 @@ const CartApp = () => {
       }
     });
 
-    history.listen(onParentNavigate);
+    const unlisten = history.listen(onParentNavigate);
+
+    return () => {
+      unlisten();
+    };
   }, []);
 
   return <div ref={ref} />;

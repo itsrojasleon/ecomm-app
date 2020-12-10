@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
 import Nav from './components/nav';
 import { ecomm } from '../api/ecomm';
 import '../styles/tailwind.css';
@@ -48,7 +47,7 @@ const App = () => {
               <UsersApp currentUser={currentUser} />
             </Route>
             <Route exact path="/">
-              <div>Home</div>
+              <h1>Home</h1>
             </Route>
             <Route path="*">
               <Redirect to="/" />

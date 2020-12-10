@@ -9,6 +9,7 @@ const ProductsApp = () => {
   useEffect(() => {
     const { onParentNavigate } = mount(ref.current, {
       initialPath: history.location.pathname,
+      // send navigation to the child
       onNavigate({ pathname: nextPathname }) {
         const { pathname } = history.location;
 
@@ -18,7 +19,12 @@ const ProductsApp = () => {
       }
     });
 
-    history.listen(onParentNavigate);
+    // Listen for navigation coming from the child
+    const unlisten = history.listen(onParentNavigate);
+
+    return () => {
+      unlisten();
+    };
   }, []);
 
   return <div ref={ref} />;

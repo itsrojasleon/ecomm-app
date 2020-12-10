@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, memo } from 'react';
 import Product from '../components/product';
 import Alert from '../components/alert';
 import { Context } from '../context/products-context';
@@ -21,4 +21,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default memo(Products);
