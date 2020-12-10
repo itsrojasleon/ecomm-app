@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Product from '../components/product';
-import { ecomm } from '../../api/ecomm';
+import { Context } from '../context/wishlist-context';
 
 const Wishlist = () => {
-  const [products, setProducts] = useState([]);
+  const { state, fetchWishlist } = useContext(Context);
 
   useEffect(() => {
-    const fetchWishlist = async () => {
-      try {
-        const { data } = await ecomm.get('/api/wishlist');
-
-        setProducts(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
     fetchWishlist();
   }, []);
 
-  if (products.length === 0) return 'No products added to the wishlist';
+  if (state.isLoading) return <div>Loading...</div>;
+  if (state.wishlist.length === 0) return 'No products added to the wishlist';
 
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
-      {products.map(({ id, product }) => (
+      {state.wishlist.map(({ id, product }) => (
         <Product key={id} {...product} />
       ))}
     </div>

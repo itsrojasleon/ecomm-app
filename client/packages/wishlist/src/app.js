@@ -1,15 +1,18 @@
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import Wishlist from './pages/wishlist';
+import { Provider } from './context/wishlist-context';
 import '../styles/tailwind.css';
 
 const App = ({ history }) => {
   return (
-    <Router history={history}>
-      <Switch>
-        <Route path="/wishlist" component={Wishlist} />
-      </Switch>
-    </Router>
+    <Provider>
+      <Router history={history}>
+        <Switch>
+          <Route path="/wishlist" component={Wishlist} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 };
 
