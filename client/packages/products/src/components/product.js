@@ -1,20 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ecomm } from '../../api/ecomm';
 import { Context } from '../context/products-context';
 
 const Product = ({ id, name, price, description, wishlist }) => {
   const [wishlisted, setWishlisted] = useState(Boolean(wishlist));
-  const { state, addToCart, addToWishlist } = useContext(Context);
-
-  // const addToWishlist = async () => {
-  //   try {
-  //     setWishlisted(!wishlisted);
-  //     await ecomm.post('/api/wishlist', { productId: id });
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  const { addToCart, addToWishlist } = useContext(Context);
 
   return (
     <div className="flex">

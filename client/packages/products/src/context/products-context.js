@@ -90,7 +90,6 @@ export const Provider = ({ children }) => {
         productId,
         quantity: 1
       });
-      console.log(data);
       dispatch({ type: productsActions.addToCart, payload: data });
     } catch (err) {
       dispatch({ type: productsActions.error, payload: err });
