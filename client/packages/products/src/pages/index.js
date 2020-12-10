@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Product from '../components/product';
-import { ecomm } from '../../api/ecomm';
+import Alert from '../components/alert';
+import { Context } from '../context/products-context';
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const { state, fetchProducts } = useContext(Context);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const { data } = await ecomm.get('/api/products');
-
-      setProducts(data);
-    };
-
     fetchProducts();
   }, []);
 
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
-      {products.map((product) => (
+      {state.products.map((product) => (
         <Product key={product.id} {...product} />
       ))}
+      <Alert />
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ecomm } from '../../api/ecomm';
+import { Context } from '../context/products-context';
 
 const Create = () => {
   const [name, setName] = useState('');
@@ -9,16 +9,14 @@ const Create = () => {
 
   const history = useHistory();
 
-  const handleSubmit = async (e) => {
+  const { createProduct } = useContext(Context);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    await ecomm.post('/api/products', {
-      name,
-      price,
-      description
-    });
+    createProduct({ name, price, description });
 
-    history.push('/');
+    history.push('/products');
   };
 
   return (

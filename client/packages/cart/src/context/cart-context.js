@@ -60,67 +60,61 @@ const cartReducer = (state, { type, payload }) => {
   }
 };
 
-const fetchItems = (dispatch) => async () => {
-  try {
-    dispatch({ type: cartActions.isLoading });
-    const { data } = await ecomm.get('/api/cart');
-    dispatch({ type: cartActions.fetchItems, payload: data });
-  } catch (err) {
-    dispatch({ type: cartActions.error, payload: err });
-  }
-};
-
-const removeItem = (dispatch) => async (id) => {
-  try {
-    await ecomm.delete(`/api/cart/${id}`);
-    dispatch({ type: cartActions.removeItem, payload: id });
-  } catch (err) {
-    dispatch({ type: cartActions.error, payload: err });
-  }
-};
-
-const removeAll = (dispatch) => async () => {
-  try {
-    await ecomm.delete('/api/cart');
-    dispatch({ type: cartActions.removeAll });
-  } catch (err) {
-    dispatch({ type: cartActions.error, payload: err });
-  }
-};
-
-// Increase product's quantity by one
-const increase = (dispatch) => async (id) => {
-  try {
-    await ecomm.put(`/api/cart/increase/${id}`);
-    dispatch({ type: cartActions.increase, payload: id });
-  } catch (err) {
-    dispatch({ type: cartActions.error, payload: err });
-  }
-};
-
-// Decrease product's quantity by one
-const decrease = (dispatch) => async (id) => {
-  try {
-    await ecomm.put(`/api/cart/decrease/${id}`);
-    dispatch({ type: cartActions.decrease, payload: id });
-  } catch (err) {
-    dispatch({ type: cartActions.error, payload: err });
-  }
-};
-
-const actions = { fetchItems, removeItem, increase, decrease, removeAll };
-
 export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  const boundActions = {};
+  const fetchItems = async () => {
+    try {
+      dispatch({ type: cartActions.isLoading });
+      const { data } = await ecomm.get('/api/cart');
+      dispatch({ type: cartActions.fetchItems, payload: data });
+    } catch (err) {
+      dispatch({ type: cartActions.error, payload: err });
+    }
+  };
 
-  for (let key in actions) {
-    boundActions[key] = actions[key](dispatch);
-  }
+  const removeItem = async (id) => {
+    try {
+      await ecomm.delete(`/api/cart/${id}`);
+      dispatch({ type: cartActions.removeItem, payload: id });
+    } catch (err) {
+      dispatch({ type: cartActions.error, payload: err });
+    }
+  };
+
+  const removeAll = async () => {
+    try {
+      await ecomm.delete('/api/cart');
+      dispatch({ type: cartActions.removeAll });
+    } catch (err) {
+      dispatch({ type: cartActions.error, payload: err });
+    }
+  };
+
+  // Increase product's quantity by one
+  const increase = async (id) => {
+    try {
+      await ecomm.put(`/api/cart/increase/${id}`);
+      dispatch({ type: cartActions.increase, payload: id });
+    } catch (err) {
+      dispatch({ type: cartActions.error, payload: err });
+    }
+  };
+
+  // Decrease product's quantity by one
+  const decrease = async (id) => {
+    try {
+      await ecomm.put(`/api/cart/decrease/${id}`);
+      dispatch({ type: cartActions.decrease, payload: id });
+    } catch (err) {
+      dispatch({ type: cartActions.error, payload: err });
+    }
+  };
+
+  const actions = { fetchItems, removeItem, increase, decrease, removeAll };
 
   return (
-    <Context.Provider value={{ state, ...boundActions }}>
+    <Context.Provider value={{ state, ...actions }}>
       {children}
     </Context.Provider>
   );
