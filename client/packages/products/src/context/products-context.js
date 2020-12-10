@@ -8,11 +8,13 @@ const productsActions = {
   isLoading: 'is_loading',
   error: 'error',
   fetchProducts: 'fetch_products',
+  fetchProduct: 'fetch_product',
   createProduct: 'create_product'
 };
 
 const initialState = {
   products: [],
+  product: {},
   error: [],
   isLoading: false
 };
@@ -25,6 +27,8 @@ const productsReducer = (state, { type, payload }) => {
       return { ...state, isLoading: false, error: payload };
     case productsActions.fetchProducts:
       return { ...state, isLoading: false, products: payload };
+    case productsActions.fetchProduct:
+      return { ...state, isLoading: false, product: payload };
     case productsActions.createProduct:
       return {
         ...state,
@@ -49,6 +53,16 @@ export const Provider = ({ children }) => {
     }
   };
 
+  const fetchProduct = async (id) => {
+    dispatch({ type: productsActions.isLoading });
+    try {
+      const { data } = await ecomm.get(`/api/products/${id}`);
+      dispatch({ type: productsActions.fetchProduct, payload: data });
+    } catch (err) {
+      dispatch({ type: productsActions.error, payload: err });
+    }
+  };
+
   const createProduct = async ({ name, price, description }) => {
     try {
       const { data } = await ecomm.post('/api/products', {
@@ -62,7 +76,7 @@ export const Provider = ({ children }) => {
     }
   };
 
-  const actions = { fetchProducts, createProduct };
+  const actions = { fetchProducts, createProduct, fetchProduct };
 
   return (
     <Context.Provider value={{ state, ...actions }}>
