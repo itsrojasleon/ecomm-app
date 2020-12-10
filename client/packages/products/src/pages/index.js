@@ -15,6 +15,7 @@ const Products = () => {
       {state.products.map((product) => (
         <Product key={product.id} {...product} />
       ))}
+      {/* {JSON.stringify(state.cart)} */}
       <Alert />
     </div>
   );

@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Product from '../components/product';
 import { Context } from '../context/products-context';
-import { ecomm } from '../../api/ecomm';
 
 const Show = () => {
   const { id } = useParams();
@@ -14,11 +13,11 @@ const Show = () => {
 
   if (state.errors?.length) {
     return (
-      <div>
+      <>
         {state.errors.map((error, i) => (
           <div key={i}>{error.message}</div>
         ))}
-      </div>
+      </>
     );
   }
 

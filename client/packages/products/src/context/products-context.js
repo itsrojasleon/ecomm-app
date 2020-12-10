@@ -9,12 +9,16 @@ const productsActions = {
   error: 'error',
   fetchProducts: 'fetch_products',
   fetchProduct: 'fetch_product',
-  createProduct: 'create_product'
+  createProduct: 'create_product',
+  addToCart: 'add_to_cart',
+  addToWishlist: 'add_to_wishlist'
 };
 
 const initialState = {
   products: [],
   product: {},
+  cart: {},
+  wishlist: {},
   error: [],
   isLoading: false
 };
@@ -26,15 +30,19 @@ const productsReducer = (state, { type, payload }) => {
     case productsActions.error:
       return { ...state, isLoading: false, error: payload };
     case productsActions.fetchProducts:
-      return { ...state, isLoading: false, products: payload };
+      return { ...state, isLoading: false, products: payload, error: [] };
     case productsActions.fetchProduct:
-      return { ...state, isLoading: false, product: payload };
+      return { ...state, isLoading: false, product: payload, error: [] };
     case productsActions.createProduct:
       return {
         ...state,
         isLoading: false,
         products: state.products.concat(payload)
       };
+    case productsActions.addToCart:
+      return { ...state, cart: payload };
+    case productsActions.addToCart:
+      return { ...state, wishlist: payload };
     default:
       return state;
   }
@@ -76,7 +84,35 @@ export const Provider = ({ children }) => {
     }
   };
 
-  const actions = { fetchProducts, createProduct, fetchProduct };
+  const addToCart = async (productId) => {
+    try {
+      const { data } = await ecomm.post('/api/cart', {
+        productId,
+        quantity: 1
+      });
+      console.log(data);
+      dispatch({ type: productsActions.addToCart, payload: data });
+    } catch (err) {
+      dispatch({ type: productsActions.error, payload: err });
+    }
+  };
+
+  const addToWishlist = async (productId) => {
+    try {
+      const { data } = await ecomm.post('/api/wishlist', { productId });
+      dispatch({ type: productsActions.addToWishlist, payload: data });
+    } catch (err) {
+      dispatch({ type: productsActions.error, payload: err });
+    }
+  };
+
+  const actions = {
+    fetchProducts,
+    createProduct,
+    fetchProduct,
+    addToCart,
+    addToWishlist
+  };
 
   return (
     <Context.Provider value={{ state, ...actions }}>
