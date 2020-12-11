@@ -41,7 +41,15 @@ const productsReducer = (state, { type, payload }) => {
         products: state.products.concat(payload)
       };
     case productsActions.addToCart:
-      return { ...state, cart: state.cart.concat(payload) };
+      return {
+        ...state,
+        cart: state.cart.concat(payload),
+        products: state.products.map((product) =>
+          product.id === payload.productId
+            ? { ...product, addedToCart: !product?.addedToCart }
+            : product
+        )
+      };
     case productsActions.removeFromCart:
       return { ...state, cart: state.cart.slice(1) };
     case productsActions.addToWishlist:
