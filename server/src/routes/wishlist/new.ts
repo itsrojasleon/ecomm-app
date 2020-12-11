@@ -20,7 +20,9 @@ router.post(
   async (req: Request, res: Response) => {
     const { productId } = req.body;
 
-    const wishlist = await Wishlist.findOne({ where: { productId } });
+    const wishlist = await Wishlist.findOne({
+      where: { productId, userId: req.currentUser!.id }
+    });
 
     if (wishlist) {
       await wishlist.destroy();

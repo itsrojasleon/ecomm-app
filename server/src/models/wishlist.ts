@@ -3,20 +3,18 @@ import {
   Column,
   Model,
   ForeignKey,
-  BelongsTo,
-  Unique
+  BelongsTo
 } from 'sequelize-typescript';
 import { Product } from './product';
 import { User } from './user';
 
-@Table({ underscored: true })
+@Table({ underscored: true, tableName: 'wishlist' })
 export class Wishlist extends Model<Wishlist> {
   @ForeignKey(() => User)
   @Column
   userId!: number;
 
   @ForeignKey(() => Product)
-  @Unique
   @Column
   productId!: number;
 
