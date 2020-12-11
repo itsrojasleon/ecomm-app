@@ -28,6 +28,7 @@ const App = () => {
     };
   }, []);
 
+  if (state.isLoading) return 'LOADING...';
   if (state.error) return <div>{JSON.stringify(state.error)}</div>;
 
   return (
@@ -45,7 +46,7 @@ const App = () => {
             <Route path="/wishlist" component={WishlistApp} />
 
             <Route path="/users">
-              <UsersApp currentUser={state.currentUser} />
+              <UsersApp />
             </Route>
             <Route exact path="/">
               <h1>Home</h1>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { mount } from 'users/UsersApp';
 
-const WishlistApp = ({ currentUser }) => {
+const WishlistApp = () => {
   const ref = useRef(null);
   const history = useHistory();
 
@@ -15,8 +15,7 @@ const WishlistApp = ({ currentUser }) => {
         if (pathname !== nextPathname) {
           history.push(nextPathname);
         }
-      },
-      currentUser
+      }
     });
 
     const unlisten = history.listen(onParentNavigate);

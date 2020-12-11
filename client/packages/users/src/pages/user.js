@@ -3,19 +3,20 @@ import { useParams } from 'react-router-dom';
 import UserDetails from '../components/user-details';
 import { Context } from '../context/users-context';
 
-const User = ({ currentUser }) => {
-  const { state, fetchUser } = useContext(Context);
+const User = () => {
+  const { state, fetchCurrentUser, fetchUser } = useContext(Context);
   const { username } = useParams();
 
   useEffect(() => {
+    fetchCurrentUser();
     fetchUser(username);
   }, []);
 
-  if (Object.values(state.user).length === 0) return 'mmmmm';
+  if (state.isLoading) return 'LOADING USER';
 
   return (
     <>
-      <UserDetails user={state.user} currentUser={currentUser} />
+      <UserDetails user={state.user} currentUser={state.currentUser} />
     </>
   );
 };

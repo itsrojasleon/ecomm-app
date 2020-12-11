@@ -38,7 +38,10 @@ export const Provider = ({ children }) => {
   const fetchCurrentUser = async () => {
     try {
       const { data } = await ecomm.get('/api/users/currentuser');
-      dispatch({ type: containerActions.fetchCurrentUser, payload: data });
+      dispatch({
+        type: containerActions.fetchCurrentUser,
+        payload: data.currentUser
+      });
     } catch (err) {
       dispatch({ type: containerActions.error, payload: err });
     }

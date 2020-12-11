@@ -4,17 +4,17 @@ import { Context } from '../context/users-context';
 
 const UserDetails = ({ user, currentUser }) => {
   const [isUpdating, setUpdating] = useState(false);
-  const [name, setName] = useState(user.name || '');
-  const [bio, setBio] = useState(user.bio || '');
+  const [name, setName] = useState(user?.name || '');
+  const [bio, setBio] = useState(user?.bio || '');
 
   const { updateUser } = useContext(Context);
 
-  const isOwner = currentUser.id === user.id;
+  const isOwner = currentUser?.id === user?.id;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    updateUser({ username: user.username, bio, name });
+    updateUser({ username: user?.username, bio, name });
 
     setUpdating(false);
   };
@@ -22,11 +22,11 @@ const UserDetails = ({ user, currentUser }) => {
   const renderContent = () => (
     <div className="flex justify-between items-center">
       <div className="flex flex-col">
-        <h3 className="font-semibold text-xl mb-4">{user.username}</h3>
-        <p>{user.name}</p>
-        <p>{user.email}</p>
-        <p>{user.bio}</p>
-        <p>Account created at {convertDate(user.createdAt)}</p>
+        <h3 className="font-semibold text-xl mb-4">{user?.username}</h3>
+        <p>{user?.name}</p>
+        <p>{user?.email}</p>
+        <p>{user?.bio}</p>
+        <p>Account created at {convertDate(user?.createdAt)}</p>
       </div>
       {isOwner && (
         <button

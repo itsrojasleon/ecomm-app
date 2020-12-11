@@ -1,23 +1,15 @@
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import User from './pages/user';
-import '../styles/tailwind.css';
 import { Provider } from './context/users-context';
+import '../styles/tailwind.css';
 
-// Only for dev purposes
-// Pretend... there's a current user
-// I'm a liar, I know
-const App = ({
-  history,
-  currentUser = { id: 1, username: 'rojasleon', email: 'test@test.com' }
-}) => {
+const App = ({ history }) => {
   return (
     <Provider>
       <Router history={history}>
         <Switch>
-          <Route path="/users/:username">
-            <User currentUser={currentUser} />
-          </Route>
+          <Route path="/users/:username" component={User} />
         </Switch>
       </Router>
     </Provider>
