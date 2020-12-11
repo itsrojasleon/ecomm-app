@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import NavItem from './nav-item';
+import { Context } from '../context/container-context';
 
 const User = () => (
   <svg
@@ -50,7 +51,12 @@ const Cart = () => (
   </svg>
 );
 
-const Nav = ({ currentUser, onSignout }) => {
+const Nav = () => {
+  const {
+    state: { currentUser },
+    signout
+  } = useContext(Context);
+
   const links = [
     { href: '/', label: 'Home' },
     !currentUser && { href: '/auth/signup', label: 'Signup' },
@@ -73,20 +79,20 @@ const Nav = ({ currentUser, onSignout }) => {
           {links}
           {currentUser && (
             <>
-              <NavLink to="/wishlist" className="block px-4 py-2 rounded-md">
+              <Link to="/wishlist" className="block px-4 py-2 rounded-md">
                 <Heart />
-              </NavLink>
-              <NavLink to="/cart" className="block px-4 py-2 rounded-md">
+              </Link>
+              <Link to="/cart" className="block px-4 py-2 rounded-md">
                 <Cart />
-              </NavLink>
-              <NavLink
+              </Link>
+              <Link
                 to={`/users/${currentUser.username}`}
                 className="block px-4 py-2 rounded-md">
                 <User />
-              </NavLink>
+              </Link>
               <button
                 className="block px-4 py-2 rounded-md bg-red-100 text-red-700"
-                onClick={onSignout}>
+                onClick={signout}>
                 Logout
               </button>
             </>

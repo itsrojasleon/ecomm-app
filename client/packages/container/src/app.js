@@ -1,7 +1,8 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import React, { lazy, Suspense, useEffect, useContext } from 'react';
+import { Route, Switch, Redirect, Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import Nav from './components/nav';
-import { ecomm } from '../api/ecomm';
+import { Context } from './context/container-context';
 import '../styles/tailwind.css';
 
 const AuthApp = lazy(() => import('./components/auth-app'));
@@ -10,33 +11,33 @@ const WishlistApp = lazy(() => import('./components/wishlist-app'));
 const UsersApp = lazy(() => import('./components/users-app'));
 const CartApp = lazy(() => import('./components/cart-app'));
 
-// const history = createBrowserHistory();
+const history = createBrowserHistory();
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const { state, fetchCurrentUser } = useContext(Context);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data } = await ecomm.get('/api/users/currentuser');
+    fetchCurrentUser();
 
-      setCurrentUser(data.currentUser);
+    const unlisten = history.listen(() => {
+      fetchCurrentUser();
+    });
+
+    return () => {
+      unlisten();
     };
-
-    fetchUser();
   }, []);
 
-  const handleSignout = async () => {
-    await ecomm.post('/api/users/signout');
-  };
+  if (state.error) return <div>{JSON.stringify(state.error)}</div>;
 
   return (
-    <BrowserRouter>
-      <Nav currentUser={currentUser} onSignout={handleSignout} />
+    <Router history={history}>
+      <Nav />
       <div className="w-11/12 m-auto">
         <Suspense fallback={<h1>Loading...</h1>}>
           <Switch>
             <Route path="/auth">
-              {currentUser && <Redirect to="/" />}
+              {state.currentUser && <Redirect to="/" />}
               <AuthApp />
             </Route>
             <Route path="/products" component={ProductsApp} />
@@ -44,7 +45,7 @@ const App = () => {
             <Route path="/wishlist" component={WishlistApp} />
 
             <Route path="/users">
-              <UsersApp currentUser={currentUser} />
+              <UsersApp currentUser={state.currentUser} />
             </Route>
             <Route exact path="/">
               <h1>Home</h1>
@@ -55,7 +56,7 @@ const App = () => {
           </Switch>
         </Suspense>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 };
 
