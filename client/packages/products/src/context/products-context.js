@@ -11,13 +11,14 @@ const productsActions = {
   fetchProduct: 'fetch_product',
   createProduct: 'create_product',
   addToCart: 'add_to_cart',
+  removeFromCart: 'remove_from_cart',
   addToWishlist: 'add_to_wishlist'
 };
 
 const initialState = {
   products: [],
   product: {},
-  cart: {},
+  cart: [],
   wishlist: {},
   error: [],
   isLoading: false
@@ -40,8 +41,10 @@ const productsReducer = (state, { type, payload }) => {
         products: state.products.concat(payload)
       };
     case productsActions.addToCart:
-      return { ...state, cart: payload };
-    case productsActions.addToCart:
+      return { ...state, cart: state.cart.concat(payload) };
+    case productsActions.removeFromCart:
+      return { ...state, cart: state.cart.slice(1) };
+    case productsActions.addToWishlist:
       return { ...state, wishlist: payload };
     default:
       return state;
@@ -90,7 +93,12 @@ export const Provider = ({ children }) => {
         productId,
         quantity: 1
       });
+
       dispatch({ type: productsActions.addToCart, payload: data });
+
+      setTimeout(() => {
+        dispatch({ type: productsActions.removeFromCart });
+      }, 3000);
     } catch (err) {
       dispatch({ type: productsActions.error, payload: err });
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, memo } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Product from '../components/product';
 import Alert from '../components/alert';
 import { Context } from '../context/products-context';
@@ -15,10 +15,17 @@ const Products = () => {
       {state.products.map((product) => (
         <Product key={product.id} {...product} />
       ))}
-      {/* {JSON.stringify(state.cart)} */}
-      <Alert />
+      {state.cart.map((product, i) => (
+        <div
+          key={product.id}
+          className={`absolute bottom-0 right-0 mb-${20 * i + 4} mr-4`}>
+          <Alert>
+            Product added to cart <b className="capitalize">{product.id}</b>
+          </Alert>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default memo(Products);
+export default Products;

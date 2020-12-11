@@ -1,22 +1,26 @@
 import React from 'react';
-import { useTimer } from '../hooks/use-timer';
 
-const Alert = () => {
-  const isOpen = useTimer();
-
-  if (!isOpen) return null;
-
+const Alert = ({ children }) => {
   return (
-    <div className="text-white px-6 py-4 border-0 rounded absolute bottom-0 right-0 mb-4 mr-4 bg-purple-500">
+    <div className="text-white px-6 py-4 border-0 rounded bg-red-500">
       <span className="text-xl inline-block mr-5 align-middle">
-        <i className="fas fa-bell" />
+        <svg
+          className=""
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+          />
+        </svg>
       </span>
-      <span className="inline-block align-middle mr-8">
-        <b className="capitalize">pink!</b> This is a pink alert - check it out!
-      </span>
-      <button className="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
-        <span>×</span>
-      </button>
+      <span className="inline-block align-middle mr-8">{children}</span>
     </div>
   );
 };

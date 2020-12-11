@@ -21,7 +21,6 @@ export class Cart extends Model<Cart> {
   userId!: number;
 
   @ForeignKey(() => Product)
-  @Unique
   @Column
   productId!: number;
 
