@@ -29,7 +29,4 @@ export class Product extends Model<Product> {
 
   @BelongsTo(() => User)
   user!: User;
-
-  // @BelongsToMany(() => Wishlist)
-  // wishlist!:
 }

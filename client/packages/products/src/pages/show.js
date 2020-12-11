@@ -11,7 +11,7 @@ const Show = () => {
     fetchProduct(id);
   }, []);
 
-  if (state.errors?.length) {
+  if (state.errors) {
     return (
       <>
         {state.errors.map((error, i) => (
@@ -21,9 +21,14 @@ const Show = () => {
     );
   }
 
-  if (Object.values(state.product).length === 0) return <div>No product</div>;
+  if (state.isLoading) return 'LOADING PRODUCT...';
+  if (!state.product) return 'Product not found';
 
-  return <Product {...state.product} />;
+  return (
+    <>
+      <Product {...state.product} />
+    </>
+  );
 };
 
 export default Show;

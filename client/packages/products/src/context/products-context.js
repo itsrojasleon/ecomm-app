@@ -17,10 +17,10 @@ const productsActions = {
 
 const initialState = {
   products: [],
-  product: {},
+  product: null,
   cart: [],
-  wishlist: {},
-  error: [],
+  wishlist: null,
+  error: null,
   isLoading: false
 };
 

@@ -2,7 +2,15 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../context/products-context';
 
-const Product = ({ id, name, price, description, wishlist, addedToCart }) => {
+const Product = ({
+  id,
+  name,
+  price,
+  description,
+  wishlist,
+  addedToCart,
+  user
+}) => {
   const [wishlisted, setWishlisted] = useState(Boolean(wishlist));
   const { addToCart, addToWishlist } = useContext(Context);
 
@@ -19,9 +27,17 @@ const Product = ({ id, name, price, description, wishlist, addedToCart }) => {
           <div className="text-xl font-semibold text-gray-500">
             ${price.toFixed(2)}
           </div>
-          <p className="w-full flex-none text-sm font-medium text-gray-500 mt-2 mb-4">
+          <p className="w-full flex-none text-sm font-medium text-gray-500 my-4">
             {description}
           </p>
+          {user && (
+            <p className="mb-4">
+              By{' '}
+              <Link className="hover:underline" to={`/users/${user.id}`}>
+                {user.name}
+              </Link>
+            </p>
+          )}
         </div>
         <div className="flex space-x-3 mb-4 text-sm font-medium">
           <div className="flex-auto flex space-x-3">
