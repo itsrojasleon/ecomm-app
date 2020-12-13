@@ -3,7 +3,8 @@ import {
   Column,
   Model,
   ForeignKey,
-  BelongsTo
+  BelongsTo,
+  Default
 } from 'sequelize-typescript';
 import { User } from './user';
 import { Product } from './product';
@@ -29,7 +30,11 @@ export enum OrderStatus {
 @Table({ underscored: true })
 export class Order extends Model<Order> {
   @Column
+  @Default(OrderStatus.Created)
   status!: OrderStatus;
+
+  @Column
+  quantity!: number;
 
   @ForeignKey(() => User)
   @Column

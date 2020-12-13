@@ -10,6 +10,7 @@ const cartActions = {
   removeAll: 'remove_all',
   increase: 'increase',
   decrease: 'decrease',
+  order: 'order',
   isLoading: 'is_loading',
   error: 'error'
 };
@@ -111,7 +112,22 @@ export const Provider = ({ children }) => {
     }
   };
 
-  const actions = { fetchItems, removeItem, increase, decrease, removeAll };
+  // const order = async ({ productId, quantity }) => {
+  //   try {
+  //     await ecomm.post(`/api/orders`, { productId, quantity });
+  //   } catch (err) {
+  //     dispatch({ type: cartActions.error, payload: err });
+  //   }
+  // };
+
+  const actions = {
+    fetchItems,
+    removeItem,
+    increase,
+    decrease,
+    removeAll
+    // order
+  };
 
   return (
     <Context.Provider value={{ state, ...actions }}>

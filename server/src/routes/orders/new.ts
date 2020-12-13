@@ -12,20 +12,28 @@ router.post(
   '/api/orders',
   currentUser,
   requireAuth,
-  [body('productId').isFloat().withMessage('You must provide a productId')],
+  [
+    body('productId').isFloat().withMessage('You must provide a productId'),
+    body('quantity').isFloat().withMessage('You must provide a quantity')
+  ],
   async (req: Request, res: Response) => {
-    // const { productId } = req.body;
-    // // Find the product the user is trying to order in the database
-    // const product = await Product.findByPk(productId);
-    // if (!product) {
-    //   throw new NotFoundError();
-    // }
-    // const order = await Order.create({
-    //   userId: req.currentUser!.id,
-    //   productId,
-    //   status: OrderStatus.Created
-    // });
-    // res.status(201).send(order);
+    const { productId, quantity } = req.body;
+
+    // Find the product the user is trying to order in the database
+    const product = await Product.findByPk(productId);
+
+    if (!product) {
+      throw new NotFoundError();
+    }
+
+    const order = await Order.create({
+      userId: req.currentUser!.id,
+      productId,
+      quantity,
+      status: OrderStatus.Created
+    });
+
+    res.status(201).send(order);
   }
 );
 
