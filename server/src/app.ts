@@ -25,7 +25,7 @@ import { updateUserRouter } from './routes/users/update';
 import { indexUserRouter } from './routes/users';
 
 // order routes
-import { newOrderRouter } from './routes/orders/new';
+// import { newOrderRouter } from './routes/orders/new';
 
 // cart routes
 import { indexCartRouter } from './routes/cart';
@@ -33,6 +33,10 @@ import { newCartRouter } from './routes/cart/new';
 import { increaseCartRouter } from './routes/cart/increase';
 import { decreaseCartRouter } from './routes/cart/decrease';
 import { deleteCartRouter } from './routes/cart/delete';
+
+// review routes
+import { newReviewRouter } from './routes/reviews/new';
+import { updateReviewRouter } from './routes/reviews/update';
 
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
@@ -81,13 +85,16 @@ app.use(updateProductsRouter);
 app.use(indexWishlistRouter);
 app.use(createWishlistRouter);
 
-app.use(newOrderRouter);
+// app.use(newOrderRouter);
 
 app.use(newCartRouter);
 app.use(indexCartRouter);
 app.use(deleteCartRouter);
 app.use(increaseCartRouter);
 app.use(decreaseCartRouter);
+
+app.use(newReviewRouter);
+app.use(updateReviewRouter);
 
 app.all('*', () => {
   throw new NotFoundError();

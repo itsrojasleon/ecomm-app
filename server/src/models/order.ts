@@ -31,7 +31,7 @@ export enum OrderStatus {
 export class Order extends Model<Order> {
   @Column
   @Default(OrderStatus.Created)
-  status!: OrderStatus;
+  status!: OrderStatus.Created;
 
   @Column
   quantity!: number;

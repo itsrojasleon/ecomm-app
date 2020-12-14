@@ -4,8 +4,10 @@ import {
   Model,
   ForeignKey,
   BelongsTo,
-  HasOne
+  HasOne,
+  HasMany
 } from 'sequelize-typescript';
+import { Review } from './review';
 import { User } from './user';
 import { Wishlist } from './wishlist';
 
@@ -20,13 +22,16 @@ export class Product extends Model<Product> {
   @Column
   description!: string;
 
-  @HasOne(() => Wishlist)
-  wishlist!: Wishlist;
-
   @ForeignKey(() => User)
   @Column
   userId!: number;
 
   @BelongsTo(() => User)
   user!: User;
+
+  @HasOne(() => Wishlist)
+  wishlist!: Wishlist;
+
+  @HasMany(() => Review)
+  reviews!: Review[];
 }

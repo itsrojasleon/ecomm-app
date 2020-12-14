@@ -3,10 +3,13 @@ import {
   Column,
   Model,
   HasMany,
-  BeforeCreate
+  BeforeCreate,
+  HasOne
 } from 'sequelize-typescript';
 import { PasswordManager } from '../services/password-manager';
+import { Cart } from './cart';
 import { Product } from './product';
+import { Review } from './review';
 
 @Table({ underscored: true })
 export class User extends Model<User> {
@@ -27,6 +30,12 @@ export class User extends Model<User> {
 
   @HasMany(() => Product)
   products!: Product[];
+
+  @HasMany(() => Review)
+  reviews!: Review[];
+
+  @HasOne(() => Cart)
+  cart!: Cart;
 
   @BeforeCreate
   static async hashPassword(instance: User) {

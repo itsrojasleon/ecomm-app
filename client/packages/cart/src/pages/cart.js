@@ -4,7 +4,7 @@ import { Context } from '../context/cart-context';
 import { sum } from '../utils/sum';
 
 const Cart = () => {
-  const { state, fetchItems, removeAll, order } = useContext(Context);
+  const { state, fetchItems, removeAll } = useContext(Context);
 
   useEffect(() => {
     fetchItems();
