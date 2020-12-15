@@ -37,6 +37,7 @@ import { deleteCartRouter } from './routes/cart/delete';
 // review routes
 import { newReviewRouter } from './routes/reviews/new';
 import { updateReviewRouter } from './routes/reviews/update';
+import { deleteReviewRouter } from './routes/reviews/delete';
 
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
@@ -95,6 +96,7 @@ app.use(decreaseCartRouter);
 
 app.use(newReviewRouter);
 app.use(updateReviewRouter);
+app.use(deleteReviewRouter);
 
 app.all('*', () => {
   throw new NotFoundError();

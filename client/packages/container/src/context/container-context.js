@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import { ecomm } from '../../api/ecomm';
+import { ecomm } from '../api/ecomm';
 
 export const Context = createContext(null);
 Context.displayName = 'ContainerContext';

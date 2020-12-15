@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { mount } from 'products/ProductsApp';
 import { useHistory } from 'react-router-dom';
 
-const ProductsApp = () => {
+const ProductsApp = ({ currentUser }) => {
   const ref = useRef(null);
   const history = useHistory();
 
@@ -16,7 +16,8 @@ const ProductsApp = () => {
         if (pathname !== nextPathname) {
           history.push(nextPathname);
         }
-      }
+      },
+      currentUser
     });
 
     // Listen for navigation coming from the child

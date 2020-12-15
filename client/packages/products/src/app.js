@@ -6,13 +6,15 @@ import Products from './pages';
 import '../styles/tailwind.css';
 import { Provider } from './context/products-context';
 
-const App = ({ history }) => {
+const App = ({ history, currentUser }) => {
   return (
     <Provider>
       <Router history={history}>
         <Switch>
           <Route path="/products/create" component={Create} />
-          <Route path="/products/:id" component={Show} />
+          <Route path="/products/:id">
+            <Show currentUser={currentUser} />
+          </Route>
           <Route path="/products" component={Products} />
         </Switch>
       </Router>

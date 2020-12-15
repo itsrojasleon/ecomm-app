@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import { ecomm } from '../../api/ecomm';
+import { ecomm } from '../api/ecomm';
 
 export const Context = createContext(null);
 Context.displayName = 'ProductsContext';
@@ -12,7 +12,9 @@ const productsActions = {
   createProduct: 'create_product',
   addToCart: 'add_to_cart',
   removeFromCart: 'remove_from_cart',
-  addToWishlist: 'add_to_wishlist'
+  addToWishlist: 'add_to_wishlist',
+  updateReview: 'update_review',
+  removeReview: 'remove_review'
 };
 
 const initialState = {
@@ -44,11 +46,11 @@ const productsReducer = (state, { type, payload }) => {
       return {
         ...state,
         cart: state.cart.concat(payload),
-        products: state.products.map((product) =>
-          product.id === payload.productId
+        products: state.products.map((product) => {
+          return product.id === payload.productId
             ? { ...product, addedToCart: !product?.addedToCart }
-            : product
-        )
+            : product;
+        })
       };
     case productsActions.removeFromCart:
       return { ...state, cart: state.cart.slice(1) };
@@ -121,12 +123,40 @@ export const Provider = ({ children }) => {
     }
   };
 
+  const updateReview = async ({ id, title, comment, score }) => {
+    try {
+      await ecomm.put(`/api/reviews/${id}`, {
+        title,
+        comment,
+        score
+      });
+      // Do not dispatch any action
+      // after the review is updated, is redirected to /products
+      // so, it's going to fetch the product again
+    } catch (err) {
+      dispatch({ type: productsActions.error, payload: err });
+    }
+  };
+
+  const removeReview = async (id) => {
+    try {
+      await ecomm.delete(`/api/reviews/${id}`);
+      // Do not dispatch any action
+      // after the review is deleted, is redirected to /products
+      // so, it's going to fetch the product again
+    } catch (err) {
+      dispatch({ type: productsActions.error, payload: err });
+    }
+  };
+
   const actions = {
     fetchProducts,
     createProduct,
     fetchProduct,
     addToCart,
-    addToWishlist
+    addToWishlist,
+    removeReview,
+    updateReview
   };
 
   return (

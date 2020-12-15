@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ecomm } from '../../api/ecomm';
 
 const Signup = () => {
@@ -7,12 +7,15 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
+  const history = useHistory();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await ecomm.post('/api/users/signup', { email, password, username });
-      history.push('/');
+      await ecomm
+        .post('/api/users/signup', { email, password, username })
+        .then(() => history.push('/'));
     } catch (err) {
       console.error(err);
     }

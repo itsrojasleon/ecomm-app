@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import NavItem from './nav-item';
 import { Context } from '../context/container-context';
 
@@ -53,6 +53,7 @@ const Cart = () => (
 
 const Nav = () => {
   const { currentUser, signout } = useContext(Context);
+  const history = useHistory();
 
   const links = [
     { href: '/', label: 'Home' },
@@ -89,7 +90,7 @@ const Nav = () => {
               </Link>
               <button
                 className="block px-4 py-2 rounded-md bg-red-100 text-red-700"
-                onClick={signout}>
+                onClick={() => signout().then(() => history.push('/'))}>
                 Logout
               </button>
             </>

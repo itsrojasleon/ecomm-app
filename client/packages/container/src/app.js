@@ -43,7 +43,9 @@ const App = () => {
               {currentUser && <Redirect to="/" />}
               <AuthApp />
             </Route>
-            <Route path="/products" component={ProductsApp} />
+            <Route path="/products">
+              <ProductsApp currentUser={currentUser} />
+            </Route>
             <Route path="/cart" component={CartApp} />
             <Route path="/wishlist" component={WishlistApp} />
 

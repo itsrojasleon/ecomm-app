@@ -12,8 +12,9 @@ const Signin = () => {
     e.preventDefault();
 
     try {
-      await ecomm.post('/api/users/signin', { email, password });
-      history.push('/');
+      await ecomm
+        .post('/api/users/signin', { email, password })
+        .then(() => history.push('/'));
     } catch (err) {
       console.error(err);
     }
