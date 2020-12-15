@@ -14,7 +14,9 @@ const CartApp = lazy(() => import('./components/cart-app'));
 const history = createBrowserHistory();
 
 const App = () => {
-  const { state, fetchCurrentUser } = useContext(Context);
+  const { currentUser, isLoading, error, fetchCurrentUser } = useContext(
+    Context
+  );
 
   useEffect(() => {
     fetchCurrentUser();
@@ -28,8 +30,8 @@ const App = () => {
     };
   }, []);
 
-  if (state.isLoading) return 'LOADING...';
-  if (state.error) return <div>{JSON.stringify(state.error)}</div>;
+  if (isLoading) return 'LOADING...';
+  if (error) return <div>{JSON.stringify(error)}</div>;
 
   return (
     <Router history={history}>
@@ -38,7 +40,7 @@ const App = () => {
         <Suspense fallback={<h1>Loading...</h1>}>
           <Switch>
             <Route path="/auth">
-              {state.currentUser && <Redirect to="/" />}
+              {currentUser && <Redirect to="/" />}
               <AuthApp />
             </Route>
             <Route path="/products" component={ProductsApp} />

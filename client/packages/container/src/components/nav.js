@@ -52,10 +52,7 @@ const Cart = () => (
 );
 
 const Nav = () => {
-  const {
-    state: { currentUser },
-    signout
-  } = useContext(Context);
+  const { currentUser, signout } = useContext(Context);
 
   const links = [
     { href: '/', label: 'Home' },

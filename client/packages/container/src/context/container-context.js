@@ -59,7 +59,7 @@ export const Provider = ({ children }) => {
   const actions = { fetchCurrentUser, signout };
 
   return (
-    <Context.Provider value={{ state, ...actions }}>
+    <Context.Provider value={{ ...state, ...actions }}>
       {children}
     </Context.Provider>
   );
