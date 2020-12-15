@@ -1,19 +1,16 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Context } from '../context/products-context';
+import FormReview from './form-review';
 
-const Review = ({ review, currentUser }) => {
-  const { updateReview, removeReview } = useContext(Context);
+const Review = ({ id, title, comment, score, userId, currentUser }) => {
+  const { removeReview } = useContext(Context);
   const history = useHistory();
-
-  const [title, setTitle] = useState(review.title);
-  const [comment, setComment] = useState(review.comment);
-  const [score, setScore] = useState(review.score);
 
   const [isUpdading, setIsUpdating] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const isOwner = review.userId === currentUser.id;
+  const isOwner = userId === currentUser.id;
 
   const renderContentForOwner = () => (
     <div className="mt-4 border border-gray-100 rounded p-2">
@@ -54,69 +51,11 @@ const Review = ({ review, currentUser }) => {
           />
         </svg>
       </div>
-      {isUpdading ? renderForm() : null}
+      {isUpdading ? (
+        <FormReview initialValues={{ title, comment, score }} id={id} />
+      ) : null}
       {isDeleting ? renderWarning() : null}
     </div>
-  );
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    updateReview({ id: review.id, title, comment, score }).then(() => {
-      history.push('/products');
-    });
-  };
-
-  const renderForm = () => (
-    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-      <input type="hidden" name="remember" value="true" />
-      <div className="rounded-md shadow-sm -space-y-px">
-        <div className="pb-3">
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            className="rounded-md w-full px-3 py-2 border border-gray-200 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-gray-500 sm:text-sm"
-            placeholder="title"
-          />
-        </div>
-        <div className="pb-3">
-          <input
-            type="text"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            required
-            className="rounded-md w-full px-3 py-2 border border-gray-200 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-gray-500 sm:text-sm"
-            placeholder="comment"
-          />
-        </div>
-        <div>
-          <input
-            type="number"
-            min={0}
-            max={5}
-            value={score}
-            onChange={(e) => setScore(e.target.value)}
-            required
-            className="rounded-md w-full px-3 py-2 border border-gray-200 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-gray-500 sm:text-sm"
-            placeholder="score"
-          />
-        </div>
-      </div>
-      <div className="flex gap-3">
-        <button
-          onClick={() => setIsUpdating(false)}
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-          Update
-        </button>
-      </div>
-    </form>
   );
 
   const renderWarning = () => (
@@ -130,7 +69,7 @@ const Review = ({ review, currentUser }) => {
         </button>
         <button
           onClick={() => {
-            removeReview(review.id).then(() => history.push('/products'));
+            removeReview(id).then(() => history.push('/products'));
           }}
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
           Delete
@@ -141,9 +80,9 @@ const Review = ({ review, currentUser }) => {
 
   return (
     <div className="border border-gray-100 rounded-lg p-3">
-      <h3 className="font-semibold">{review.title}</h3>
-      <p className="text-gray-700">{review.comment}</p>
-      <p>{review.score}</p>
+      <h3 className="font-semibold">{title}</h3>
+      <p className="text-gray-700">{comment}</p>
+      <p>{score}</p>
       {isOwner ? renderContentForOwner() : <div>SOME</div>}
     </div>
   );

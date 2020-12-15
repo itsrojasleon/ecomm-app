@@ -1,8 +1,25 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import FormReview from '../components/form-review';
 import Product from '../components/product';
 import Review from '../components/review';
 import { Context } from '../context/products-context';
+
+const Icon = () => (
+  <svg
+    className="h-7 w-7 text-white cursor-pointer"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+    />
+  </svg>
+);
 
 // Let's pretend we're authenticated
 // This is only good running on isolation
@@ -11,6 +28,7 @@ const Show = ({
 }) => {
   const { id } = useParams();
   const { state, fetchProduct } = useContext(Context);
+  const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
     fetchProduct(id);
@@ -32,10 +50,21 @@ const Show = ({
   return (
     <>
       <Product {...state.product} />
-      <h3 className="my-3 text-lg text-gray-600">Reviews.</h3>
+      <div className="flex justify-between items-center">
+        <h3 className="my-4 text-lg text-gray-600">Reviews.</h3>
+        <span className="rounded-full bg-black flex w-7 transform transition hover:scale-125">
+          <Icon />
+        </span>
+      </div>
+      {isCreating ? (
+        <div>
+          <FormReview initialValues={{ title: '', comment: '', score: '' }} />
+        </div>
+      ) : null}
+
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
         {state.product.reviews.map((review) => (
-          <Review key={review.id} review={review} currentUser={currentUser} />
+          <Review key={review.id} {...review} currentUser={currentUser} />
         ))}
       </div>
     </>

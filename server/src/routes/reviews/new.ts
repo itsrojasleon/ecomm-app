@@ -25,6 +25,15 @@ router.post(
   async (req: Request, res: Response) => {
     const { productId, title, comment, score } = req.body;
 
+    // Make sure the user is not creating a review twice in the same product
+    const existingReview = await Review.findOne({
+      where: { userId: req.currentUser!.id, productId }
+    });
+
+    if (existingReview) {
+      throw new BadRequestError('Duplicated review');
+    }
+
     // Make sure the product exists
     const product = await Product.findByPk(productId);
 

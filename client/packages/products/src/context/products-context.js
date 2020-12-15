@@ -13,6 +13,7 @@ const productsActions = {
   addToCart: 'add_to_cart',
   removeFromCart: 'remove_from_cart',
   addToWishlist: 'add_to_wishlist',
+  createReview: 'create_review',
   updateReview: 'update_review',
   removeReview: 'remove_review'
 };
@@ -56,6 +57,8 @@ const productsReducer = (state, { type, payload }) => {
       return { ...state, cart: state.cart.slice(1) };
     case productsActions.addToWishlist:
       return { ...state, wishlist: payload };
+    case productsActions.createReview:
+      return { ...state, product: state.product.reviews.concat(payload) };
     default:
       return state;
   }
@@ -123,6 +126,20 @@ export const Provider = ({ children }) => {
     }
   };
 
+  const createReview = async ({ title, comment, score }) => {
+    try {
+      const { data } = await ecomm.post(`/api/reviews/`, {
+        title,
+        comment,
+        score
+      });
+
+      dispatch({ type: productsActions.createReview, payload: data });
+    } catch (err) {
+      dispatch({ type: productsActions.error, payload: err });
+    }
+  };
+
   const updateReview = async ({ id, title, comment, score }) => {
     try {
       await ecomm.put(`/api/reviews/${id}`, {
@@ -155,6 +172,7 @@ export const Provider = ({ children }) => {
     fetchProduct,
     addToCart,
     addToWishlist,
+    createReview,
     removeReview,
     updateReview
   };
