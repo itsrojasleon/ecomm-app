@@ -27,7 +27,7 @@ const Show = ({
   currentUser = { id: 1, email: 'test@test.com', username: 'rojasleon' }
 }) => {
   const { id } = useParams();
-  const { state, fetchProduct } = useContext(Context);
+  const { state, fetchProduct, createReview } = useContext(Context);
   const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
@@ -60,7 +60,15 @@ const Show = ({
       </div>
       {isCreating ? (
         <div className="w-8/12 m-auto shadow p-4 mb-4">
-          <FormReview initialValues={{ title: '', comment: '', score: '' }} />
+          <FormReview
+            initialValues={{
+              title: '',
+              comment: '',
+              score: ''
+            }}
+            onSubmit={createReview}
+            productId={state.product.id}
+          />
         </div>
       ) : null}
 

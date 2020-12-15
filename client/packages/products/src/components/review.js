@@ -4,7 +4,7 @@ import { Context } from '../context/products-context';
 import FormReview from './form-review';
 
 const Review = ({ id, title, comment, score, userId, currentUser }) => {
-  const { removeReview } = useContext(Context);
+  const { updateReview, removeReview } = useContext(Context);
   const history = useHistory();
 
   const [isUpdading, setIsUpdating] = useState(false);
@@ -52,7 +52,11 @@ const Review = ({ id, title, comment, score, userId, currentUser }) => {
         </svg>
       </div>
       {isUpdading ? (
-        <FormReview initialValues={{ title, comment, score }} id={id} />
+        <FormReview
+          initialValues={{ title, comment, score }}
+          onSubmit={updateReview}
+          id={id}
+        />
       ) : null}
       {isDeleting ? renderWarning() : null}
     </div>
