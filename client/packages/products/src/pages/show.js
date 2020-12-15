@@ -52,12 +52,14 @@ const Show = ({
       <Product {...state.product} />
       <div className="flex justify-between items-center">
         <h3 className="my-4 text-lg text-gray-600">Reviews.</h3>
-        <span className="rounded-full bg-black flex w-7 transform transition hover:scale-125">
+        <span
+          onClick={() => setIsCreating((prev) => !prev)}
+          className="rounded-full bg-black flex w-7 transform transition hover:scale-125">
           <Icon />
         </span>
       </div>
       {isCreating ? (
-        <div>
+        <div className="w-8/12 m-auto shadow p-4 mb-4">
           <FormReview initialValues={{ title: '', comment: '', score: '' }} />
         </div>
       ) : null}

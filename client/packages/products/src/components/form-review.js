@@ -23,7 +23,11 @@ const FormReview = ({ initialValues, id }) => {
       <input type="hidden" name="remember" value="true" />
       <div className="rounded-md shadow-sm -space-y-px">
         <div className="pb-3">
+          <label className="font-medium pb-2" htmlFor="title">
+            Title
+          </label>
           <input
+            name="title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -33,7 +37,11 @@ const FormReview = ({ initialValues, id }) => {
           />
         </div>
         <div className="pb-3">
+          <label className="font-medium pb-2" htmlFor="comment">
+            Comment
+          </label>
           <input
+            name="comment"
             type="text"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
@@ -43,7 +51,11 @@ const FormReview = ({ initialValues, id }) => {
           />
         </div>
         <div>
+          <label className="font-medium pb-2" htmlFor="score">
+            Score
+          </label>
           <input
+            name="score"
             type="number"
             min={0}
             max={5}
@@ -64,7 +76,7 @@ const FormReview = ({ initialValues, id }) => {
         <button
           type="submit"
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-          Update
+          Submit
         </button>
       </div>
     </form>
