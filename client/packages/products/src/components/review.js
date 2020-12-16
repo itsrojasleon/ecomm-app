@@ -88,11 +88,10 @@ const Review = ({ id, title, comment, score, userId, currentUser }) => {
     <div className="border border-gray-100 rounded-lg p-3">
       <h3 className="font-semibold">{title}</h3>
       <p className="text-gray-700">{comment}</p>
-      <div>
+      <div className="flex justify-between">
         <p>{score}</p>
         <Rating defaultStars={score} />
       </div>
-
       {isOwner ? renderContentForOwner() : <div>SOME</div>}
     </div>
   );

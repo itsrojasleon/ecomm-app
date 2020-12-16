@@ -63,6 +63,21 @@ const productsReducer = (state, { type, payload }) => {
           reviews: state.product.reviews.concat(payload)
         }
       };
+    case productsActions.updateReview:
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          reviews: state.product.reviews.map((review) => {
+            return review.id === payload.id
+              ? {
+                  ...review,
+                  ...payload.data
+                }
+              : review;
+          })
+        }
+      };
     default:
       return state;
   }
@@ -150,13 +165,13 @@ export const Provider = ({ children }) => {
 
   const updateReview = async (id, { title, comment, score }) => {
     try {
-      await ecomm.put(`/api/reviews/${id}`, {
+      const { data } = await ecomm.put(`/api/reviews/${id}`, {
         title,
         comment,
         score
       });
 
-      dispatch({});
+      dispatch({ type: productsActions.updateReview, payload: { id, data } });
     } catch (err) {
       dispatch({ type: productsActions.error, payload: err });
     }
