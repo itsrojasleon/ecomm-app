@@ -26,6 +26,7 @@ import { indexUserRouter } from './routes/users';
 
 // order routes
 // import { newOrderRouter } from './routes/orders/new';
+import { indexOrderRouter } from './routes/orders/index';
 
 // cart routes
 import { indexCartRouter } from './routes/cart';

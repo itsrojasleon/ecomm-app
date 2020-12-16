@@ -5,6 +5,7 @@ import { currentUser } from '../../middlewares/currentuser';
 import { requireAuth } from '../../middlewares/require-auth';
 import { Product } from '../../models/product';
 import { Order, OrderStatus } from '../../models/order';
+import { validateRequest } from '../../middlewares/validate-request';
 
 const router = express.Router();
 
@@ -16,6 +17,7 @@ router.post(
     body('productId').isFloat().withMessage('You must provide a productId'),
     body('quantity').isFloat().withMessage('You must provide a quantity')
   ],
+  validateRequest,
   async (req: Request, res: Response) => {
     const { productId, quantity } = req.body;
 
