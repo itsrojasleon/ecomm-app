@@ -62,12 +62,12 @@ const Show = ({
         <div className="w-8/12 m-auto shadow p-4 mb-4">
           <FormReview
             initialValues={{
+              productId: state.product.id,
               title: '',
               comment: '',
               score: ''
             }}
             onSubmit={createReview}
-            productId={state.product.id}
           />
         </div>
       ) : null}

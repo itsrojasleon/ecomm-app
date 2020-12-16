@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
-const FormReview = ({ initialValues, onSubmit, productId, id }) => {
+const FormReview = ({ initialValues, onSubmit, id }) => {
   const [title, setTitle] = useState(initialValues.title);
   const [comment, setComment] = useState(initialValues.comment);
   const [score, setScore] = useState(initialValues.score);
 
-  const history = useHistory();
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // To create a new review
-    if (productId) {
-      onSubmit({ title, comment, score, productId }).then(() =>
-        history.push('/products')
-      );
-    } else {
+    if (id) {
       // To update a review
-      onSubmit({ title, comment, score, id }).then(() =>
-        history.push('/products')
-      );
+      onSubmit(id, { title, comment, score });
+    } else {
+      // To create a new review
+      onSubmit({
+        title,
+        comment,
+        score,
+        productId: initialValues.productId
+      });
     }
   };
 

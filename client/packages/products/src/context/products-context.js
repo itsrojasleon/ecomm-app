@@ -12,7 +12,8 @@ const productsActions = {
   createProduct: 'create_product',
   addToCart: 'add_to_cart',
   removeFromCart: 'remove_from_cart',
-  addToWishlist: 'add_to_wishlist'
+  addToWishlist: 'add_to_wishlist',
+  createReview: 'create_review'
 };
 
 const initialState = {
@@ -54,6 +55,14 @@ const productsReducer = (state, { type, payload }) => {
       return { ...state, cart: state.cart.slice(1) };
     case productsActions.addToWishlist:
       return { ...state, wishlist: payload };
+    case productsActions.createReview:
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          reviews: state.product.reviews.concat(payload)
+        }
+      };
     default:
       return state;
   }
@@ -123,27 +132,28 @@ export const Provider = ({ children }) => {
 
   const createReview = async ({ productId, title, comment, score }) => {
     try {
-      await ecomm.post('/api/reviews', {
+      const { data } = await ecomm.post('/api/reviews', {
         productId,
         title,
         comment,
         score
       });
+
+      dispatch({ type: productsActions.createReview, payload: data });
     } catch (err) {
       dispatch({ type: productsActions.error, payload: err });
     }
   };
 
-  const updateReview = async ({ id, title, comment, score }) => {
+  const updateReview = async (id, { title, comment, score }) => {
     try {
       await ecomm.put(`/api/reviews/${id}`, {
         title,
         comment,
         score
       });
-      // Do not dispatch any action
-      // after the review is updated, is redirected to /products
-      // so, it's going to fetch the product again
+
+      dispatch({});
     } catch (err) {
       dispatch({ type: productsActions.error, payload: err });
     }
