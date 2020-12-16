@@ -3,6 +3,30 @@ import { useHistory } from 'react-router-dom';
 import { Context } from '../context/products-context';
 import FormReview from './form-review';
 
+const Stars = ({ numberOfStars }) => {
+  const [index, setIndex] = useState(0);
+
+  return (
+    <div className="flex justify-center items-center">
+      <div className="flex items-center mt-2 mb-4">
+        {index}
+        {[...Array(numberOfStars).keys()].map((n) => (
+          <svg
+            onMouseEnter={() => setIndex(n + 1)}
+            key={n}
+            className={`mx-1 w-6 h-6 fill-current ${
+              index <= n ? 'text-gray-400' : 'text-yellow-400'
+            }`}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20">
+            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+          </svg>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Review = ({ id, title, comment, score, userId, currentUser }) => {
   const { updateReview, removeReview } = useContext(Context);
   const history = useHistory();
@@ -88,6 +112,7 @@ const Review = ({ id, title, comment, score, userId, currentUser }) => {
       <h3 className="font-semibold">{title}</h3>
       <p className="text-gray-700">{comment}</p>
       <p>{score}</p>
+      <Stars numberOfStars={5} />
       {isOwner ? renderContentForOwner() : <div>SOME</div>}
     </div>
   );
