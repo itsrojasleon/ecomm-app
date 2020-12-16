@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FormReview = ({ initialValues, onSubmit, id }) => {
+const FormReview = ({ initialValues, onSubmit, onCancel, id }) => {
   const [title, setTitle] = useState(initialValues.title);
   const [comment, setComment] = useState(initialValues.comment);
   const [score, setScore] = useState(initialValues.score);
@@ -73,7 +73,7 @@ const FormReview = ({ initialValues, onSubmit, id }) => {
       </div>
       <div className="flex gap-3">
         <button
-          onClick={() => setIsUpdating(false)}
+          onClick={() => onCancel(false)}
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
           Cancel
         </button>

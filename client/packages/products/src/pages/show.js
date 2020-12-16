@@ -34,15 +34,17 @@ const Show = ({
     fetchProduct(id);
   }, []);
 
-  if (state.errors) {
-    return (
-      <>
-        {state.errors.map((error, i) => (
-          <div key={i}>{error.message}</div>
-        ))}
-      </>
-    );
-  }
+  // Come here
+
+  // if (state.error.length) {
+  //   return (
+  //     <>
+  //       {state.error.map((error, i) => (
+  //         <div key={i}>{error.message}</div>
+  //       ))}
+  //     </>
+  //   );
+  // }
 
   if (state.isLoading) return 'LOADING PRODUCT...';
   if (!state.product) return 'Product not found';
@@ -60,6 +62,7 @@ const Show = ({
       </div>
       {isCreating ? (
         <div className="w-8/12 m-auto shadow p-4 mb-4">
+          <h3 className="text-lg font-bold">Create a review</h3>
           <FormReview
             initialValues={{
               productId: state.product.id,
@@ -68,10 +71,10 @@ const Show = ({
               score: ''
             }}
             onSubmit={createReview}
+            onCancel={setIsCreating}
           />
         </div>
       ) : null}
-
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
         {state.product.reviews.map((review) => (
           <Review key={review.id} {...review} currentUser={currentUser} />

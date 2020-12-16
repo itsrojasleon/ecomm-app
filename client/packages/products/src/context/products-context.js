@@ -21,7 +21,7 @@ const initialState = {
   product: null,
   cart: [],
   wishlist: null,
-  error: null,
+  error: [],
   isLoading: false
 };
 
@@ -141,7 +141,10 @@ export const Provider = ({ children }) => {
 
       dispatch({ type: productsActions.createReview, payload: data });
     } catch (err) {
-      dispatch({ type: productsActions.error, payload: err });
+      dispatch({
+        type: productsActions.error,
+        payload: err.response.data.errors
+      });
     }
   };
 

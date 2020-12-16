@@ -55,6 +55,7 @@ const Review = ({ id, title, comment, score, userId, currentUser }) => {
         <FormReview
           initialValues={{ title, comment, score }}
           onSubmit={updateReview}
+          onCancel={setIsUpdating}
           id={id}
         />
       ) : null}
