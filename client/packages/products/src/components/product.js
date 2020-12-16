@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Heart, Added } from './icons';
 import { Context } from '../context/products';
 
 const Product = ({
@@ -45,22 +46,7 @@ const Product = ({
               onClick={() => addToCart(id)}
               className="w-1/2 flex items-center justify-center rounded-md bg-black text-white"
               type="button">
-              {addedToCart ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  width="20"
-                  height="20"
-                  fill="currentColor">
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              ) : (
-                'Add to cart'
-              )}
+              {addedToCart ? <Added /> : 'Add to cart'}
             </button>
           </div>
           <button
@@ -73,13 +59,7 @@ const Product = ({
             }`}
             type="button"
             aria-label="like">
-            <svg width="20" height="20" fill="currentColor">
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-              />
-            </svg>
+            <Heart />
           </button>
         </div>
       </form>

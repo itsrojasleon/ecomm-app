@@ -3,20 +3,20 @@ import { useHistory } from 'react-router-dom';
 import { Context } from '../context/products';
 
 const Create = () => {
+  const { createProduct } = useContext(Context);
+
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
 
   const history = useHistory();
 
-  const { createProduct } = useContext(Context);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    createProduct({ name, price, description });
-
-    history.push('/products');
+    createProduct({ name, price, description }).then(() => {
+      history.push('/products');
+    });
   };
 
   return (

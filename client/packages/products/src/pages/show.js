@@ -4,23 +4,8 @@ import FormReview from '../components/form-review';
 import Product from '../components/product';
 import Review from '../components/review';
 import Alert from '../components/alert';
+import { Add } from '../components/icons';
 import { Context } from '../context/products';
-
-const Icon = () => (
-  <svg
-    className="h-7 w-7 text-white cursor-pointer"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor">
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-    />
-  </svg>
-);
 
 // Let's pretend we're authenticated
 // This is only good running on isolation
@@ -46,7 +31,7 @@ const Show = ({
         <span
           onClick={() => setIsCreating((prev) => !prev)}
           className="rounded-full bg-black flex w-7 transform transition hover:scale-125">
-          <Icon />
+          <Add />
         </span>
       </div>
       {isCreating ? (

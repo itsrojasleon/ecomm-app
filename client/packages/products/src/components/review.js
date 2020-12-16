@@ -1,56 +1,33 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Context } from '../context/products';
 import FormReview from './form-review';
 import Rating from './rating';
+import { Write, Trash } from './icons';
+import { Context } from '../context/products';
 
 const Review = ({ id, title, comment, score, userId, currentUser }) => {
   const { updateReview, removeReview } = useContext(Context);
-  const history = useHistory();
 
   const [isUpdading, setIsUpdating] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const isOwner = userId === currentUser.id;
 
+  const onWrite = () => {
+    setIsUpdating((prev) => !prev);
+    setIsDeleting(false);
+  };
+
+  const onDelete = () => {
+    setIsDeleting((prev) => !prev);
+    setIsUpdating(false);
+  };
+
   const renderContentForOwner = () => (
     <div className="mt-4 border border-gray-100 rounded p-2">
       <p className="text-gray-500 pb-2 text-center">Actions</p>
       <div className="flex justify-between">
-        <svg
-          onClick={() => {
-            setIsUpdating((prev) => !prev);
-            setIsDeleting(false);
-          }}
-          className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-          />
-        </svg>
-        <svg
-          onClick={() => {
-            setIsDeleting((prev) => !prev);
-            setIsUpdating(false);
-          }}
-          className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-          />
-        </svg>
+        <Write onClick={onWrite} />
+        <Trash onClick={onDelete} />
       </div>
       {isUpdading ? (
         <FormReview
