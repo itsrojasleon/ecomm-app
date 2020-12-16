@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import FormReview from '../components/form-review';
 import Product from '../components/product';
 import Review from '../components/review';
+import Alert from '../components/alert';
 import { Context } from '../context/products-context';
 
 const Icon = () => (
@@ -33,18 +34,6 @@ const Show = ({
   useEffect(() => {
     fetchProduct(id);
   }, []);
-
-  // Come here
-
-  // if (state.error.length) {
-  //   return (
-  //     <>
-  //       {state.error.map((error, i) => (
-  //         <div key={i}>{error.message}</div>
-  //       ))}
-  //     </>
-  //   );
-  // }
 
   if (state.isLoading) return 'LOADING PRODUCT...';
   if (!state.product) return 'Product not found';
@@ -80,6 +69,17 @@ const Show = ({
           <Review key={review.id} {...review} currentUser={currentUser} />
         ))}
       </div>
+      {state.error.length > 0 && (
+        <>
+          {state.error.map((error, i) => (
+            <div
+              key={error.message}
+              className={`absolute bottom-0 right-0 left-0`}>
+              <Alert color="red">{error.message}</Alert>
+            </div>
+          ))}
+        </>
+      )}
     </>
   );
 };

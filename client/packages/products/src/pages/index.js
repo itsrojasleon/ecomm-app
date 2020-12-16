@@ -19,7 +19,7 @@ const Products = () => {
         <div
           key={product.id}
           className={`absolute bottom-0 right-0 mb-${20 * i + 4} mr-4`}>
-          <Alert>
+          <Alert color="green">
             Product added to cart <b className="capitalize">{product.id}</b>
           </Alert>
         </div>

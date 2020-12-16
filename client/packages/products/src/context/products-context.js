@@ -7,6 +7,7 @@ Context.displayName = 'ProductsContext';
 const productsActions = {
   isLoading: 'is_loading',
   error: 'error',
+  cleanError: 'clean_error',
   fetchProducts: 'fetch_products',
   fetchProduct: 'fetch_product',
   createProduct: 'create_product',
@@ -33,6 +34,8 @@ const productsReducer = (state, { type, payload }) => {
       return { ...state, isLoading: true };
     case productsActions.error:
       return { ...state, isLoading: false, error: payload };
+    case productsActions.cleanError:
+      return { ...state, isLoading: false, error: state.error.slice(1) };
     case productsActions.fetchProducts:
       return { ...state, isLoading: false, products: payload, error: [] };
     case productsActions.fetchProduct:
@@ -172,6 +175,10 @@ export const Provider = ({ children }) => {
         type: productsActions.error,
         payload: err.response.data.errors
       });
+
+      setTimeout(() => {
+        dispatch({ type: productsActions.cleanError });
+      }, 3000);
     }
   };
 
