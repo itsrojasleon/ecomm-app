@@ -68,7 +68,7 @@ const Show = ({
               productId: state.product.id,
               title: '',
               comment: '',
-              score: ''
+              score: 1
             }}
             onSubmit={createReview}
             onCancel={setIsCreating}

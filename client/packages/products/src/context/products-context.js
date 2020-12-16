@@ -13,7 +13,9 @@ const productsActions = {
   addToCart: 'add_to_cart',
   removeFromCart: 'remove_from_cart',
   addToWishlist: 'add_to_wishlist',
-  createReview: 'create_review'
+  createReview: 'create_review',
+  updateReview: 'update_review',
+  removeReview: 'remove_review'
 };
 
 const initialState = {
@@ -76,6 +78,16 @@ const productsReducer = (state, { type, payload }) => {
                 }
               : review;
           })
+        }
+      };
+    case productsActions.removeReview:
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          reviews: state.product.reviews.filter(
+            (review) => review.id !== payload
+          )
         }
       };
     default:
@@ -180,9 +192,8 @@ export const Provider = ({ children }) => {
   const removeReview = async (id) => {
     try {
       await ecomm.delete(`/api/reviews/${id}`);
-      // Do not dispatch any action
-      // after the review is deleted, is redirected to /products
-      // so, it's going to fetch the product again
+
+      dispatch({ type: productsActions.removeReview, payload: id });
     } catch (err) {
       dispatch({ type: productsActions.error, payload: err });
     }

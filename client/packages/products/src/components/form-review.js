@@ -4,7 +4,7 @@ import Rating from './rating';
 const FormReview = ({ initialValues, onSubmit, onCancel, id }) => {
   const [title, setTitle] = useState(initialValues.title);
   const [comment, setComment] = useState(initialValues.comment);
-  const [score, setScore] = useState(initialValues.score || 1);
+  const [score, setScore] = useState(initialValues.score);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +21,8 @@ const FormReview = ({ initialValues, onSubmit, onCancel, id }) => {
         productId: initialValues.productId
       });
     }
+
+    onCancel();
   };
 
   return (
