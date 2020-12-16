@@ -9,9 +9,9 @@ export const reducer = (state, { type, payload }) => {
     case ACTION_TYPES.cleanError:
       return { ...state, isLoading: false, error: state.error.slice(1) };
     case ACTION_TYPES.fetchProducts:
-      return { ...state, isLoading: false, products: payload, error: [] };
+      return { ...state, isLoading: false, products: payload };
     case ACTION_TYPES.fetchProduct:
-      return { ...state, isLoading: false, product: payload, error: [] };
+      return { ...state, isLoading: false, product: payload };
     case ACTION_TYPES.createProduct:
       return {
         ...state,
