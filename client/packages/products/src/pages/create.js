@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Context } from '../context/products-context';
+import { Context } from '../context/products';
 
 const Create = () => {
   const [name, setName] = useState('');

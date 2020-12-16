@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Context } from '../context/products-context';
+import { Context } from '../context/products';
 import FormReview from './form-review';
 import Rating from './rating';
 

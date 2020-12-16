@@ -4,7 +4,7 @@ import Create from './pages/create';
 import Show from './pages/show';
 import Products from './pages';
 import '../styles/tailwind.css';
-import { Provider } from './context/products-context';
+import { Provider } from './context/products';
 
 const App = ({ history, currentUser }) => {
   return (

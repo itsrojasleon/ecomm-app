@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import Product from '../components/product';
 import Alert from '../components/alert';
-import { Context } from '../context/products-context';
+import { Context } from '../context/products';
 
 const Products = () => {
   const { state, fetchProducts } = useContext(Context);

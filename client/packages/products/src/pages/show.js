@@ -4,7 +4,7 @@ import FormReview from '../components/form-review';
 import Product from '../components/product';
 import Review from '../components/review';
 import Alert from '../components/alert';
-import { Context } from '../context/products-context';
+import { Context } from '../context/products';
 
 const Icon = () => (
   <svg
