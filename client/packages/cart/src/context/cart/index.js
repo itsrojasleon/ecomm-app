@@ -19,7 +19,7 @@ export const Provider = ({ children }) => {
   }
 
   return (
-    <Context.Provider value={{ state, ...boundActions }}>
+    <Context.Provider value={{ ...state, ...boundActions }}>
       {children}
     </Context.Provider>
   );
