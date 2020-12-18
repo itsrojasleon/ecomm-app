@@ -4,29 +4,27 @@ import {
   Model,
   ForeignKey,
   BelongsTo,
-  Min,
-  Max
+  Min
 } from 'sequelize-typescript';
-import { User } from './user';
+import { Order } from './order';
 import { Product } from './product';
 
-@Table({ underscored: true, tableName: 'cart' })
-export class Cart extends Model<Cart> {
-  @Min(0)
-  @Max(5)
+@Table({ underscored: true })
+export class OrderDetails extends Model<OrderDetails> {
+  @Min(1)
   @Column
   quantity!: number;
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => Order)
   @Column
-  userId!: number;
+  orderId!: number;
 
   @ForeignKey(() => Product)
   @Column
   productId!: number;
 
-  @BelongsTo(() => User)
-  user!: User;
+  @BelongsTo(() => Order)
+  order!: Order;
 
   @BelongsTo(() => Product)
   product!: Product;

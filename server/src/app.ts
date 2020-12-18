@@ -25,7 +25,7 @@ import { updateUserRouter } from './routes/users/update';
 import { indexUserRouter } from './routes/users';
 
 // order routes
-// import { newOrderRouter } from './routes/orders/new';
+import { newOrderRouter } from './routes/orders/new';
 import { indexOrderRouter } from './routes/orders/index';
 
 // cart routes
@@ -42,6 +42,7 @@ import { deleteReviewRouter } from './routes/reviews/delete';
 
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
+import { newOrderDetailsRouter } from './routes/order-details/new';
 
 const app = express();
 
@@ -87,7 +88,9 @@ app.use(updateProductsRouter);
 app.use(indexWishlistRouter);
 app.use(createWishlistRouter);
 
-// app.use(newOrderRouter);
+app.use(newOrderRouter);
+
+app.use(newOrderDetailsRouter);
 
 app.use(newCartRouter);
 app.use(indexCartRouter);

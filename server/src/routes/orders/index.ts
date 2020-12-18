@@ -14,7 +14,7 @@ router.get(
       where: { userId: req.currentUser!.id }
     });
 
-    res.status(201).send(orders);
+    res.send(orders);
   }
 );
 

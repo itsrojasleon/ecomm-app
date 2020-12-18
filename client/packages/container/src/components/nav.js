@@ -91,7 +91,7 @@ const Nav = () => {
               <button
                 className="block px-4 py-2 rounded-md bg-red-100 text-red-700"
                 onClick={() => signout().then(() => history.push('/'))}>
-                Logout
+                Sign out
               </button>
             </>
           )}
