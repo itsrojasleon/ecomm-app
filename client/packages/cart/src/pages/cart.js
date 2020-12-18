@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import ProductItem from '../components/cart-item';
-import { Context } from '../context/cart-context';
+import { Context } from '../context/cart';
 import { sum } from '../utils/sum';
 
 const Cart = () => {
-  const { state, fetchItems, removeAll } = useContext(Context);
+  const { state, fetchItems, removeAll, makeOrder } = useContext(Context);
+  const history = useHistory();
 
   useEffect(() => {
     fetchItems();
@@ -55,8 +57,17 @@ const Cart = () => {
           <p>Total cost</p>
           <p>${sum(state.items).total.toFixed(2)}</p>
         </div>
-        <button className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-          Checkout
+        <button
+          onClick={() => {
+            makeOrder({
+              total: sum(state.items).total,
+              items: state.items
+            })
+              .then(() => removeAll)
+              .then(() => history.push('/orders'));
+          }}
+          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+          Order
         </button>
       </div>
     </div>

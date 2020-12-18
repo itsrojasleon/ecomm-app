@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import Cart from './pages/cart';
-import { Provider } from './context/cart-context';
+import { Provider } from './context/cart';
 import '../styles/tailwind.css';
 
 const App = ({ history }) => {
