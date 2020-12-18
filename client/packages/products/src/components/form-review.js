@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import Rating from './rating';
 
 const FormReview = ({ initialValues, onSubmit, onCancel, id }) => {
-  const [{ title, comment, score }, setValues] = useState({
-    title: initialValues.title,
-    comment: initialValues.comment,
-    score: initialValues.score
-  });
+  const [title, setTitle] = useState(initialValues.title);
+  const [comment, setComment] = useState(initialValues.comment);
+  const [score, setScore] = useState(initialValues.score);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +37,7 @@ const FormReview = ({ initialValues, onSubmit, onCancel, id }) => {
             name="title"
             type="text"
             value={title}
-            onChange={(e) => setValues({ title: e.target.value })}
+            onChange={(e) => setTitle(e.target.value)}
             required
             className="rounded-md w-full px-3 py-2 border border-gray-200 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-gray-500 sm:text-sm"
             placeholder="title"
@@ -53,7 +51,7 @@ const FormReview = ({ initialValues, onSubmit, onCancel, id }) => {
             name="comment"
             type="text"
             value={comment}
-            onChange={(e) => setValues({ comment: e.target.value })}
+            onChange={(e) => setComment(e.target.value)}
             required
             className="rounded-md w-full px-3 py-2 border border-gray-200 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-gray-500 sm:text-sm"
             placeholder="comment"

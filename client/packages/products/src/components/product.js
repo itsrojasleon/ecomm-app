@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Added } from './icons';
-import { Context as CartContext } from '../context/cart';
-import { Context as WishlistContext } from '../context/wishlist';
+import { Context } from '../context/products';
 
 const Product = ({ id, name, price, description, wishlist, user }) => {
   const [{ wishlisted, addedToCart }, setValues] = useState({
@@ -12,8 +11,7 @@ const Product = ({ id, name, price, description, wishlist, user }) => {
     addedToCart: false
   });
 
-  const { addToCart } = useContext(CartContext);
-  const { addToWishlist } = useContext(WishlistContext);
+  const { addToCart, addToWishlist } = useContext(Context);
 
   return (
     <div className="flex">

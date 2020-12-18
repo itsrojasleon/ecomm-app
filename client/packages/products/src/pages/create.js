@@ -5,13 +5,13 @@ import { Context } from '../context/products';
 const Create = () => {
   const { createProduct } = useContext(Context);
 
+  const history = useHistory();
+
   const [{ name, price, description }, setValues] = useState({
     name: '',
     price: '',
     description: ''
   });
-
-  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();

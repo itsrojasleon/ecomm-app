@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import FormReview from './form-review';
 import Rating from './rating';
 import { Write, Trash } from './icons';
-import { Context } from '../context/reviews';
+import { Context } from '../context/products';
 
 const Review = ({ id, title, comment, score, userId, currentUser }) => {
   const { updateReview, removeReview } = useContext(Context);
@@ -61,7 +61,7 @@ const Review = ({ id, title, comment, score, userId, currentUser }) => {
 
   return (
     <div className="border border-gray-100 rounded-lg p-3">
-      <h3 className="font-semibold">{title}</h3>
+      <h3 className="font-semibold uppercase">{title}</h3>
       <p className="text-gray-700">{comment}</p>
       <div className="flex justify-between">
         <p>{score}</p>

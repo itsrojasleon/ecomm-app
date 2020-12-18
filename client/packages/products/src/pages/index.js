@@ -1,12 +1,10 @@
 import React, { useEffect, useContext } from 'react';
 import Product from '../components/product';
 import Alert from '../components/alert';
-import { Context as ProductsContext } from '../context/products';
-import { Context as CartContext } from '../context/cart';
+import { Context } from '../context/products';
 
 const Products = () => {
-  const { products, fetchProducts } = useContext(ProductsContext);
-  const { cart } = useContext(CartContext);
+  const { products, cart, fetchProducts } = useContext(Context);
 
   useEffect(() => {
     fetchProducts();
@@ -17,12 +15,12 @@ const Products = () => {
       {products.map((product) => (
         <Product key={product.id} {...product} />
       ))}
-      {cart.map((item, i) => (
+      {cart.map((product, i) => (
         <div
-          key={item.id}
+          key={product.id}
           className={`absolute bottom-0 right-0 mb-${20 * i + 4} mr-4`}>
           <Alert color="green">
-            Product added to cart <b className="capitalize">{item.id}</b>
+            Product added to cart <b className="capitalize">{product.id}</b>
           </Alert>
         </div>
       ))}

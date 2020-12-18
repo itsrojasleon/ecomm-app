@@ -36,6 +36,7 @@ import { decreaseCartRouter } from './routes/cart/decrease';
 import { deleteCartRouter } from './routes/cart/delete';
 
 // review routes
+import { indexReviewsRouter } from './routes/reviews/index';
 import { newReviewRouter } from './routes/reviews/new';
 import { updateReviewRouter } from './routes/reviews/update';
 import { deleteReviewRouter } from './routes/reviews/delete';
@@ -99,6 +100,7 @@ app.use(deleteCartRouter);
 app.use(increaseCartRouter);
 app.use(decreaseCartRouter);
 
+app.use(indexReviewsRouter);
 app.use(newReviewRouter);
 app.use(updateReviewRouter);
 app.use(deleteReviewRouter);

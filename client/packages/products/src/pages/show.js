@@ -5,8 +5,7 @@ import Product from '../components/product';
 import Review from '../components/review';
 import Alert from '../components/alert';
 import { Add } from '../components/icons';
-import { Context as ProductsContext } from '../context/products';
-import { Context as ReviewsContext } from '../context/reviews';
+import { Context } from '../context/products';
 
 // Let's pretend we're authenticated
 // This is only good running on isolation
@@ -14,18 +13,16 @@ const Show = ({
   currentUser = { id: 1, email: 'test@test.com', username: 'rojasleon' }
 }) => {
   const { id } = useParams();
-  const { product, error, isLoading, fetchProduct } = useContext(
-    ProductsContext
+  const { isLoading, product, error, fetchProduct, createReview } = useContext(
+    Context
   );
-  const { createReview } = useContext(ReviewsContext);
-
   const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
     fetchProduct(id);
   }, []);
 
-  if (isLoading) return 'Loading product...';
+  if (isLoading) return 'LOADING PRODUCT...';
   if (!product) return 'Product not found';
 
   return (
