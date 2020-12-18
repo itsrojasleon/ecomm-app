@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Alert = ({ children, color, isBig }) => {
+const Alert = ({ children, color }) => {
   return (
     <div className={`text-white px-6 py-4 border-0 rounded bg-${color}-600`}>
       <span className="text-xl inline-block mr-5 align-middle">

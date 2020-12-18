@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import FormReview from './form-review';
 import Rating from './rating';
 import { Write, Trash } from './icons';
-import { Context } from '../context/products';
+import { Context } from '../context/reviews';
 
 const Review = ({ id, title, comment, score, userId, currentUser }) => {
   const { updateReview, removeReview } = useContext(Context);

@@ -4,13 +4,15 @@ import {
   Model,
   ForeignKey,
   BelongsTo,
-  Min
+  Min,
+  AllowNull
 } from 'sequelize-typescript';
 import { Order } from './order';
 import { Product } from './product';
 
 @Table({ underscored: true })
 export class OrderDetails extends Model<OrderDetails> {
+  @AllowNull(false)
   @Min(1)
   @Column
   quantity!: number;

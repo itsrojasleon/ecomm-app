@@ -5,7 +5,7 @@ import { Context } from '../context/cart';
 import { sum } from '../utils/sum';
 
 const Cart = () => {
-  const { state, fetchItems, removeAll, makeOrder } = useContext(Context);
+  const { state, fetchItems } = useContext(Context);
   const history = useHistory();
 
   useEffect(() => {
@@ -33,20 +33,20 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {state.items.map((item) => (
+            {/* {state.items.map((item) => (
               <ProductItem key={item.id} {...item} />
-            ))}
+            ))} */}
           </tbody>
         </table>
         <div className="p-2">
           <button
-            onClick={removeAll}
+            // onClick={removeAll}
             className="m-auto text-center text-red-600 cursor-pointer block px-4 py-2 rounded-md hover:bg-red-100">
             Empty shopping cart
           </button>
         </div>
       </div>
-      <div className="lg:w-4/12 w-full gap-6 lg:gap-0 bg-gray-100 p-3 flex justify-between flex-col">
+      {/* <div className="lg:w-4/12 w-full gap-6 lg:gap-0 bg-gray-100 p-3 flex justify-between flex-col">
         <h2 className="text-xl font-semibold">Order summary</h2>
 
         <div className="flex justify-between font-semibold">
@@ -69,7 +69,7 @@ const Cart = () => {
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
           Order
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

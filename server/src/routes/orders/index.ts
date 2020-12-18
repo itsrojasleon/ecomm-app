@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { currentUser } from '../../middlewares/currentuser';
 import { requireAuth } from '../../middlewares/require-auth';
 import { Order } from '../../models/order';
+import { OrderDetails } from '../../models/order-details';
 
 const router = express.Router();
 
@@ -11,11 +12,12 @@ router.get(
   requireAuth,
   async (req: Request, res: Response) => {
     const orders = await Order.findAll({
-      where: { userId: req.currentUser!.id }
+      where: { userId: req.currentUser!.id },
+      include: [OrderDetails]
     });
 
     res.send(orders);
   }
 );
 
-export { router as indexOrderRouter };
+export { router as indexOrdersRouter };

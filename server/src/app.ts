@@ -26,7 +26,7 @@ import { indexUserRouter } from './routes/users';
 
 // order routes
 import { newOrderRouter } from './routes/orders/new';
-import { indexOrderRouter } from './routes/orders/index';
+// import { indexOrdersRouter } from './routes/orders/index';
 
 // cart routes
 import { indexCartRouter } from './routes/cart';
@@ -60,7 +60,8 @@ app.use(
           'http://localhost:8082',
           'http://localhost:8083',
           'http://localhost:8084',
-          'http://localhost:8085'
+          'http://localhost:8085',
+          'http://localhost:8086'
         ].indexOf(origin) === -1
       ) {
         const msg =

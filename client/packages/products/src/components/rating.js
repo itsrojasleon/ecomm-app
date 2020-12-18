@@ -11,7 +11,7 @@ const Rating = ({ numberOfStars = 5, defaultStars = 1, setStars }) => {
   const handleClick = (n) => {
     if (setStars) {
       setIndex(n + 1);
-      setStars(n + 1);
+      setStars({ score: n + 1 });
     }
   };
 

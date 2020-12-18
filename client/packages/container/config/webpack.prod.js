@@ -19,7 +19,8 @@ const prodConfig = {
         products: `products@${domain}/products/latest/remoteEntry.js`,
         wishlist: `wishlist@${domain}/wishlist/latest/remoteEntry.js`,
         users: `users@${domain}/users/latest/remoteEntry.js`,
-        cart: `cart@${domain}/cart/latest/remoteEntry.js`
+        cart: `cart@${domain}/cart/latest/remoteEntry.js`,
+        orders: `ordes@${domain}/orders/latest/remoteEntry.js`
       },
       shared: packageJson.dependencies
     })

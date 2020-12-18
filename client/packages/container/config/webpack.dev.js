@@ -22,7 +22,8 @@ const devConfig = {
         auth: 'auth@http://localhost:8082/remoteEntry.js',
         wishlist: 'wishlist@http://localhost:8083/remoteEntry.js',
         users: 'users@http://localhost:8084/remoteEntry.js',
-        cart: 'cart@http://localhost:8085/remoteEntry.js'
+        cart: 'cart@http://localhost:8085/remoteEntry.js',
+        orders: 'orders@http://localhost:8086/remoteEntry.js'
       },
       shared: packageJson.dependencies
     })

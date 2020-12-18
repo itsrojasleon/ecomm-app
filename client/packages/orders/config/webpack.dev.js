@@ -7,10 +7,10 @@ const packageJson = require('../package.json');
 const devConfig = {
   mode: 'development',
   output: {
-    publicPath: 'http://localhost:8085/'
+    publicPath: 'http://localhost:8086/'
   },
   devServer: {
-    port: 8085,
+    port: 8086,
     historyApiFallback: {
       index: 'index.html'
     }
