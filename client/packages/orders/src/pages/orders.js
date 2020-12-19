@@ -1,24 +1,25 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../context/orders';
+import { sum } from '../utils/sum';
 
 const Orders = () => {
-  const { state, fetchOrders } = useContext(Context);
+  const { isLoading, orders, fetchOrders } = useContext(Context);
   const history = useHistory();
 
   useEffect(() => {
     fetchOrders();
   }, []);
 
-  if (state.isLoading) return 'Loading...';
-  if (state.orders.length === 0) return 'No products added to the cart';
+  if (isLoading) return 'Loading...';
+  if (orders.length === 0) return 'No products added to the cart';
 
   return (
     <div>
-      {state.orders.map((order) => (
-        <div key={order.id}>
-          {order.status} - {order.total}
-        </div>
+      {orders.map((order) => (
+        <Link key={order.id} to={`/orders/${order.id}`}>
+          {order.id}
+        </Link>
       ))}
     </div>
   );

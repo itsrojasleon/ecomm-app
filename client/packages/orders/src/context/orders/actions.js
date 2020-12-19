@@ -12,4 +12,15 @@ const fetchOrders = (dispatch) => async () => {
   }
 };
 
-export { fetchOrders };
+const fetchOrder = (dispatch) => async (id) => {
+  try {
+    dispatch({ type: ACTION_TYPES.isLoading });
+    const { data } = await ecomm.get(`/api/orders/${id}`);
+
+    dispatch({ type: ACTION_TYPES.fetchOrder, payload: data });
+  } catch (err) {
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data });
+  }
+};
+
+export { fetchOrders, fetchOrder };

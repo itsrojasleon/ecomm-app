@@ -8,6 +8,7 @@ Context.displayName = 'OrdersContext';
 export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     orders: [],
+    order: null,
     error: [],
     isLoading: false
   });
@@ -19,7 +20,7 @@ export const Provider = ({ children }) => {
   }
 
   return (
-    <Context.Provider value={{ state, ...boundActions }}>
+    <Context.Provider value={{ ...state, ...boundActions }}>
       {children}
     </Context.Provider>
   );

@@ -1,5 +1,6 @@
 export const ACTION_TYPES = {
-  fetchOrders: 'fetch_orders',
-  isLoading: 'is_loading',
-  error: 'error'
+  fetchOrders: 'FETCH_ORDERS',
+  fetchOrder: 'FETCH_ORDER',
+  isLoading: 'IS_LOADING',
+  error: 'ERROR'
 };

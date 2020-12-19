@@ -5,11 +5,10 @@ import {
   ForeignKey,
   BelongsTo,
   Default,
-  Min,
-  AllowNull
+  HasMany
 } from 'sequelize-typescript';
+import { OrderDetails } from './order-details';
 import { User } from './user';
-import { Product } from './product';
 
 export enum OrderStatus {
   // When the order has been created but the product it is
@@ -41,4 +40,7 @@ export class Order extends Model<Order> {
 
   @BelongsTo(() => User)
   user!: User;
+
+  @HasMany(() => OrderDetails)
+  orders!: OrderDetails[];
 }
