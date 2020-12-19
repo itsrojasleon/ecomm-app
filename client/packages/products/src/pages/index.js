@@ -4,7 +4,7 @@ import Alert from '../components/alert';
 import { Context } from '../context/products';
 
 const Products = () => {
-  const { state, fetchProducts } = useContext(Context);
+  const { products, cart, fetchProducts } = useContext(Context);
 
   useEffect(() => {
     fetchProducts();
@@ -12,10 +12,10 @@ const Products = () => {
 
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
-      {state.products.map((product) => (
+      {products.map((product) => (
         <Product key={product.id} {...product} />
       ))}
-      {state.cart.map((product, i) => (
+      {cart.map((product, i) => (
         <div
           key={product.id}
           className={`absolute bottom-0 right-0 mb-${20 * i + 4} mr-4`}>

@@ -60,7 +60,8 @@ const Nav = () => {
     !currentUser && { href: '/auth/signup', label: 'Signup' },
     !currentUser && { href: '/auth/signin', label: 'Signin' },
     currentUser && { href: '/products', label: 'Products' },
-    currentUser && { href: '/products/create', label: 'Sell' }
+    currentUser && { href: '/products/create', label: 'Sell' },
+    currentUser && { href: '/orders', label: 'Orders' }
   ]
     .filter(Boolean)
     .map(({ href, label }) => (
@@ -91,7 +92,7 @@ const Nav = () => {
               <button
                 className="block px-4 py-2 rounded-md bg-red-100 text-red-700"
                 onClick={() => signout().then(() => history.push('/'))}>
-                Logout
+                Sign out
               </button>
             </>
           )}

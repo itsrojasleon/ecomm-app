@@ -3,8 +3,8 @@ import { Router, Switch, Route } from 'react-router-dom';
 import Create from './pages/create';
 import Show from './pages/show';
 import Products from './pages';
-import '../styles/tailwind.css';
 import { Provider } from './context/products';
+import '../styles/tailwind.css';
 
 const App = ({ history, currentUser }) => {
   return (

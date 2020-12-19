@@ -4,10 +4,11 @@ import {
   Model,
   ForeignKey,
   BelongsTo,
-  Default
+  Default,
+  HasMany
 } from 'sequelize-typescript';
+import { OrderDetails } from './order-details';
 import { User } from './user';
-import { Product } from './product';
 
 export enum OrderStatus {
   // When the order has been created but the product it is
@@ -29,24 +30,17 @@ export enum OrderStatus {
 
 @Table({ underscored: true })
 export class Order extends Model<Order> {
-  @Column
   @Default(OrderStatus.Created)
-  status!: string;
-
   @Column
-  quantity!: number;
+  status!: string;
 
   @ForeignKey(() => User)
   @Column
   userId!: number;
 
-  @ForeignKey(() => Product)
-  @Column
-  productId!: number;
-
   @BelongsTo(() => User)
   user!: User;
 
-  @BelongsTo(() => Product)
-  product!: Product;
+  @HasMany(() => OrderDetails)
+  orders!: OrderDetails[];
 }

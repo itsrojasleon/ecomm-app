@@ -1,17 +1,38 @@
 import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { ecomm } from '../api/ecomm';
 import ProductItem from '../components/cart-item';
-import { Context } from '../context/cart-context';
+import { Context } from '../context/cart';
 import { sum } from '../utils/sum';
 
 const Cart = () => {
-  const { state, fetchItems, removeAll } = useContext(Context);
+  const { isLoading, items, fetchItems, removeAll } = useContext(Context);
+  const history = useHistory();
 
   useEffect(() => {
     fetchItems();
   }, []);
 
-  if (state.isLoading) return 'Loading...';
-  if (state.items.length === 0) return 'No products added to the cart';
+  if (isLoading) return 'Loading...';
+  if (items.length === 0) return 'No products added to the cart';
+
+  const order = async () => {
+    const {
+      data: { id }
+    } = await ecomm.post('/api/orders');
+
+    for (let { quantity, productId } of items) {
+      await ecomm.post(`/api/order-details`, {
+        orderId: id,
+        quantity,
+        productId
+      });
+    }
+
+    removeAll().then(() => {
+      history.push('/orders');
+    });
+  };
 
   return (
     <div className="flex flex-wrap shadow-lg">
@@ -31,7 +52,7 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {state.items.map((item) => (
+            {items.map((item) => (
               <ProductItem key={item.id} {...item} />
             ))}
           </tbody>
@@ -48,15 +69,17 @@ const Cart = () => {
         <h2 className="text-xl font-semibold">Order summary</h2>
 
         <div className="flex justify-between font-semibold">
-          <p>Items: {sum(state.items).itemsCount}</p>
-          <p>Kind of items: {sum(state.items).count}</p>
+          <p>Items: {sum(items).itemsCount}</p>
+          <p>Kind of items: {sum(items).count}</p>
         </div>
         <div className="flex justify-between font-semibold uppercase">
           <p>Total cost</p>
-          <p>${sum(state.items).total.toFixed(2)}</p>
+          <p>${sum(items).total.toFixed(2)}</p>
         </div>
-        <button className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-          Checkout
+        <button
+          onClick={order}
+          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+          Order
         </button>
       </div>
     </div>

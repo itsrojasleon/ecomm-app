@@ -3,16 +3,14 @@ import { Link } from 'react-router-dom';
 import { Heart, Added } from './icons';
 import { Context } from '../context/products';
 
-const Product = ({
-  id,
-  name,
-  price,
-  description,
-  wishlist,
-  addedToCart,
-  user
-}) => {
-  const [wishlisted, setWishlisted] = useState(Boolean(wishlist));
+const Product = ({ id, name, price, description, wishlist, user }) => {
+  const [{ wishlisted, addedToCart }, setValues] = useState({
+    wishlisted: Boolean(wishlist),
+    // We're not going to worry about persisting added to cart value
+    // I saw in amazon they don't do that, instead they increment the value of quantity
+    addedToCart: false
+  });
+
   const { addToCart, addToWishlist } = useContext(Context);
 
   return (
@@ -43,7 +41,10 @@ const Product = ({
         <div className="flex space-x-3 mb-4 text-sm font-medium">
           <div className="flex-auto flex space-x-3">
             <button
-              onClick={() => addToCart(id)}
+              onClick={() => {
+                setValues({ addedToCart: true });
+                addToCart(id);
+              }}
               className="w-1/2 flex items-center justify-center rounded-md bg-black text-white"
               type="button">
               {addedToCart ? <Added /> : 'Add to cart'}
@@ -51,7 +52,7 @@ const Product = ({
           </div>
           <button
             onClick={() => {
-              setWishlisted(!wishlisted);
+              setValues({ wishlisted: !wishlisted });
               addToWishlist(id);
             }}
             className={`flex-none flex items-center justify-center w-9 h-9 rounded-md border-gray-400 border ${

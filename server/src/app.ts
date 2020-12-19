@@ -25,8 +25,12 @@ import { updateUserRouter } from './routes/users/update';
 import { indexUserRouter } from './routes/users';
 
 // order routes
-// import { newOrderRouter } from './routes/orders/new';
-import { indexOrderRouter } from './routes/orders/index';
+import { newOrderRouter } from './routes/orders/new';
+import { indexOrdersRouter } from './routes/orders/index';
+
+// order details routes
+import { indexOrderDetailsRouter } from './routes/order-details/index';
+import { newOrderDetailsRouter } from './routes/order-details/new';
 
 // cart routes
 import { indexCartRouter } from './routes/cart';
@@ -36,6 +40,7 @@ import { decreaseCartRouter } from './routes/cart/decrease';
 import { deleteCartRouter } from './routes/cart/delete';
 
 // review routes
+import { indexReviewsRouter } from './routes/reviews/index';
 import { newReviewRouter } from './routes/reviews/new';
 import { updateReviewRouter } from './routes/reviews/update';
 import { deleteReviewRouter } from './routes/reviews/delete';
@@ -59,7 +64,8 @@ app.use(
           'http://localhost:8082',
           'http://localhost:8083',
           'http://localhost:8084',
-          'http://localhost:8085'
+          'http://localhost:8085',
+          'http://localhost:8086'
         ].indexOf(origin) === -1
       ) {
         const msg =
@@ -87,7 +93,11 @@ app.use(updateProductsRouter);
 app.use(indexWishlistRouter);
 app.use(createWishlistRouter);
 
-// app.use(newOrderRouter);
+app.use(indexOrdersRouter);
+app.use(newOrderRouter);
+
+app.use(indexOrderDetailsRouter);
+app.use(newOrderDetailsRouter);
 
 app.use(newCartRouter);
 app.use(indexCartRouter);
@@ -95,6 +105,7 @@ app.use(deleteCartRouter);
 app.use(increaseCartRouter);
 app.use(decreaseCartRouter);
 
+app.use(indexReviewsRouter);
 app.use(newReviewRouter);
 app.use(updateReviewRouter);
 app.use(deleteReviewRouter);

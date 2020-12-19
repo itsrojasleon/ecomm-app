@@ -10,6 +10,7 @@ const ProductsApp = lazy(() => import('./components/products-app'));
 const WishlistApp = lazy(() => import('./components/wishlist-app'));
 const UsersApp = lazy(() => import('./components/users-app'));
 const CartApp = lazy(() => import('./components/cart-app'));
+const OrdersApp = lazy(() => import('./components/orders-app'));
 
 const history = createBrowserHistory();
 
@@ -47,6 +48,7 @@ const App = () => {
               <ProductsApp currentUser={currentUser} />
             </Route>
             <Route path="/cart" component={CartApp} />
+            <Route path="/orders" component={OrdersApp} />
             <Route path="/wishlist" component={WishlistApp} />
 
             <Route path="/users">

@@ -1,23 +1,23 @@
 import express, { Request, Response } from 'express';
 import { currentUser } from '../../middlewares/currentuser';
 import { requireAuth } from '../../middlewares/require-auth';
-import { Order } from '../../models/order';
-import { User } from '../../models/user';
+import { OrderDetails } from '../../models/order-details';
+import { Product } from '../../models/product';
 
 const router = express.Router();
 
 router.get(
-  '/api/orders',
+  '/api/orders/:id',
   currentUser,
   requireAuth,
   async (req: Request, res: Response) => {
-    const orders = await Order.findAll({
-      where: { userId: req.currentUser!.id },
-      include: [User]
+    const orders = await OrderDetails.findAll({
+      where: { orderId: req.params.id },
+      include: [Product]
     });
 
     res.send(orders);
   }
 );
 
-export { router as indexOrdersRouter };
+export { router as indexOrderDetailsRouter };
