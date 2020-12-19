@@ -8,7 +8,7 @@ Context.displayName = 'OrdersContext';
 export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     orders: [],
-    order: null,
+    order: [],
     error: [],
     isLoading: false
   });
