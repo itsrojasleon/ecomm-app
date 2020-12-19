@@ -1,7 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../context/orders';
+import Title from '../components/title';
 import { sum } from '../utils/sum';
+import OrderDetails from '../components/order-details';
 
 const Orders = () => {
   const { isLoading, orders, fetchOrders } = useContext(Context);
@@ -16,11 +18,12 @@ const Orders = () => {
 
   return (
     <div>
-      {orders.map((order) => (
-        <Link key={order.id} to={`/orders/${order.id}`}>
-          {order.id}
-        </Link>
-      ))}
+      <Title>Orders</Title>
+      <div className="gap-4">
+        {orders.map((order) => (
+          <OrderDetails key={order.id} {...order} />
+        ))}
+      </div>
     </div>
   );
 };
