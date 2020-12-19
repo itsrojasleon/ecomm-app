@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import Title from '../components/title';
+import Table from '../components/table';
 import { Context } from '../context/orders';
 import { sum } from '../utils/sum';
 
@@ -16,20 +17,35 @@ const Order = () => {
   if (isLoading) return 'Loading...';
   if (order.length === 0) return 'No products added to the cart';
 
+  const data = order.map((order) => [
+    order.id,
+    order.quantity,
+    order.product.name,
+    order.product.price
+  ]);
+
   return (
     <div>
       <Title>Order</Title>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
+      <Table headers={['id', 'quantity', 'name', 'price', 'created at']}>
         {order.map((order) => (
-          <div
-            key={order.id}
-            className="border border-gray-100 p-2 mt-3 flex justify-between">
-            <p>{order.quantity}</p>
-            <p>{order.product.name}</p>
-            <p>$ {order.product.price.toFixed(2)}</p>
-          </div>
+          <tr key={order.id}>
+            <td className="border border-gray-200 px-4 py-2">{order.id}</td>
+            <td className="border border-gray-200 px-4 py-2">
+              {order.quantity}
+            </td>
+            <td className="border border-gray-200 px-4 py-2">
+              {order.product.name}
+            </td>
+            <td className="border border-gray-200 px-4 py-2">
+              {order.product.price.toFixed(2)}
+            </td>
+            <td className="border border-gray-200 px-4 py-2">
+              {order.createdAt}
+            </td>
+          </tr>
         ))}
-      </div>
+      </Table>
     </div>
   );
 };
