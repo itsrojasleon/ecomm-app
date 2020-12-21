@@ -22,6 +22,9 @@ export class Product extends Model<Product> {
   @Column
   description!: string;
 
+  @Column
+  imageUrl!: string;
+
   @ForeignKey(() => User)
   @Column
   userId!: number;

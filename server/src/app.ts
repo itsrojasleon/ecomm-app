@@ -45,6 +45,9 @@ import { newReviewRouter } from './routes/reviews/new';
 import { updateReviewRouter } from './routes/reviews/update';
 import { deleteReviewRouter } from './routes/reviews/delete';
 
+// upload routes
+import { uploadRouter } from './routes/upload/new';
+
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
 
@@ -109,6 +112,8 @@ app.use(indexReviewsRouter);
 app.use(newReviewRouter);
 app.use(updateReviewRouter);
 app.use(deleteReviewRouter);
+
+app.use(uploadRouter);
 
 app.all('*', () => {
   throw new NotFoundError();

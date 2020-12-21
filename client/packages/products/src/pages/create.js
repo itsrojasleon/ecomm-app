@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { ecomm } from '../api/ecomm';
 import { Context } from '../context/products';
 
 const Create = () => {
@@ -7,16 +9,23 @@ const Create = () => {
 
   const history = useHistory();
 
-  const [{ name, price, description }, setValues] = useState({
-    name: '',
-    price: '',
-    description: ''
-  });
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [file, setFile] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    createProduct({ name, price, description }).then(() => {
+    const { data } = await ecomm.get('/api/upload');
+
+    await axios.put(data.url, file, {
+      headers: {
+        'Content-Type': file.type
+      }
+    });
+
+    createProduct({ name, price, description, imageUrl: data.key }).then(() => {
       history.push('/products');
     });
   };
@@ -40,7 +49,7 @@ const Create = () => {
                 name="name"
                 type="text"
                 value={name}
-                onChange={(e) => setValues({ name: e.target.value })}
+                onChange={(e) => setName(e.target.value)}
                 required
                 className="rounded-md w-full px-3 py-2 border border-gray-200 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-gray-500 sm:text-sm"
                 placeholder="name"
@@ -54,13 +63,13 @@ const Create = () => {
                 name="price"
                 type="number"
                 value={price}
-                onChange={(e) => setValues({ price: e.target.value })}
+                onChange={(e) => setPrice(e.target.value)}
                 required
                 className="rounded-md w-full px-3 py-2 border border-gray-200 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-gray-500 sm:text-sm"
                 placeholder="price"
               />
             </div>
-            <div>
+            <div className="pb-3">
               <label className="font-medium" htmlFor="description">
                 Product's description
               </label>
@@ -68,10 +77,24 @@ const Create = () => {
                 name="description"
                 type="text"
                 value={description}
-                onChange={(e) => setValues({ description: e.target.value })}
+                onChange={(e) => setDescription(e.target.value)}
                 required
                 className="rounded-md w-full px-3 py-2 border border-gray-200 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-gray-500 sm:text-sm"
                 placeholder="description"
+              />
+            </div>
+            <div className="pb-3">
+              <label className="font-medium" htmlFor="image">
+                Product's image
+              </label>
+              <input
+                name="image"
+                accept="image/*"
+                type="file"
+                onChange={(e) => setFile(e.target.files[0])}
+                required
+                className="rounded-md w-full px-3 py-2 border border-gray-200 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-gray-500 sm:text-sm"
+                placeholder="image url"
               />
             </div>
           </div>

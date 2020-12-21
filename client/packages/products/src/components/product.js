@@ -3,7 +3,15 @@ import { Link } from 'react-router-dom';
 import { Heart, Added } from './icons';
 import { Context } from '../context/products';
 
-const Product = ({ id, name, price, description, wishlist, user }) => {
+const Product = ({
+  id,
+  name,
+  price,
+  description,
+  imageUrl,
+  wishlist,
+  user
+}) => {
   const [{ wishlisted, addedToCart }, setValues] = useState({
     wishlisted: Boolean(wishlist),
     // We're not going to worry about persisting added to cart value
@@ -15,8 +23,10 @@ const Product = ({ id, name, price, description, wishlist, user }) => {
 
   return (
     <div className="flex">
-      {/* add image */}
-      <form className="flex-auto p-6 shadow">
+      <div className="flex-auto p-6 shadow">
+        <img
+          src={`https://rlecomm-upload.s3.us-east-2.amazonaws.com/${imageUrl}`}
+        />
         <div className="flex flex-wrap">
           <Link
             to={`/products/${id}`}
@@ -63,7 +73,7 @@ const Product = ({ id, name, price, description, wishlist, user }) => {
             <Heart />
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

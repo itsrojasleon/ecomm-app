@@ -1,5 +1,8 @@
+import { config } from 'dotenv';
 import { app } from './app';
 import { sequelize } from './sequelize';
+
+config({ path: __dirname + '/.env' });
 
 const main = async () => {
   // if (!process.env.JWT_KEY) {

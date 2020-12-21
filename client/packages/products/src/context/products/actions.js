@@ -21,12 +21,18 @@ const fetchProduct = (dispatch) => async (id) => {
   }
 };
 
-const createProduct = (dispatch) => async ({ name, price, description }) => {
+const createProduct = (dispatch) => async ({
+  name,
+  price,
+  description,
+  imageUrl
+}) => {
   try {
     const { data } = await ecomm.post('/api/products', {
       name,
       price,
-      description
+      description,
+      imageUrl
     });
     dispatch({ type: ACTION_TYPES.createProduct, payload: data });
   } catch (err) {

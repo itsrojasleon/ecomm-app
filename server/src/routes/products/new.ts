@@ -18,16 +18,18 @@ router.post(
     body('price').isFloat({ gt: 0 }).withMessage('You must provide a price'),
     body('description')
       .isLength({ min: 1, max: 500 })
-      .withMessage('You must provide a valid description')
+      .withMessage('You must provide a valid description'),
+    body('imageUrl').not().isEmpty().withMessage('You must provide an imageUrl')
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { name, price, description } = req.body;
+    const { name, price, description, imageUrl } = req.body;
 
     const product = await Product.create({
       name,
       price,
       description,
+      imageUrl,
       userId: parseInt(req.currentUser!.id)
     });
 
