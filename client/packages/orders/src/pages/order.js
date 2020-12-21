@@ -28,6 +28,14 @@ const Order = () => {
             </td>
             <td className="border border-gray-200 px-4 py-2">
               {order.product.name}
+              <img
+                className="w-3/12"
+                src={
+                  'https://rlecomm-upload.s3.us-east-2.amazonaws.com/' +
+                  order.product.imageUrl
+                }
+                alt={order.name}
+              />
             </td>
             <td className="border border-gray-200 px-4 py-2">
               {order.product.price.toFixed(2)}
