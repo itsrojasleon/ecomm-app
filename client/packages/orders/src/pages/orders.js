@@ -11,7 +11,7 @@ const Orders = () => {
   }, []);
 
   if (isLoading) return 'Loading...';
-  if (orders.length === 0) return 'No products added to the cart';
+  if (orders.length === 0) return 'There is nothing here';
 
   return (
     <div>
