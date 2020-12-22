@@ -16,7 +16,7 @@ const Order = () => {
   }, []);
 
   if (isLoading) return 'Loading...';
-  if (order.length === 0) return 'No products added to the cart';
+  if (order.length === 0) return 'This order does not exist';
 
   return (
     <>

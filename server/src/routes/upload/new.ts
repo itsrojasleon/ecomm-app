@@ -3,12 +3,13 @@ import { randomBytes } from 'crypto';
 import { S3 } from 'aws-sdk';
 import { currentUser } from '../../middlewares/currentuser';
 import { requireAuth } from '../../middlewares/require-auth';
+import { config } from '../../config';
 
 const router = express.Router();
 
 const s3 = new S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  accessKeyId: config.AWS_ACCESS_KEY_ID,
+  secretAccessKey: config.AWS_SECRET_ACCESS_KEY,
   apiVersion: '2006-03-01',
   region: 'us-east-2'
 });
@@ -25,7 +26,7 @@ router.get(
     s3.getSignedUrl(
       'putObject',
       {
-        Bucket: process.env.AWS_BUCKET_NAME,
+        Bucket: config.AWS_BUCKET_NAME,
         ContentType: 'image/jpeg',
         Key: key
       },

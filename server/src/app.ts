@@ -51,6 +51,7 @@ import { uploadRouter } from './routes/upload/new';
 
 import { NotFoundError } from './errors/not-found';
 import { errorHandler } from './middlewares/error-handler';
+import { createPaymentsRouter } from './routes/payments/new';
 
 const app = express();
 
@@ -114,6 +115,8 @@ app.use(indexReviewsRouter);
 app.use(newReviewRouter);
 app.use(updateReviewRouter);
 app.use(deleteReviewRouter);
+
+app.use(createPaymentsRouter);
 
 app.use(uploadRouter);
 

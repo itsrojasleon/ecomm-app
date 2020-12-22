@@ -35,4 +35,13 @@ const cancelOrder = (dispatch) => async (id) => {
   }
 };
 
-export { fetchOrders, fetchOrder, cancelOrder };
+const makePayment = (dispatch) => async ({ token, orderId }) => {
+  try {
+    const { data } = await ecomm.post('/api/payments', { token, orderId });
+    dispatch({ type: ACTION_TYPES.makePayment, payload: data });
+  } catch (err) {
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data });
+  }
+};
+
+export { fetchOrders, fetchOrder, cancelOrder, makePayment };

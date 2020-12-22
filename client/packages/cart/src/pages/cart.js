@@ -19,7 +19,7 @@ const Cart = () => {
   const order = async () => {
     const {
       data: { id }
-    } = await ecomm.post('/api/orders');
+    } = await ecomm.post('/api/orders', { total: sum(items).total });
 
     for (let { quantity, productId } of items) {
       await ecomm.post(`/api/order-details`, {

@@ -17,7 +17,7 @@ router.post(
   currentUser,
   requireAuth,
   [
-    body('token').not().isEmpty().withMessage('You must provide a name'),
+    body('token').not().isEmpty().withMessage('You must provide a token'),
     body('orderId').isFloat().withMessage('You must provide an orderId')
   ],
   validateRequest,
@@ -44,7 +44,8 @@ router.post(
 
     const payment = await Payment.create({
       orderId,
-      stripeId: charge.id
+      stripeId: charge.id,
+      userId: req.currentUser!.id
     });
 
     // At this point somebody already paid for the order
