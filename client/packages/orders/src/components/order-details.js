@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Context } from '../context/orders';
 
 const OrderDetails = ({ status, user, id }) => {
+  const { cancelOrder } = useContext(Context);
+
   return (
     <div className="flex gap-4">
       <p>Status: {status}</p>
@@ -10,6 +13,7 @@ const OrderDetails = ({ status, user, id }) => {
       <Link className="border rounded px-2" to="/payments">
         Pay
       </Link>
+      <span onClick={() => cancelOrder(id)}>Cancel order</span>
     </div>
   );
 };

@@ -23,4 +23,16 @@ const fetchOrder = (dispatch) => async (id) => {
   }
 };
 
-export { fetchOrders, fetchOrder };
+const cancelOrder = (dispatch) => async (id) => {
+  try {
+    dispatch({ type: ACTION_TYPES.isLoading });
+
+    await ecomm.post(`/api/orders/${id}`);
+
+    dispatch({ type: ACTION_TYPES.cancelOrder, payload: id });
+  } catch (err) {
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data });
+  }
+};
+
+export { fetchOrders, fetchOrder, cancelOrder };

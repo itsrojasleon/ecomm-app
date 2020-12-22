@@ -6,6 +6,14 @@ export const reducer = (state, { type, payload }) => {
       return { ...state, orders: payload, isLoading: false };
     case ACTION_TYPES.fetchOrder:
       return { ...state, order: payload, isLoading: false };
+    case ACTION_TYPES.cancelOrder:
+      return {
+        ...state,
+        orders: state.orders.map((order) =>
+          order.id === payload ? { ...order, status: 'cancelled' } : order
+        ),
+        isLoading: false
+      };
     case ACTION_TYPES.isLoading:
       return { ...state, isLoading: true, error: [] };
     case ACTION_TYPES.error:

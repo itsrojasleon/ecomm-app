@@ -31,6 +31,7 @@ import { indexOrdersRouter } from './routes/orders/index';
 // order details routes
 import { indexOrderDetailsRouter } from './routes/order-details/index';
 import { newOrderDetailsRouter } from './routes/order-details/new';
+import { cancelOrderRouter } from './routes/orders/cancel';
 
 // cart routes
 import { indexCartRouter } from './routes/cart';
@@ -98,6 +99,7 @@ app.use(createWishlistRouter);
 
 app.use(indexOrdersRouter);
 app.use(newOrderRouter);
+app.use(cancelOrderRouter);
 
 app.use(indexOrderDetailsRouter);
 app.use(newOrderDetailsRouter);

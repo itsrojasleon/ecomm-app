@@ -9,7 +9,7 @@ import { Context } from '../context/orders';
 const Order = () => {
   const { order, isLoading, error, fetchOrder } = useContext(Context);
   const { id } = useParams();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     fetchOrder(id);
@@ -21,11 +21,11 @@ const Order = () => {
   return (
     <>
       <Title>Order # {id}</Title>
-      <ul className="border border-gray-200 rounded">
+      <ul className="grid lg:grid-cols-2 md:grid-cols-2 gap-4">
         {order.map((order) => (
           <article
             key={order.id}
-            className="p-4 flex items-center justify-between">
+            className="p-4 flex items-center justify-between border border-gray-200 rounded ">
             <div className="flex gap-3">
               <img
                 src={
@@ -56,7 +56,11 @@ const Order = () => {
               className="border rounded-full p-1 shadow">
               {isOpen ? <Close /> : <Add />}
             </span>
-            {isOpen && <p>askoaksoaksaoskoaksoas</p>}
+            {isOpen && (
+              <p>
+                Created at <strong>{convertDate(order.createdAt)}</strong>
+              </p>
+            )}
           </article>
         ))}
       </ul>
