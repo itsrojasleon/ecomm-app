@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { convertDate } from '@rlecomm/common';
 import Title from '../components/title';
-import Table from '../components/table';
+import Add from '../components/add';
 import { Context } from '../context/orders';
 
 const Order = () => {
@@ -17,36 +17,45 @@ const Order = () => {
   if (order.length === 0) return 'No products added to the cart';
 
   return (
-    <div>
+    <>
       <Title>Order # {id}</Title>
-      <Table headers={['id', 'quantity', 'name', 'price', 'created at']}>
+      <ul className="border border-gray-200 rounded">
         {order.map((order) => (
-          <tr key={order.id}>
-            <td className="border border-gray-200 px-4 py-2">{order.id}</td>
-            <td className="border border-gray-200 px-4 py-2">
-              {order.quantity}
-            </td>
-            <td className="border border-gray-200 px-4 py-2">
-              {order.product.name}
+          <article
+            key={order.id}
+            className="p-4 flex items-center justify-between">
+            <div className="flex gap-3">
               <img
-                className="w-3/12"
                 src={
                   'https://rlecomm-upload.s3.us-east-2.amazonaws.com/' +
                   order.product.imageUrl
                 }
-                alt={order.name}
+                alt={order.product.name}
+                className="flex-none w-18 h-18 rounded-lg object-cover bg-gray-100"
+                width="144"
+                height="144"
               />
-            </td>
-            <td className="border border-gray-200 px-4 py-2">
-              {order.product.price.toFixed(2)}
-            </td>
-            <td className="border border-gray-200 px-4 py-2">
-              {convertDate(order.createdAt)}
-            </td>
-          </tr>
+              <div className="flex flex-col justify-between">
+                <h2 className="text-lg font-semibold text-black mb-0.5">
+                  {order.product.name}
+                </h2>
+                <div className="flex flex-row gap-1">
+                  <p className="text-gray-600">
+                    {order.quantity} X $ {order.product.price.toFixed(2)} =
+                  </p>
+                  <p className="font-semibold">
+                    $ {(order.quantity * order.product.price).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <span className="border rounded-full">
+              <Add />
+            </span>
+          </article>
         ))}
-      </Table>
-    </div>
+      </ul>
+    </>
   );
 };
 
