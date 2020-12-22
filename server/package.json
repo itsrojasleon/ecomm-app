@@ -38,7 +38,8 @@
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "sequelize": "5.22.3",
-    "sequelize-typescript": "1"
+    "sequelize-typescript": "1",
+    "stripe": "^8.129.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",

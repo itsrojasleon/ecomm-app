@@ -34,6 +34,9 @@ export class Order extends Model<Order> {
   @Column
   status!: string;
 
+  @Column
+  total!: number;
+
   @ForeignKey(() => User)
   @Column
   userId!: number;
