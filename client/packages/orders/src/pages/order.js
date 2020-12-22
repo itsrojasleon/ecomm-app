@@ -1,13 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { convertDate } from '@rlecomm/common';
 import Title from '../components/title';
 import Add from '../components/add';
+import Close from '../components/close';
 import { Context } from '../context/orders';
 
 const Order = () => {
   const { order, isLoading, error, fetchOrder } = useContext(Context);
   const { id } = useParams();
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     fetchOrder(id);
@@ -49,9 +51,12 @@ const Order = () => {
                 </div>
               </div>
             </div>
-            <span className="border rounded-full">
-              <Add />
+            <span
+              onClick={() => setIsOpen((prev) => !prev)}
+              className="border rounded-full p-1 shadow">
+              {isOpen ? <Close /> : <Add />}
             </span>
+            {isOpen && <p>askoaksoaksaoskoaksoas</p>}
           </article>
         ))}
       </ul>
