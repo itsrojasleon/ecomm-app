@@ -1,10 +1,10 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Add } from '@rlecomm/common';
 import FormReview from '../components/form-review';
 import Product from '../components/product';
 import Review from '../components/review';
 import Alert from '../components/alert';
-import { Add } from '../components/icons';
 import { Context } from '../context/products';
 
 // Let's pretend we're authenticated
@@ -32,7 +32,7 @@ const Show = ({
         <h3 className="my-4 text-lg text-gray-600">Reviews.</h3>
         <span
           onClick={() => setIsCreating((prev) => !prev)}
-          className="rounded-full bg-black flex w-7 transform transition hover:scale-125">
+          className="rounded-full border flex transform transition hover:scale-125">
           <Add />
         </span>
       </div>

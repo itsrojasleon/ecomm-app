@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { convertDate } from '@rlecomm/common';
+import { convertDate, Add, Close } from '@rlecomm/common';
 import Title from '../components/title';
-import Add from '../components/add';
-import Close from '../components/close';
 import { Context } from '../context/orders';
 
 const Order = () => {

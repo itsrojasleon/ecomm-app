@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
+import { Write, Trash } from '@rlecomm/common';
 import FormReview from './form-review';
 import Rating from './rating';
-import { Write, Trash } from './icons';
 import { Context } from '../context/products';
 
 const Review = ({ id, title, comment, score, userId, currentUser }) => {

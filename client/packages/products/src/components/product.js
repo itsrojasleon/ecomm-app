@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Added } from './icons';
+import { Heart, Added } from '@rlecomm/common';
 import { Context } from '../context/products';
 
 const Product = ({
@@ -55,7 +55,7 @@ const Product = ({
                 setValues({ addedToCart: true });
                 addToCart(id);
               }}
-              className="w-1/2 flex items-center justify-center rounded-md bg-black text-white"
+              className="w-1/2 flex items-center justify-center rounded-md bg-gray-600 text-white"
               type="button">
               {addedToCart ? <Added /> : 'Add to cart'}
             </button>

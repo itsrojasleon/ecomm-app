@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Star } from './icons';
+import { Star } from '@rlecomm/common';
 
 const Rating = ({ numberOfStars = 5, defaultStars = 1, setStars }) => {
   const [index, setIndex] = useState(defaultStars);
