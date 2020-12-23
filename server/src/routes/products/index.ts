@@ -3,6 +3,7 @@ import { currentUser } from '../../middlewares/currentuser';
 import { requireAuth } from '../../middlewares/require-auth';
 import { Product } from '../../models/product';
 import { Wishlist } from '../../models/wishlist';
+import { Review } from '../../models/review';
 
 const router = express.Router();
 
@@ -16,6 +17,10 @@ router.get(
         {
           model: Wishlist,
           where: { userId: req.currentUser!.id },
+          required: false
+        },
+        {
+          model: Review,
           required: false
         }
       ]
