@@ -52,7 +52,7 @@ const App = () => {
             <Route path="/wishlist" component={WishlistApp} />
 
             <Route path="/users">
-              <UsersApp />
+              <UsersApp currentUser={currentUser} />
             </Route>
             <Route exact path="/">
               <h1>Home</h1>

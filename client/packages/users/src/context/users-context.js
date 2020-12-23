@@ -6,7 +6,6 @@ Context.displayName = 'UsersContext';
 
 const userActions = {
   fetchUser: 'fetch_user',
-  fetchCurrentUser: 'fetch_current_user',
   updateUser: 'update_user',
   isLoading: 'is_loading',
   error: 'error'
@@ -23,8 +22,6 @@ const usersReducer = (state, { type, payload }) => {
   switch (type) {
     case userActions.fetchUser:
       return { ...state, user: payload, isLoading: false };
-    case userActions.fetchCurrentUser:
-      return { ...state, currentUser: payload, isLoading: false };
     case userActions.updateUser:
       const { bio, name } = payload;
       return {
@@ -52,18 +49,6 @@ export const Provider = ({ children }) => {
     }
   };
 
-  const fetchCurrentUser = async () => {
-    try {
-      const { data } = await ecomm.get('/api/users/currentuser');
-      dispatch({
-        type: userActions.fetchCurrentUser,
-        payload: data.currentUser
-      });
-    } catch (err) {
-      dispatch({ type: userActions.error, payload: err });
-    }
-  };
-
   const updateUser = async ({ username, bio, name }) => {
     try {
       await ecomm.put(`/api/users/${username}`, { bio, name });
@@ -73,7 +58,7 @@ export const Provider = ({ children }) => {
     }
   };
 
-  const actions = { fetchUser, updateUser, fetchCurrentUser };
+  const actions = { fetchUser, updateUser };
 
   return (
     <Context.Provider value={{ state, ...actions }}>
