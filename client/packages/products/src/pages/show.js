@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Add } from '@rlecomm/common';
+import { Add, Close } from '@rlecomm/common';
 import FormReview from '../components/form-review';
 import Product from '../components/product';
 import Review from '../components/review';
@@ -26,34 +26,42 @@ const Show = ({
   if (!product) return 'Product not found';
 
   return (
-    <>
-      <Product {...product} />
-      <div className="flex justify-between items-center">
-        <h3 className="my-4 text-lg text-gray-600">Reviews.</h3>
-        <span
-          onClick={() => setIsCreating((prev) => !prev)}
-          className="rounded-full border flex transform transition hover:scale-125">
-          <Add />
-        </span>
+    <div className="grid grid-cols-1 sm:grid-cols-2 sm:px-8 sm:py-12 sm:gap-x-8">
+      <div className="w-full">
+        <Product {...product} />
       </div>
-      {isCreating ? (
-        <div className="w-8/12 m-auto shadow p-4 mb-4">
-          <h3 className="text-lg font-bold">Create a review</h3>
-          <FormReview
-            initialValues={{
-              productId: product.id,
-              title: '',
-              comment: '',
-              score: 1
-            }}
-            onSubmit={createReview}
-            onCancel={setIsCreating}
-          />
+
+      <div className="w-full border border-gray-100 p-2 rounded sm:overflow-auto">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="my-4 text-lg font-semibold">Reviews</h3>
+          <span
+            onClick={() => setIsCreating((prev) => !prev)}
+            className="rounded-full border flex transform transition hover:scale-125">
+            {isCreating ? <Close /> : <Add />}
+          </span>
         </div>
-      ) : null}
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
-        {product.reviews.map((review) => (
-          <Review key={review.id} {...review} currentUser={currentUser} />
+        {isCreating ? (
+          <div className="w-8/12 m-auto shadow p-4 mb-4">
+            <h3 className="text-lg font-bold">Create a review</h3>
+            <FormReview
+              initialValues={{
+                productId: product.id,
+                title: '',
+                comment: '',
+                score: 1
+              }}
+              onSubmit={createReview}
+              onCancel={setIsCreating}
+            />
+          </div>
+        ) : null}
+        {product.reviews.map((review, i) => (
+          <Review
+            key={review.id}
+            {...review}
+            currentUser={currentUser}
+            index={i + 1}
+          />
         ))}
       </div>
       {error.length > 0 && (
@@ -67,7 +75,7 @@ const Show = ({
           ))}
         </>
       )}
-    </>
+    </div>
   );
 };
 

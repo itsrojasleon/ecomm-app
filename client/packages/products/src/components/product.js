@@ -29,9 +29,22 @@ const Product = ({
     addToCart(id).then(() => setValues({ addedToCart: true }));
   };
 
+  const renderUserInfo = () => (
+    <span className="mt-4">
+      <span className="flex gap-1">
+        <p>By</p>
+        <Link
+          className="hover:underline font-semibold"
+          to={`/users/${user.id}`}>
+          {user.username}
+        </Link>
+      </span>
+    </span>
+  );
+
   return (
     <div className="flex">
-      <div className="flex-auto p-6">
+      <div className="flex-auto">
         <img
           className="rounded-xl"
           src={`https://rlecomm-upload.s3.us-east-2.amazonaws.com/${imageUrl}`}
@@ -46,16 +59,8 @@ const Product = ({
           <p className="w-full flex-none text-medium text-gray-500 mt-1">
             {description}
           </p>
-          {user && (
-            <p className="mb-4">
-              By{' '}
-              <Link className="hover:underline" to={`/users/${user.id}`}>
-                {user.name}
-              </Link>
-            </p>
-          )}
+          {user && renderUserInfo()}
         </div>
-        {/* ehre */}
         <div className="flex space-x-3 font-medium items-center justify-between mt-6">
           <button
             onClick={handleCart}
@@ -65,16 +70,14 @@ const Product = ({
           </button>
           <button
             onClick={handleWishlist}
-            className={`flex-none flex items-center justify-center w-9 h-9 rounded-md border-gray-400 border ${
-              wishlisted ? 'text-red-500' : 'text-gray-300'
-            }`}
+            className="flex-none flex items-center justify-center w-9 h-9 rounded-md border-gray-300 border"
             type="button"
             aria-label="like">
-            <Heart />
+            <Heart color={wishlisted ? 'red' : 'gray'} />
           </button>
           <span className="flex items-center">
             <Star />
-            <span className="text-gray-400">({reviews.length})</span>
+            <span className="text-gray-400 text-xs">({reviews.length})</span>
           </span>
         </div>
       </div>

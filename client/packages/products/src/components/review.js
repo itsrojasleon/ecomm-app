@@ -4,7 +4,7 @@ import FormReview from './form-review';
 import Rating from './rating';
 import { Context } from '../context/products';
 
-const Review = ({ id, title, comment, score, userId, currentUser }) => {
+const Review = ({ id, title, comment, score, userId, currentUser, index }) => {
   const { updateReview, removeReview } = useContext(Context);
 
   const [isUpdading, setIsUpdating] = useState(false);
@@ -23,8 +23,8 @@ const Review = ({ id, title, comment, score, userId, currentUser }) => {
   };
 
   const renderContentForOwner = () => (
-    <div className="mt-4 border border-gray-100 rounded p-2">
-      <p className="text-gray-500 pb-2 text-center">Actions</p>
+    <div className="mt-3">
+      <p className="text-green-500 mb-1">Actions</p>
       <div className="flex justify-between">
         <Write onClick={onWrite} />
         <Trash onClick={onDelete} />
@@ -60,14 +60,17 @@ const Review = ({ id, title, comment, score, userId, currentUser }) => {
   );
 
   return (
-    <div className="border border-gray-100 rounded-lg p-3">
+    <div className="border border-gray-100 p-3 rounded">
+      <p className="mb-1"># {index}</p>
       <h3 className="font-semibold uppercase">{title}</h3>
-      <p className="text-gray-700">{comment}</p>
-      <div className="flex justify-between">
-        <p>{score}</p>
+      <p className="text-gray-500 mt-1">{comment}</p>
+      <div className="flex justify-between items-center">
+        <p className="text-gray-500">
+          Rating: <strong>{score}</strong>
+        </p>
         <Rating defaultStars={score} />
       </div>
-      {isOwner ? renderContentForOwner() : <div>SOME</div>}
+      {isOwner && renderContentForOwner()}
     </div>
   );
 };
