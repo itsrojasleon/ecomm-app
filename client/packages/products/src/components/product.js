@@ -35,7 +35,7 @@ const Product = ({
         <p>By</p>
         <Link
           className="hover:underline font-semibold"
-          to={`/users/${user.id}`}>
+          to={`/users/${user.username}`}>
           {user.username}
         </Link>
       </span>

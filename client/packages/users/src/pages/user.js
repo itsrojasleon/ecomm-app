@@ -10,7 +10,7 @@ const User = () => {
   useEffect(() => {
     fetchCurrentUser();
     fetchUser(username);
-  }, []);
+  }, [username]);
 
   if (state.isLoading) return 'LOADING USER';
 
