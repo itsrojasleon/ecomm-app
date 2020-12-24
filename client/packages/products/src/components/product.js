@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Added, Star } from '@rlecomm/common';
+import { Heart, Added, Star, formatMoney } from '@rlecomm/common';
 import { Context } from '../context/products';
 
 const Product = ({
@@ -55,7 +55,7 @@ const Product = ({
             className="flex-auto text-xl font-semibold">
             {name}
           </Link>
-          <div className="text-xl font-semibold">${price.toFixed(2)}</div>
+          <div className="text-xl font-semibold">${formatMoney(price)}</div>
           <p className="w-full flex-none text-medium text-gray-500 mt-1">
             {description}
           </p>

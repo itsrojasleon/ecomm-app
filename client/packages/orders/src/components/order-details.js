@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import StripeCheckout from 'react-stripe-checkout';
-import { convertDate } from '@rlecomm/common';
+import { convertDate, formatMoney } from '@rlecomm/common';
 import { Context } from '../context/orders';
 
 const OrderDetails = ({
@@ -28,7 +28,7 @@ const OrderDetails = ({
         }
         ) on {status === 'created' ? createdDate() : updatedDate()}
       </p>
-      <span>{total.toFixed(2)}</span>
+      <span>{formatMoney(total)}</span>
       <Link className="hover:underline font-semibold" to={`/orders/${orderId}`}>
         See details
       </Link>
