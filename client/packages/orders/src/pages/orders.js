@@ -2,12 +2,13 @@ import React, { useContext, useEffect } from 'react';
 import { Context } from '../context/orders';
 import Title from '../components/title';
 import OrderDetails from '../components/order-details';
+import { Tabs, TabMenu, TabItem } from '../components/tabs';
 
 const Orders = () => {
-  const { isLoading, orders, fetchCreatedOrders } = useContext(Context);
+  const { isLoading, orders, fetchOrders } = useContext(Context);
 
   useEffect(() => {
-    fetchCreatedOrders();
+    fetchOrders();
   }, []);
 
   if (isLoading) return 'Loading...';
@@ -15,11 +16,31 @@ const Orders = () => {
 
   return (
     <div>
-      <Title>Orders</Title>
       <div className="gap-4">
-        {orders.map((order) => (
-          <OrderDetails key={order.id} {...order} />
-        ))}
+        <Tabs>
+          <TabMenu titles={['Created', 'Completed', 'Cancelled']} />
+          <TabItem index={0}>
+            {orders
+              .filter((order) => order.status === 'created')
+              .map((order) => (
+                <OrderDetails key={order.id} {...order} />
+              ))}
+          </TabItem>
+          <TabItem index={1}>
+            {orders
+              .filter((order) => order.status === 'completed')
+              .map((order) => (
+                <OrderDetails key={order.id} {...order} />
+              ))}
+          </TabItem>
+          <TabItem index={2}>
+            {orders
+              .filter((order) => order.status === 'cancelled')
+              .map((order) => (
+                <OrderDetails key={order.id} {...order} />
+              ))}
+          </TabItem>
+        </Tabs>
       </div>
     </div>
   );

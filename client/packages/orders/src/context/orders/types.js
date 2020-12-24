@@ -1,7 +1,5 @@
 export const ACTION_TYPES = {
-  fetchCreatedOrders: 'FETCH_CREATED_ORDERS',
-  fetchCompletedOrders: 'FETCH_COMPLETED_ORDERS',
-  fetchCancelledOrders: 'FETCH_CANCELLED_ORDERS',
+  fetchOrders: 'FETCH_ORDERS',
   fetchOrder: 'FETCH_ORDER',
   cancelOrder: 'CANCEL_ORDER',
   makePayment: 'MAKE_PAYMENT',
