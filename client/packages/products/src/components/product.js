@@ -1,6 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Added, Star, formatMoney } from '@rlecomm/common';
+import {
+  Heart,
+  Added,
+  Star,
+  formatMoney,
+  S3_BUCKET_NAME
+} from '@rlecomm/common';
 import { Context } from '../context/products';
 
 const Product = ({
@@ -42,13 +48,17 @@ const Product = ({
     </span>
   );
 
+  const renderReviewsInfo = () => (
+    <span className="flex items-center">
+      <Star />
+      <span className="text-gray-400 text-xs">({reviews.length})</span>
+    </span>
+  );
+
   return (
     <div className="flex">
       <div className="flex-auto">
-        <img
-          className="rounded-xl"
-          src={`https://rlecomm-upload.s3.us-east-2.amazonaws.com/${imageUrl}`}
-        />
+        <img className="rounded-xl" src={`${S3_BUCKET_NAME}/${imageUrl}`} />
         <div className="flex flex-wrap mt-3">
           <Link
             to={`/products/${id}`}
@@ -75,10 +85,7 @@ const Product = ({
             aria-label="like">
             <Heart color={wishlisted ? 'red' : 'gray'} />
           </button>
-          <span className="flex items-center">
-            <Star />
-            <span className="text-gray-400 text-xs">({reviews.length})</span>
-          </span>
+          {reviews.length > 0 && renderReviewsInfo()}
         </div>
       </div>
     </div>

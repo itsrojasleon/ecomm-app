@@ -1,50 +1,61 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Context } from '../context/wishlist-context';
+import { Heart, Added, formatMoney, S3_BUCKET_NAME } from '@rlecomm/common';
+import { Context } from '../context/wishlist';
 
-const Product = ({ id, name, price, description }) => {
-  const { removeFromWishlist } = useContext(Context);
+const Product = ({ id, name, price, description, imageUrl, user }) => {
+  const { removeFromWishlist, addToCart } = useContext(Context);
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const handleCart = () => {
+    addToCart(id).then(() => setAddedToCart(true));
+  };
+
+  const renderUserInfo = () => (
+    <span className="mt-4">
+      <span className="flex gap-1">
+        <p>By</p>
+        <Link
+          className="hover:underline font-semibold"
+          to={`/users/${user.username}`}>
+          {user.username}
+        </Link>
+      </span>
+    </span>
+  );
 
   return (
     <div className="flex">
-      {/* add image */}
-      <form className="flex-auto p-6 shadow">
-        <div className="flex flex-wrap">
+      <div className="flex-auto">
+        <img className="rounded-xl" src={`${S3_BUCKET_NAME}/${imageUrl}`} />
+        <div className="flex flex-wrap mt-3">
           <Link
             to={`/products/${id}`}
             className="flex-auto text-xl font-semibold">
             {name}
           </Link>
-          <div className="text-xl font-semibold text-gray-500">
-            ${price.toFixed(2)}
-          </div>
-          <p className="w-full flex-none text-sm font-medium text-gray-500 mt-2 mb-4">
+          <div className="text-xl font-semibold">${formatMoney(price)}</div>
+          <p className="w-full flex-none text-medium text-gray-500 mt-1">
             {description}
           </p>
+          {user && renderUserInfo()}
         </div>
-        <div className="flex space-x-3 mb-4 text-sm font-medium">
-          <div className="flex-auto flex space-x-3">
-            <button
-              className="w-1/2 flex items-center justify-center rounded-md bg-black text-white"
-              type="button">
-              Add to bag
-            </button>
-          </div>
+        <div className="flex space-x-3 font-medium items-center justify-between mt-6">
           <button
-            onClick={() => removeFromWishlist(id)}
-            className="flex-none flex items-center justify-center w-9 h-9 rounded-md border-gray-400 border text-red-500"
+            onClick={handleCart}
+            className="w-1/2 flex items-center justify-center w-9 h-9 rounded-md bg-black text-white"
+            type="button">
+            {addedToCart ? <Added /> : 'Add to cart'}
+          </button>
+          <button
+            onClick={removeFromWishlist}
+            className="flex-none flex items-center justify-center w-9 h-9 rounded-md border-gray-300 border"
             type="button"
             aria-label="like">
-            <svg width="20" height="20" fill="currentColor">
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-              />
-            </svg>
+            <Heart color="red" />
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

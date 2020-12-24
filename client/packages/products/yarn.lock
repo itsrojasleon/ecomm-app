@@ -918,10 +918,10 @@
     postcss "7.0.32"
     purgecss "^3.0.0"
 
-"@rlecomm/common@1.0.24":
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/@rlecomm/common/-/common-1.0.24.tgz#273e8a670dc021a85c1603d9a3459f490db0fdbc"
-  integrity sha512-6ry0nw4VqAx79iVHcfywOogCNMmIe6p2Y9kt1lDEzV4HJLOXwFhP4ZYaqMNs6ljZ5MUn1qnStM9RrQwoJ3f5KQ==
+"@rlecomm/common@1.0.26":
+  version "1.0.26"
+  resolved "https://registry.yarnpkg.com/@rlecomm/common/-/common-1.0.26.tgz#1d85ce9fde7a93d9b3732f585a655cb88975e81c"
+  integrity sha512-XgMGT8WSxCUIUAfnvsBBBuTIcrDFlda6X/sD/RIW8uw0ZXNZybXwbj6hapdrNn6Vk5A5vjhxxALa7pPVyH0k/g==
 
 "@types/anymatch@*":
   version "1.3.1"
