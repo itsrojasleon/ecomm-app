@@ -51,7 +51,7 @@ router.post(
     // At this point somebody already paid for the order
     // update the status of the order to completed
     await order.update({
-      status: OrderStatus.Complete
+      status: OrderStatus.Completed
     });
 
     res.send({ id: payment.id });

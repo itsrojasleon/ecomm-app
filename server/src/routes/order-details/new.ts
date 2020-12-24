@@ -3,7 +3,7 @@ import { body } from 'express-validator';
 import { currentUser } from '../../middlewares/currentuser';
 import { requireAuth } from '../../middlewares/require-auth';
 import { Product } from '../../models/product';
-import { Order, OrderStatus } from '../../models/order';
+import { Order } from '../../models/order';
 import { validateRequest } from '../../middlewares/validate-request';
 import { BadRequestError } from '../../errors/bad-request';
 import { OrderDetails } from '../../models/order-details';

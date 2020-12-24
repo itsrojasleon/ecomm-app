@@ -4,10 +4,10 @@ import Title from '../components/title';
 import OrderDetails from '../components/order-details';
 
 const Orders = () => {
-  const { isLoading, orders, fetchOrders } = useContext(Context);
+  const { isLoading, orders, fetchCreatedOrders } = useContext(Context);
 
   useEffect(() => {
-    fetchOrders();
+    fetchCreatedOrders();
   }, []);
 
   if (isLoading) return 'Loading...';
