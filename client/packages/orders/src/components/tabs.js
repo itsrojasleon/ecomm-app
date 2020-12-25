@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const Context = createContext(null);
 Context.displayName = 'TabsContext';
@@ -25,7 +25,7 @@ const TabMenu = ({ titles }) => {
       <ul className="flex justify-around gap-2">
         {titles.map((title, i) => (
           <li
-            className={`w-full text-center py-2 rounded hover:bg-gray-100 cursor-pointer border border-gray-100 ${
+            className={`w-full text-center py-2 rounded hover:bg-gray-100 cursor-pointer border border-gray-100 capitalize ${
               currentIndex === i ? 'bg-gray-100 font-semibold shadow' : ''
             }`}
             key={title}

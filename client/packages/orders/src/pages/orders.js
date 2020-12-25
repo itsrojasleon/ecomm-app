@@ -4,6 +4,8 @@ import Title from '../components/title';
 import OrderDetails from '../components/order-details';
 import { Tabs, TabMenu, TabItem } from '../components/tabs';
 
+const TITLES = ['created', 'completed', 'cancelled'];
+
 const Orders = () => {
   const { isLoading, orders, fetchOrders } = useContext(Context);
 
@@ -18,28 +20,20 @@ const Orders = () => {
     <div>
       <div className="gap-4">
         <Tabs>
-          <TabMenu titles={['Created', 'Completed', 'Cancelled']} />
-          <TabItem index={0}>
-            {orders
-              .filter((order) => order.status === 'created')
-              .map((order) => (
-                <OrderDetails key={order.id} {...order} />
-              ))}
-          </TabItem>
-          <TabItem index={1}>
-            {orders
-              .filter((order) => order.status === 'completed')
-              .map((order) => (
-                <OrderDetails key={order.id} {...order} />
-              ))}
-          </TabItem>
-          <TabItem index={2}>
-            {orders
-              .filter((order) => order.status === 'cancelled')
-              .map((order) => (
-                <OrderDetails key={order.id} {...order} />
-              ))}
-          </TabItem>
+          <TabMenu titles={TITLES} />
+          {TITLES.map((title, i) => {
+            let newOrders = orders.filter((order) => order.status === title);
+
+            return (
+              <TabItem key={title} index={i}>
+                {!newOrders.length
+                  ? 'No orders'
+                  : newOrders.map((order) => (
+                      <OrderDetails key={order.id} {...order} />
+                    ))}
+              </TabItem>
+            );
+          })}
         </Tabs>
       </div>
     </div>
