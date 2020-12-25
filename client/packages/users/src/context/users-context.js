@@ -61,7 +61,7 @@ export const Provider = ({ children }) => {
   const actions = { fetchUser, updateUser };
 
   return (
-    <Context.Provider value={{ state, ...actions }}>
+    <Context.Provider value={{ ...state, ...actions }}>
       {children}
     </Context.Provider>
   );

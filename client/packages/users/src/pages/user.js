@@ -1,21 +1,28 @@
 import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { Title, Subtitle } from '@rlecomm/common';
 import UserDetails from '../components/user-details';
 import { Context } from '../context/users-context';
 
 const User = ({ currentUser }) => {
-  const { state, fetchUser } = useContext(Context);
+  const { isLoading, user, fetchUser } = useContext(Context);
   const { username } = useParams();
 
   useEffect(() => {
     fetchUser(username);
   }, [username]);
 
-  if (state.isLoading) return 'LOADING USER';
+  if (isLoading) return 'LOADING USER';
 
   return (
     <>
-      <UserDetails user={state.user} currentUser={currentUser} />
+      <Title>User's page</Title>
+      <Subtitle>
+        {user?.id === currentUser.id
+          ? 'This is your profile'
+          : "Here's the profile of this person"}
+      </Subtitle>
+      <UserDetails user={user} currentUser={currentUser} />
     </>
   );
 };
