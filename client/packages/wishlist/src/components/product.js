@@ -48,7 +48,7 @@ const Product = ({ id, name, price, description, imageUrl, user }) => {
             {addedToCart ? <Added /> : 'Add to cart'}
           </button>
           <button
-            onClick={removeFromWishlist}
+            onClick={() => removeFromWishlist(id)}
             className="flex-none flex items-center justify-center w-9 h-9 rounded-md border-gray-300 border"
             type="button"
             aria-label="like">

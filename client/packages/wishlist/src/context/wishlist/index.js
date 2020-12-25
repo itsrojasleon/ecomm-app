@@ -4,7 +4,7 @@ import { ecomm } from '@rlecomm/common';
 export const Context = createContext(null);
 Context.displayName = 'WishlistContext';
 
-const wishlistActions = {
+const ACTION_TYPES = {
   fetchWishlist: 'FETCH_WISHLIST',
   removeFromWishlist: 'REMOVE_FROM_WISHLIST',
   addToCart: 'ADD_TO_CART',
@@ -20,13 +20,13 @@ const initialState = {
 
 const wishlistReducer = (state, { type, payload }) => {
   switch (type) {
-    case wishlistActions.isLoading:
+    case ACTION_TYPES.isLoading:
       return { ...state, isLoading: true };
-    case wishlistActions.error:
+    case ACTION_TYPES.error:
       return { ...state, isLoading: false, error: payload };
-    case wishlistActions.fetchWishlist:
+    case ACTION_TYPES.fetchWishlist:
       return { ...state, wishlist: payload, isLoading: false };
-    case wishlistActions.removeFromWishlist:
+    case ACTION_TYPES.removeFromWishlist:
       return {
         ...state,
         wishlist: state.wishlist.filter((wish) => wish.product.id !== payload)
@@ -43,9 +43,9 @@ export const Provider = ({ children }) => {
     try {
       const { data } = await ecomm.get('/api/wishlist');
 
-      dispatch({ type: wishlistActions.fetchWishlist, payload: data });
+      dispatch({ type: ACTION_TYPES.fetchWishlist, payload: data });
     } catch (err) {
-      dispatch({ type: wishlistActions.error, payload: err });
+      dispatch({ type: ACTION_TYPES.error, payload: err });
     }
   };
 
@@ -54,15 +54,15 @@ export const Provider = ({ children }) => {
       await ecomm.post('/api/wishlist', { productId });
 
       dispatch({
-        type: wishlistActions.removeFromWishlist,
+        type: ACTION_TYPES.removeFromWishlist,
         payload: productId
       });
     } catch (err) {
-      dispatch({ type: wishlistActions.error, payload: err });
+      dispatch({ type: ACTION_TYPES.error, payload: err });
     }
   };
 
-  const addToCart = (dispatch) => async (productId) => {
+  const addToCart = async (productId) => {
     try {
       const { data } = await ecomm.post('/api/cart', {
         productId,

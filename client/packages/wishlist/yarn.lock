@@ -930,10 +930,10 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@rlecomm/common@^1.0.26":
-  version "1.0.26"
-  resolved "https://registry.yarnpkg.com/@rlecomm/common/-/common-1.0.26.tgz#1d85ce9fde7a93d9b3732f585a655cb88975e81c"
-  integrity sha512-XgMGT8WSxCUIUAfnvsBBBuTIcrDFlda6X/sD/RIW8uw0ZXNZybXwbj6hapdrNn6Vk5A5vjhxxALa7pPVyH0k/g==
+"@rlecomm/common@1.0.27":
+  version "1.0.27"
+  resolved "https://registry.yarnpkg.com/@rlecomm/common/-/common-1.0.27.tgz#e013e8d761026d10ca4737f06c1be6c0521fff00"
+  integrity sha512-3dQLtfYb+7IBbvk/trVnNcby5gkMcp8ZR9X/8qVs3Lg0nD4neuREfhNUHPQeO/WH5VtAT9GQWNeuAHwRDmkcPw==
 
 "@types/anymatch@*":
   version "1.3.1"
