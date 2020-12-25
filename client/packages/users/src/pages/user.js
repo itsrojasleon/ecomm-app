@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Title, Subtitle } from '@rlecomm/common';
 import UserDetails from '../components/user-details';
+import UserProducts from '../components/user-products';
 import { Context } from '../context/users-context';
 
 const User = ({ currentUser }) => {
@@ -24,10 +25,8 @@ const User = ({ currentUser }) => {
           : "Here's the profile of this person"}
       </Subtitle>
       <div className="grid lg:grid-cols-2 md:grid-cols-2 gap-4">
-        <div className="">
-          <UserDetails user={user} currentUser={currentUser} />
-        </div>
-        <div className="">other stuff</div>
+        <UserDetails user={user} currentUser={currentUser} />
+        <UserProducts products={user.products} />
       </div>
     </>
   );

@@ -41,12 +41,19 @@ const UserDetails = ({ user, currentUser }) => {
         </p>
       </div>
       {isOwner && (
-        <button
-          onClick={() => setUpdating(true)}
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-          type="submit">
-          Update Profile
-        </button>
+        <>
+          <button
+            onClick={() => setUpdating(true)}
+            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black mb-3"
+            type="submit">
+            Update Profile
+          </button>
+          <button
+            onClick={handleSignout}
+            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
+            Signout
+          </button>
+        </>
       )}
     </>
   );

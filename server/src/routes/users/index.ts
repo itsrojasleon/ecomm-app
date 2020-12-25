@@ -3,6 +3,7 @@ import { currentUser } from '../../middlewares/currentuser';
 import { requireAuth } from '../../middlewares/require-auth';
 import { NotFoundError } from '../../errors/not-found';
 import { User } from '../../models/user';
+import { Product } from '../../models/product';
 
 const router = express.Router();
 
@@ -21,7 +22,8 @@ router.get(
         'createdAt',
         'updatedAt',
         'bio'
-      ]
+      ],
+      include: [Product]
     });
 
     if (!user) {
