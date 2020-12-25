@@ -5,7 +5,7 @@ import NavItem from './nav-item';
 import { Context } from '../context/container-context';
 
 const Nav = () => {
-  const { currentUser, signout } = useContext(Context);
+  const { currentUser } = useContext(Context);
   const history = useHistory();
 
   const links = [
@@ -26,7 +26,9 @@ const Nav = () => {
   return (
     <nav className="p-4 border-b mb-4">
       <ul className="flex justify-between items-center">
-        <li className="text-lg font-semibold">Ecomm App</li>
+        <Link to="/">
+          <li className="text-lg font-bold">Ecomm</li>
+        </Link>
         <div className="flex gap-3">
           {links}
           {currentUser && (
@@ -42,11 +44,6 @@ const Nav = () => {
                 className="block px-4 py-2 rounded-md">
                 <User />
               </Link>
-              <button
-                className="block px-4 py-2 rounded-md bg-red-100 text-red-700"
-                onClick={() => signout().then(() => history.push('/'))}>
-                Sign out
-              </button>
             </>
           )}
         </div>
