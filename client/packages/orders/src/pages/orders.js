@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Context } from '../context/orders';
-import Title from '../components/title';
+import { Title, Subtitle } from '@rlecomm/common';
 import OrderDetails from '../components/order-details';
 import { Tabs, TabMenu, TabItem } from '../components/tabs';
 
@@ -18,6 +18,8 @@ const Orders = () => {
 
   return (
     <div>
+      <Title>Orders</Title>
+      <Subtitle>These are your orders</Subtitle>
       <div className="gap-4">
         <Tabs>
           <TabMenu titles={TITLES} />
