@@ -6,7 +6,6 @@ Context.displayName = 'ContainerContext';
 
 const containerActions = {
   fetchCurrentUser: 'fetch_current_user',
-  signout: 'signout',
   isLoading: 'is_loading',
   error: 'error'
 };
@@ -21,8 +20,6 @@ const containerReducer = (state, { type, payload }) => {
   switch (type) {
     case containerActions.fetchCurrentUser:
       return { ...state, currentUser: payload, isLoading: false };
-    case containerActions.signout:
-      return { ...state, currentUser: null };
     case containerActions.isLoading:
       return { ...state, isLoading: true, error: null };
     case containerActions.error:
@@ -47,16 +44,7 @@ export const Provider = ({ children }) => {
     }
   };
 
-  const signout = async () => {
-    try {
-      await ecomm.post('/api/users/signout');
-      dispatch({ type: containerActions.signout });
-    } catch (err) {
-      dispatch({ type: containerActions.error, payload: err });
-    }
-  };
-
-  const actions = { fetchCurrentUser, signout };
+  const actions = { fetchCurrentUser };
 
   return (
     <Context.Provider value={{ ...state, ...actions }}>

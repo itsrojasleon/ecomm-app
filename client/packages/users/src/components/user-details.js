@@ -1,46 +1,58 @@
 import React, { useState, useContext } from 'react';
-import { convertDate } from '../utils/date';
+import { useHistory } from 'react-router-dom';
+import { convertDate } from '@rlecomm/common';
 import { Context } from '../context/users-context';
 
 const UserDetails = ({ user, currentUser }) => {
   const [isUpdating, setUpdating] = useState(false);
-  const [name, setName] = useState(user?.name || '');
-  const [bio, setBio] = useState(user?.bio || '');
+  const [name, setName] = useState(user.name || '');
+  const [bio, setBio] = useState(user.bio || '');
 
-  const { updateUser } = useContext(Context);
+  const { updateUser, signout } = useContext(Context);
 
-  const isOwner = currentUser?.id === user?.id;
+  const history = useHistory();
+
+  const isOwner = currentUser.id === user.id;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    updateUser({ username: user?.username, bio, name });
+    updateUser({ username: user.username, bio, name });
 
     setUpdating(false);
   };
 
+  const handleSignout = () => {
+    signout().then(() => history.push('/'));
+  };
+
   const renderContent = () => (
-    <div className="flex justify-between items-center">
-      <div className="flex flex-col">
-        <h3 className="font-semibold text-xl mb-4">{user?.username}</h3>
-        <p>{user?.name}</p>
-        <p>{user?.email}</p>
-        <p>{user?.bio}</p>
-        <p>Account created at {convertDate(user?.createdAt)}</p>
+    <>
+      <div className="flex flex-col mb-2">
+        {user.name ? (
+          <p className="font-semibold text-lg">{user.name}</p>
+        ) : (
+          <p className="font-semibold text-lg">{user.username}</p>
+        )}
+        <p className="text-gray-600">{user.email}</p>
+        <p className="text-gray-900 font-light my-3">{user.bio}</p>
+        <p className="text-gray-900 mb-3">
+          Account created on <strong>{convertDate(user.createdAt)}</strong>
+        </p>
       </div>
       {isOwner && (
         <button
           onClick={() => setUpdating(true)}
-          className="w-1/3 py-2 flex items-center justify-center rounded-md bg-black text-white"
+          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
           type="submit">
           Update Profile
         </button>
       )}
-    </div>
+    </>
   );
 
   const renderForm = () => (
-    <form className="flex flex-col" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="pb-3">
         <label className="font-medium pb-2" htmlFor="name">
           Name
@@ -66,21 +78,21 @@ const UserDetails = ({ user, currentUser }) => {
       <div className="flex gap-3">
         <button
           type="submit"
-          className="w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-800 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          Update
-        </button>
-        <button
-          type="submit"
           onClick={() => setUpdating(false)}
           className="w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           Cancel
+        </button>
+        <button
+          type="submit"
+          className="w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-800 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Update
         </button>
       </div>
     </form>
   );
 
   return (
-    <div className="shadow w-10/12 m-auto p-4">
+    <div className="flex flex-col justify-between shadow-md p-3">
       {isUpdating ? renderForm() : renderContent()}
     </div>
   );

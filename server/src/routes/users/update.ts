@@ -6,11 +6,12 @@ import { NotFoundError } from '../../errors/not-found';
 import { validateRequest } from '../../middlewares/validate-request';
 import { User } from '../../models/user';
 import { BadRequestError } from '../../errors/bad-request';
+import { NotAuthorizedError } from '../../errors/not-authorized';
 
 const router = express.Router();
 
 router.put(
-  '/api/users/:username',
+  '/api/users',
   currentUser,
   requireAuth,
   [
@@ -21,18 +22,21 @@ router.put(
   async (req: Request, res: Response) => {
     const { name, bio } = req.body;
 
-    const existingUser = await User.findOne({
-      where: { id: req.currentUser!.id, username: req.params.username }
-    });
+    const existingUser = await User.findByPk(req.currentUser!.id);
 
     if (!existingUser) {
       throw new NotFoundError();
     }
 
+    // Make sure somebody is not going to mess trying to get someone's info
+    if (existingUser.id !== req.currentUser!.id) {
+      throw new NotAuthorizedError();
+    }
+
     try {
       await existingUser.update({ name, bio });
     } catch (err) {
-      throw new BadRequestError('Something went wrong');
+      throw new BadRequestError(`Something went wrong ${err}`);
     }
 
     res.send(existingUser);

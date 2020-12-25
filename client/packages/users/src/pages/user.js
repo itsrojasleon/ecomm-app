@@ -12,7 +12,8 @@ const User = ({ currentUser }) => {
     fetchUser(username);
   }, [username]);
 
-  if (isLoading) return 'LOADING USER';
+  if (!user) return 'No user';
+  if (isLoading) return 'Loading User...';
 
   return (
     <>
@@ -22,7 +23,12 @@ const User = ({ currentUser }) => {
           ? 'This is your profile'
           : "Here's the profile of this person"}
       </Subtitle>
-      <UserDetails user={user} currentUser={currentUser} />
+      <div className="grid lg:grid-cols-2 md:grid-cols-2 gap-4">
+        <div className="">
+          <UserDetails user={user} currentUser={currentUser} />
+        </div>
+        <div className="">other stuff</div>
+      </div>
     </>
   );
 };
