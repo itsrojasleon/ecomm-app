@@ -18,7 +18,7 @@ const OrderDetails = ({
   const updatedDate = () => convertDate(updatedAt);
 
   return (
-    <div className="flex justify-between items-center gap-4 border border-gray-100 py-2 px-1 rounded">
+    <div className="flex flex-col justify-between sm:flex-row items-center gap-4 border border-gray-100 py-2 px-1 rounded">
       <p className="uppercase">
         <strong>{status}</strong> by you (@
         {

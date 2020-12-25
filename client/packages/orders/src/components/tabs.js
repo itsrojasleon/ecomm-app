@@ -25,8 +25,8 @@ const TabMenu = ({ titles }) => {
       <ul className="flex justify-around gap-2">
         {titles.map((title, i) => (
           <li
-            className={`w-full text-center py-2 rounded hover:bg-gray-100 cursor-pointer border border-gray-100 capitalize ${
-              currentIndex === i ? 'bg-gray-100 font-semibold shadow' : ''
+            className={`w-full text-center py-2 rounded hover:shadow-lg bg-gray-100 cursor-pointer capitalize transition duration-500 ease-in-out ${
+              currentIndex === i ? 'bg-gray-900 text-white font-semibold' : ''
             }`}
             key={title}
             onClick={() => setCurrentIndex(i)}>

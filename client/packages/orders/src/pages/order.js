@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Title from '../components/title';
+import { Title } from '@rlecomm/common';
 import OrderItem from '../components/order-item';
 import { Context } from '../context/orders';
 
