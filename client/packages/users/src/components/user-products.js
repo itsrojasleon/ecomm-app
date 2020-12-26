@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Subtitle } from '@rlecomm/common';
-import { Context } from '../context/users-context';
 import Product from './product';
 
 const UserDetails = ({ products }) => {
