@@ -65,6 +65,13 @@ export const reducer = (state, { type, payload }) => {
           )
         }
       };
+    case ACTION_TYPES.filterProduct:
+      return {
+        ...state,
+        products: state.products.filter((product) =>
+          product.name.toLowerCase().includes(payload.toLowerCase())
+        )
+      };
     default:
       return state;
   }

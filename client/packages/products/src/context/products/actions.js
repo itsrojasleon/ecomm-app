@@ -7,7 +7,7 @@ const fetchProducts = (dispatch) => async () => {
     const { data } = await ecomm.get('/api/products');
     dispatch({ type: ACTION_TYPES.fetchProducts, payload: data });
   } catch (err) {
-    dispatch({ type: ACTION_TYPES.error, payload: err.response.data });
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data.errors });
   }
 };
 
@@ -17,7 +17,7 @@ const fetchProduct = (dispatch) => async (id) => {
     const { data } = await ecomm.get(`/api/products/${id}`);
     dispatch({ type: ACTION_TYPES.fetchProduct, payload: data });
   } catch (err) {
-    dispatch({ type: ACTION_TYPES.error, payload: err.response.data });
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data.errors });
   }
 };
 
@@ -36,7 +36,7 @@ const createProduct = (dispatch) => async ({
     });
     dispatch({ type: ACTION_TYPES.createProduct, payload: data });
   } catch (err) {
-    dispatch({ type: ACTION_TYPES.error, payload: err.response.data });
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data.errors });
   }
 };
 
@@ -53,7 +53,7 @@ const addToCart = (dispatch) => async (productId) => {
       dispatch({ type: ACTION_TYPES.removeFromCart });
     }, 3000);
   } catch (err) {
-    dispatch({ type: ACTION_TYPES.error, payload: err.response.data });
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data.errors });
   }
 };
 
@@ -62,7 +62,7 @@ const addToWishlist = (dispatch) => async (productId) => {
     const { data } = await ecomm.post('/api/wishlist', { productId });
     dispatch({ type: ACTION_TYPES.addToWishlist, payload: data });
   } catch (err) {
-    dispatch({ type: ACTION_TYPES.error, payload: err.response.data });
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data.errors });
   }
 };
 
@@ -103,7 +103,7 @@ const updateReview = (dispatch) => async (id, { title, comment, score }) => {
 
     dispatch({ type: ACTION_TYPES.updateReview, payload: { id, data } });
   } catch (err) {
-    dispatch({ type: ACTION_TYPES.error, payload: err.response.data });
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data.errors });
   }
 };
 
@@ -113,7 +113,15 @@ const removeReview = (dispatch) => async (id) => {
 
     dispatch({ type: ACTION_TYPES.removeReview, payload: id });
   } catch (err) {
-    dispatch({ type: ACTION_TYPES.error, payload: err.response.data });
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data.errors });
+  }
+};
+
+const filterProduct = (dispatch) => async (term) => {
+  try {
+    dispatch({ type: ACTION_TYPES.filterProduct, payload: term });
+  } catch (err) {
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data.errors });
   }
 };
 
@@ -125,5 +133,6 @@ export {
   addToWishlist,
   createReview,
   updateReview,
-  removeReview
+  removeReview,
+  filterProduct
 };

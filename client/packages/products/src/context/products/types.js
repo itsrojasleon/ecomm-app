@@ -10,5 +10,6 @@ export const ACTION_TYPES = {
   addToWishlist: 'ADD_TO_WISHLIST',
   createReview: 'CREATE_REVIEW',
   updateReview: 'UPDATE_REVIEW',
-  removeReview: 'REMOVE_REVIEW'
+  removeReview: 'REMOVE_REVIEW',
+  filterProduct: 'FILTER_PRODUCT'
 };

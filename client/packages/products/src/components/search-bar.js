@@ -1,6 +1,25 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from '../context/products';
 
 const SearchBar = () => {
+  const [term, setTerm] = useState('');
+  const { filterProduct } = useContext(Context);
+
+  const handleChange = (e) => {
+    setTerm(e.target.value);
+
+    // Text too short
+    if (term.length < 1) {
+      return;
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    filterProduct(term);
+  };
+
   return (
     <div className="relative text-gray-600 focus-within:text-gray-400">
       <span className="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -16,12 +35,15 @@ const SearchBar = () => {
           </svg>
         </button>
       </span>
-      <input
-        name="q"
-        className="w-full focus:outline-none pl-10 py-2 rounded-lg bg-gray-100 text-black focus:bg-white focus:shadow-lg border border-gray-100 text-medium"
-        placeholder="Search..."
-        autocomplete="off"
-      />
+      <form onSubmit={handleSubmit}>
+        <input
+          value={term}
+          onChange={handleChange}
+          className="w-full focus:outline-none pl-10 py-2 rounded-lg bg-gray-100 text-black focus:bg-white focus:shadow-lg border border-gray-100 text-medium transition"
+          placeholder="Search..."
+          autoComplete="off"
+        />
+      </form>
     </div>
   );
 };

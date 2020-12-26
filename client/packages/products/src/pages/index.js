@@ -12,7 +12,9 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  if (!products.length) return 'No products created';
+  console.log(products);
+
+  // if (!products.length) return 'No products created';
 
   return (
     <>
