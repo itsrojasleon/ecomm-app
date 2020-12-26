@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { Title, Subtitle } from '@rlecomm/common';
 import Product from '../components/product';
+import SearchBar from '../components/search-bar';
 import Alert from '../components/alert';
 import { Context } from '../context/products';
 
@@ -16,7 +17,10 @@ const Products = () => {
   return (
     <>
       <Title>Products</Title>
-      <Subtitle>List of products</Subtitle>
+      <Subtitle>Search your favorite product</Subtitle>
+      <div className="grid sm:grid-cols-2 mb-6">
+        <SearchBar />
+      </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
         {products.map((product) => (
           <Product key={product.id} {...product} />
