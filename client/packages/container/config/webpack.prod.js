@@ -20,7 +20,8 @@ const prodConfig = {
         wishlist: `wishlist@${domain}/wishlist/latest/remoteEntry.js`,
         users: `users@${domain}/users/latest/remoteEntry.js`,
         cart: `cart@${domain}/cart/latest/remoteEntry.js`,
-        orders: `ordes@${domain}/orders/latest/remoteEntry.js`
+        orders: `ordes@${domain}/orders/latest/remoteEntry.js`,
+        search: `search@${domain}/search/latest/remoteEntry.js`
       },
       shared: packageJson.dependencies
     })

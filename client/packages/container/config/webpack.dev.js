@@ -23,7 +23,8 @@ const devConfig = {
         wishlist: 'wishlist@http://localhost:8083/remoteEntry.js',
         users: 'users@http://localhost:8084/remoteEntry.js',
         cart: 'cart@http://localhost:8085/remoteEntry.js',
-        orders: 'orders@http://localhost:8086/remoteEntry.js'
+        orders: 'orders@http://localhost:8086/remoteEntry.js',
+        search: 'search@http://localhost:8087/remoteEntry.js'
       },
       shared: packageJson.dependencies
     })

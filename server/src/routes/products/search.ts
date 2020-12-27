@@ -4,6 +4,9 @@ import { currentUser } from '../../middlewares/currentuser';
 import { requireAuth } from '../../middlewares/require-auth';
 import { BadRequestError } from '../../errors/bad-request';
 import { Product } from '../../models/product';
+import { Review } from '../../models/review';
+import { User } from '../../models/user';
+import { Wishlist } from '../../models/wishlist';
 
 const router = express.Router();
 
@@ -20,7 +23,8 @@ router.get(
       throw new BadRequestError('You must provide a term');
     }
     const products = await Product.findAll({
-      where: { name: { [Op.iLike]: `%${term}%` } }
+      where: { name: { [Op.iLike]: `%${term}%` } },
+      include: [Review, User, Wishlist]
     });
 
     res.send(products);

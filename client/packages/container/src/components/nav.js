@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Heart, User, Cart } from '@rlecomm/common';
 import NavItem from './nav-item';
+import SearchBar from './search-bar';
 import { Context } from '../context/container-context';
 
 const Nav = () => {
-  const { currentUser } = useContext(Context);
-  const history = useHistory();
+  const { currentUser, searchProducts } = useContext(Context);
 
   const links = [
     { href: '/', label: 'Home' },
@@ -30,6 +30,7 @@ const Nav = () => {
           <li className="text-lg font-bold">Ecomm</li>
         </Link>
         <div className="flex gap-3">
+          <SearchBar />
           {links}
           {currentUser && (
             <>

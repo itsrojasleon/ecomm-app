@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSubmit }) => {
   const [term, setTerm] = useState('');
+  const history = useHistory();
 
   const handleChange = (e) => {
     setTerm(e.target.value);
@@ -10,7 +12,7 @@ const SearchBar = ({ onSearch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onSearch(term);
+    history.push(`/search/${term}`);
   };
 
   return (

@@ -7,12 +7,9 @@ Context.displayName = 'ProductsContext';
 
 export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
-    products: [],
-    product: null,
-    cart: [],
-    wishlist: null,
     error: [],
-    isLoading: false
+    isLoading: false,
+    products: []
   });
 
   const boundActions = {};
