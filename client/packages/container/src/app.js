@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect, useContext } from 'react';
 import { Route, Switch, Redirect, Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import Nav from './components/nav';
+import Footer from './components/footer';
 import { Context } from './context/container-context';
 import '../styles/tailwind.css';
 
@@ -12,8 +13,6 @@ const UsersApp = lazy(() => import('./components/users-app'));
 const CartApp = lazy(() => import('./components/cart-app'));
 const OrdersApp = lazy(() => import('./components/orders-app'));
 const SearchApp = lazy(() => import('./components/search-app'));
-
-const Home = lazy(() => import('./pages/home'));
 
 const history = createBrowserHistory();
 
@@ -38,35 +37,37 @@ const App = () => {
   if (error) return <div>{JSON.stringify(error)}</div>;
 
   return (
-    <Router history={history}>
-      <Nav />
-      <div className="w-11/12 m-auto">
-        <Suspense fallback={<h1>Loading...</h1>}>
-          <Switch>
-            <Route path="/auth">
-              {currentUser && <Redirect to="/" />}
-              <AuthApp />
-            </Route>
-            <Route path="/products">
-              <ProductsApp currentUser={currentUser} />
-            </Route>
-            <Route path="/cart" component={CartApp} />
-            <Route path="/orders" component={OrdersApp} />
-            <Route path="/wishlist" component={WishlistApp} />
-            <Route path="/users">
-              <UsersApp currentUser={currentUser} />
-            </Route>
-            <Route path="/search">
-              <SearchApp currentUser={currentUser} />
-            </Route>
-            <Route exact path="/" component={Home} />
-            <Route path="*">
-              <Redirect to="/" />
-            </Route>
-          </Switch>
-        </Suspense>
-      </div>
-    </Router>
+    <div className="h-screen flex flex-col">
+      <Router history={history}>
+        <Nav />
+        <div className="w-11/12 m-auto">
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Switch>
+              <Route path="/auth">
+                {currentUser && <Redirect to="/" />}
+                <AuthApp />
+              </Route>
+              <Route path="/cart" component={CartApp} />
+              <Route path="/orders" component={OrdersApp} />
+              <Route path="/wishlist" component={WishlistApp} />
+              <Route path="/users">
+                <UsersApp currentUser={currentUser} />
+              </Route>
+              <Route path="/search">
+                <SearchApp currentUser={currentUser} />
+              </Route>
+              <Route path="/">
+                <ProductsApp currentUser={currentUser} />
+              </Route>
+              <Route path="*">
+                <Redirect to="/" />
+              </Route>
+            </Switch>
+          </Suspense>
+        </div>
+        <Footer />
+      </Router>
+    </div>
   );
 };
 

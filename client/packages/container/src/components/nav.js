@@ -12,7 +12,6 @@ const Nav = () => {
     { href: '/', label: 'Home' },
     !currentUser && { href: '/auth/signup', label: 'Signup' },
     !currentUser && { href: '/auth/signin', label: 'Signin' },
-    currentUser && { href: '/products', label: 'Products' },
     currentUser && { href: '/products/create', label: 'Sell' },
     currentUser && { href: '/orders', label: 'Orders' }
   ]

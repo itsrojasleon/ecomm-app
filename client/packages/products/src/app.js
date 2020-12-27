@@ -11,11 +11,11 @@ const App = ({ history, currentUser }) => {
     <Provider>
       <Router history={history}>
         <Switch>
-          <Route path="/products/create" component={Create} />
+          <Route exact path="/products/create" component={Create} />
           <Route path="/products/:id">
             <Show currentUser={currentUser} />
           </Route>
-          <Route path="/products" component={Products} />
+          <Route path="/" component={Products} />
         </Switch>
       </Router>
     </Provider>
