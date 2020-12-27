@@ -37,37 +37,35 @@ const App = () => {
   if (error) return <div>{JSON.stringify(error)}</div>;
 
   return (
-    <div className="h-screen flex flex-col">
-      <Router history={history}>
-        <Nav />
-        <div className="w-11/12 m-auto">
-          <Suspense fallback={<h1>Loading...</h1>}>
-            <Switch>
-              <Route path="/auth">
-                {currentUser && <Redirect to="/" />}
-                <AuthApp />
-              </Route>
-              <Route path="/cart" component={CartApp} />
-              <Route path="/orders" component={OrdersApp} />
-              <Route path="/wishlist" component={WishlistApp} />
-              <Route path="/users">
-                <UsersApp currentUser={currentUser} />
-              </Route>
-              <Route path="/search">
-                <SearchApp currentUser={currentUser} />
-              </Route>
-              <Route path="/">
-                <ProductsApp currentUser={currentUser} />
-              </Route>
-              <Route path="*">
-                <Redirect to="/" />
-              </Route>
-            </Switch>
-          </Suspense>
-        </div>
-        <Footer />
-      </Router>
-    </div>
+    <Router history={history}>
+      <Nav />
+      <div className="w-11/12 m-auto">
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Switch>
+            <Route path="/auth">
+              {currentUser && <Redirect to="/" />}
+              <AuthApp />
+            </Route>
+            <Route path="/cart" component={CartApp} />
+            <Route path="/orders" component={OrdersApp} />
+            <Route path="/wishlist" component={WishlistApp} />
+            <Route path="/users">
+              <UsersApp currentUser={currentUser} />
+            </Route>
+            <Route path="/search">
+              <SearchApp currentUser={currentUser} />
+            </Route>
+            <Route path="/">
+              <ProductsApp currentUser={currentUser} />
+            </Route>
+            <Route path="*">
+              <Redirect to="/" />
+            </Route>
+          </Switch>
+        </Suspense>
+      </div>
+      <Footer />
+    </Router>
   );
 };
 

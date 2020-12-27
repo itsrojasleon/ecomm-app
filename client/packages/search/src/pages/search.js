@@ -1,16 +1,19 @@
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Product from '../components/product';
+import Sidebar from '../components/sidebar';
 import { Context } from '../context/search';
 import { Title, Subtitle } from '@rlecomm/common';
 
 const Search = () => {
   const { term } = useParams();
-  const { products, searchProducts } = useContext(Context);
+  const { isLoading, products, searchProducts } = useContext(Context);
 
   useEffect(() => {
     searchProducts(term);
   }, [term]);
+
+  if (isLoading) return 'Loading products...';
 
   return (
     <>
@@ -20,10 +23,15 @@ const Search = () => {
           ? 'No products found'
           : `These are some products using "${term}"`}
       </Subtitle>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
-        {products.map((product) => (
-          <Product key={product.id} {...product} />
-        ))}
+      <div className="flex">
+        <div className="w-2/12">
+          <Sidebar />
+        </div>
+        <div className="flex gap-4 w-10/12">
+          {products.map((product) => (
+            <Product key={product.id} {...product} />
+          ))}
+        </div>
       </div>
     </>
   );
