@@ -1,10 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch }) => {
   const [term, setTerm] = useState('');
 
   const handleChange = (e) => {
     setTerm(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    onSearch(term);
   };
 
   return (
@@ -22,13 +28,15 @@ const SearchBar = () => {
           </svg>
         </button>
       </span>
-      <input
-        value={term}
-        onChange={handleChange}
-        className="w-full focus:outline-none pl-10 py-2 rounded-lg bg-gray-100 text-black focus:bg-white focus:shadow-lg border border-gray-100 text-medium transition"
-        placeholder="Search..."
-        autoComplete="off"
-      />
+      <form onSubmit={handleSubmit}>
+        <input
+          value={term}
+          onChange={handleChange}
+          className="w-full focus:outline-none pl-10 py-2 rounded-lg bg-gray-100 text-black focus:bg-white focus:shadow-lg border border-gray-100 text-medium transition"
+          placeholder="Search..."
+          autoComplete="off"
+        />
+      </form>
     </div>
   );
 };

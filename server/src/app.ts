@@ -15,6 +15,7 @@ import { indexProductsRouter } from './routes/products/index';
 import { createProductsRouter } from './routes/products/new';
 import { updateProductsRouter } from './routes/products/update';
 import { showProductsRouter } from './routes/products/show';
+import { searchProductsRouter } from './routes/products/search';
 
 // wishlist routes
 import { createWishlistRouter } from './routes/wishlist/new';
@@ -94,6 +95,7 @@ app.use(indexProductsRouter);
 app.use(createProductsRouter);
 app.use(showProductsRouter);
 app.use(updateProductsRouter);
+app.use(searchProductsRouter);
 
 app.use(indexWishlistRouter);
 app.use(createWishlistRouter);

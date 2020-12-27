@@ -11,6 +11,9 @@ const WishlistApp = lazy(() => import('./components/wishlist-app'));
 const UsersApp = lazy(() => import('./components/users-app'));
 const CartApp = lazy(() => import('./components/cart-app'));
 const OrdersApp = lazy(() => import('./components/orders-app'));
+const SearchApp = lazy(() => import('./components/search-app'));
+
+const Home = lazy(() => import('./pages/home'));
 
 const history = createBrowserHistory();
 
@@ -50,13 +53,13 @@ const App = () => {
             <Route path="/cart" component={CartApp} />
             <Route path="/orders" component={OrdersApp} />
             <Route path="/wishlist" component={WishlistApp} />
-
             <Route path="/users">
               <UsersApp currentUser={currentUser} />
             </Route>
-            <Route exact path="/">
-              <h1>Home</h1>
+            <Route path="/search">
+              <SearchApp currentUser={currentUser} />
             </Route>
+            <Route exact path="/" component={Home} />
             <Route path="*">
               <Redirect to="/" />
             </Route>

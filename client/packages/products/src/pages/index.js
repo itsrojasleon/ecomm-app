@@ -12,8 +12,6 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  console.log(products);
-
   // if (!products.length) return 'No products created';
 
   return (

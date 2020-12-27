@@ -1,17 +1,19 @@
 import React, { createContext, useReducer } from 'react';
-import { ecomm } from '../api/ecomm';
+import { ecomm } from '@rlecomm/common';
 
 export const Context = createContext(null);
 Context.displayName = 'ContainerContext';
 
 const containerActions = {
-  fetchCurrentUser: 'fetch_current_user',
-  isLoading: 'is_loading',
-  error: 'error'
+  fetchCurrentUser: 'FETCH_CURRENT_USER',
+  searchProducts: 'SEARCH_PRODUCTS',
+  isLoading: 'IS_LOADING',
+  error: 'ERROR'
 };
 
 const initialState = {
   currentUser: null,
+  products: [],
   error: null,
   isLoading: false
 };
@@ -20,6 +22,8 @@ const containerReducer = (state, { type, payload }) => {
   switch (type) {
     case containerActions.fetchCurrentUser:
       return { ...state, currentUser: payload, isLoading: false };
+    case containerActions.searchProducts:
+      return { ...state, products: payload, isLoading: false };
     case containerActions.isLoading:
       return { ...state, isLoading: true, error: null };
     case containerActions.error:
@@ -44,7 +48,19 @@ export const Provider = ({ children }) => {
     }
   };
 
-  const actions = { fetchCurrentUser };
+  const searchProducts = async (term) => {
+    try {
+      const { data } = await ecomm.get(`/api/search?term=${term}`);
+      dispatch({
+        type: containerActions.searchProducts,
+        payload: data
+      });
+    } catch (err) {
+      dispatch({ type: containerActions.error, payload: err });
+    }
+  };
+
+  const actions = { fetchCurrentUser, searchProducts };
 
   return (
     <Context.Provider value={{ ...state, ...actions }}>
