@@ -85,7 +85,7 @@ const Product = ({
             aria-label="like">
             <Heart color={wishlisted ? 'red' : 'gray'} />
           </button>
-          {reviews.length > 0 && renderReviewsInfo()}
+          {reviews?.length > 0 && renderReviewsInfo()}
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
-import Create from './pages';
+import Search from './pages/search';
 import { Provider } from './context/search';
 import '../styles/tailwind.css';
 
@@ -9,7 +9,7 @@ const App = ({ history, currentUser }) => {
     <Provider>
       <Router history={history}>
         <Switch>
-          <Route path="/search/:term" component={Create} />
+          <Route path="/search/:term" component={Search} />
         </Switch>
       </Router>
     </Provider>

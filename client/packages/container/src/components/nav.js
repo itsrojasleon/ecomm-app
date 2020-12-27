@@ -30,7 +30,9 @@ const Nav = () => {
           <li className="text-lg font-bold">Ecomm</li>
         </Link>
         <div className="flex gap-3">
-          <SearchBar />
+          <div>
+            <SearchBar />
+          </div>
           {links}
           {currentUser && (
             <>
