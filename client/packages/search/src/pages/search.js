@@ -23,11 +23,11 @@ const Search = () => {
           ? 'No products found'
           : `These are some products using "${term}"`}
       </Subtitle>
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        <div className="">
+      <div className="grid grid-cols-1 lg:grid-cols-4">
+        <div className="lg:pr-4">
           <Sidebar />
         </div>
-        <div className="col-span-3">
+        <div className="col-span-3 border-l lg:pl-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {products.map((product) => (
               <Product key={product.id} {...product} />
