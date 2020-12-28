@@ -1,11 +1,16 @@
 import { ecomm } from '@rlecomm/common';
 import { ACTION_TYPES } from './types';
 
-const fetchProducts = (dispatch) => async () => {
+const fetchProducts = (dispatch) => async ({ limit = 10, offset = 0 }) => {
   dispatch({ type: ACTION_TYPES.isLoading });
   try {
-    const { data } = await ecomm.get('/api/products');
-    dispatch({ type: ACTION_TYPES.fetchProducts, payload: data });
+    const {
+      data: { rows: products, count }
+    } = await ecomm.get(`/api/products?limit=${limit}&offset=${offset}`);
+    dispatch({
+      type: ACTION_TYPES.fetchProducts,
+      payload: { products, count }
+    });
   } catch (err) {
     dispatch({ type: ACTION_TYPES.error, payload: err.response.data.errors });
   }

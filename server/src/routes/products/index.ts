@@ -4,6 +4,7 @@ import { requireAuth } from '../../middlewares/require-auth';
 import { Product } from '../../models/product';
 import { Wishlist } from '../../models/wishlist';
 import { Review } from '../../models/review';
+import { BadRequestError } from '../../errors/bad-request';
 
 const router = express.Router();
 
@@ -12,7 +13,13 @@ router.get(
   currentUser,
   requireAuth,
   async (req: Request, res: Response) => {
-    const products = await Product.findAll({
+    const { limit, offset } = req.query;
+
+    if (!limit || !offset) {
+      throw new BadRequestError('You must provide a limit and offset query');
+    }
+
+    const { count, rows } = await Product.findAndCountAll({
       include: [
         {
           model: Wishlist,
@@ -23,10 +30,12 @@ router.get(
           model: Review,
           required: false
         }
-      ]
+      ],
+      limit: Number(limit),
+      offset: Number(offset)
     });
 
-    res.send(products);
+    res.send({ count, rows });
   }
 );
 
