@@ -3,7 +3,7 @@ import { reducer } from './reducer';
 import * as actions from './actions';
 
 export const Context = createContext(null);
-Context.displayName = 'ProductsContext';
+Context.displayName = 'SearchContext';
 
 export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {

@@ -8,6 +8,17 @@ export const reducer = (state, { type, payload }) => {
       return { ...state, isLoading: false, error: payload };
     case ACTION_TYPES.searchProducts:
       return { ...state, isLoading: false, products: payload };
+    case ACTION_TYPES.filterByPrices:
+      return {
+        ...state,
+        isLoading: false,
+        products: state.products.filter(
+          (product) =>
+            product.price >= payload.min && product.price <= payload.max
+        )
+      };
+    case ACTION_TYPES.reset:
+      return { ...state, reset: !state.reset };
     default:
       return state;
   }

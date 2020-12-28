@@ -7,11 +7,11 @@ import { Title, Subtitle } from '@rlecomm/common';
 
 const Search = () => {
   const { term } = useParams();
-  const { isLoading, products, searchProducts } = useContext(Context);
+  const { isLoading, products, reset, searchProducts } = useContext(Context);
 
   useEffect(() => {
     searchProducts(term);
-  }, [term]);
+  }, [term, reset]);
 
   if (isLoading) return 'Loading products...';
 
@@ -23,14 +23,16 @@ const Search = () => {
           ? 'No products found'
           : `These are some products using "${term}"`}
       </Subtitle>
-      <div className="flex">
-        <div className="w-2/12">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+        <div className="">
           <Sidebar />
         </div>
-        <div className="flex gap-4 w-10/12">
-          {products.map((product) => (
-            <Product key={product.id} {...product} />
-          ))}
+        <div className="col-span-3">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            {products.map((product) => (
+              <Product key={product.id} {...product} />
+            ))}
+          </div>
         </div>
       </div>
     </>
