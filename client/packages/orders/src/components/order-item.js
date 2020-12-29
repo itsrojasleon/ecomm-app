@@ -28,10 +28,10 @@ const OrderDetails = ({ id, product, quantity, createdAt }) => {
           </h2>
           <div className="flex flex-row gap-1">
             <p className="text-gray-600">
-              {quantity} X $ {formatMoney(product.price)} =
+              {quantity} X {formatMoney(product.price)} =
             </p>
             <p className="font-semibold">
-              $ {formatMoney(quantity * product.price)}
+              ${formatMoney(quantity * product.price)}
             </p>
           </div>
         </div>

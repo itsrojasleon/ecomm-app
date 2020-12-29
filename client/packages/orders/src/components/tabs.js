@@ -26,7 +26,7 @@ const TabMenu = ({ titles }) => {
         {titles.map((title, i) => (
           <li
             className={`w-full text-center py-2 rounded hover:shadow-lg bg-gray-100 cursor-pointer capitalize transition duration-500 ease-in-out ${
-              currentIndex === i ? 'bg-gray-900 text-white font-semibold' : ''
+              currentIndex === i ? 'bg-blue-500 text-white font-semibold' : ''
             }`}
             key={title}
             onClick={() => setCurrentIndex(i)}>
