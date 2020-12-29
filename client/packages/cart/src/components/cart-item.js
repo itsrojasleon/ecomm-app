@@ -1,41 +1,50 @@
 import React, { useContext } from 'react';
+import { S3_BUCKET_NAME, formatMoney } from '@rlecomm/common';
 import { Context } from '../context/cart';
 
 const CartItem = ({ id, product, quantity }) => {
   const { removeItem, increase, decrease } = useContext(Context);
 
   return (
-    <tr>
-      <td className="border border-gray-100 px-4 py-2">
-        <p>{product.name}</p>
-        <p
-          className="text-red-500 text-xs cursor-pointer my-3"
-          onClick={() => removeItem(id)}>
-          Remove
-        </p>
-      </td>
-      <td className="border border-gray-100 px-4 py-2">
-        <div className="flex items-center justify-center gap-5">
-          <button
-            className="text-xl text-gray-400 hover:text-black"
-            onClick={() => decrease(id)}>
-            -
-          </button>
-          <p>{quantity}</p>
-          <button
-            className="text-xl text-gray-400 hover:text-black"
-            onClick={() => increase(id)}>
-            +
-          </button>
+    <div className="flex justify-between items-center p-3">
+      <div className="flex gap-2">
+        <img
+          className="h-28 rounded transform hover:scale-105 transition"
+          src={`${S3_BUCKET_NAME}/${product.imageUrl}`}
+          alt={product.name}
+        />
+        <div className="flex flex-col justify-between">
+          <p className="font-bold text-lg">{product.name}</p>
+          <p className="text-gray-900 font-semibold">
+            ${formatMoney(product.price)}
+          </p>
+          <p className="text-gray-500">
+            Quantity: <strong>{quantity}</strong>
+          </p>
+          <p
+            className="text-red-500 text-xs cursor-pointer"
+            onClick={() => removeItem(id)}>
+            Remove
+          </p>
         </div>
-      </td>
-      <td className="border border-gray-100 px-4 py-2 text-center">
-        $ {product.price.toFixed(2)}
-      </td>
-      <td className="border border-gray-100 px-4 py-2 text-center">
-        $ {(product.price * quantity).toFixed(2)}
-      </td>
-    </tr>
+      </div>
+      <div className="flex gap-4">
+        <button
+          onClick={() => decrease(id)}
+          className="rounded-full h-8 w-8 flex items-center justify-center text-2xl border cursor-buttonointer transform hover:scale-125 transition">
+          -
+        </button>
+
+        <button
+          onClick={() => increase(id)}
+          className="rounded-full h-8 w-8 flex items-center justify-center text-2xl border cursor-pointer transform hover:scale-125 transition">
+          +
+        </button>
+      </div>
+      <p className="text-lg font-semibold">
+        ${formatMoney(product.price * quantity)}
+      </p>
+    </div>
   );
 };
 

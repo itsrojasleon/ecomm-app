@@ -13,31 +13,32 @@ const Orders = () => {
     fetchOrders();
   }, []);
 
-  if (isLoading) return 'Loading...';
-  if (orders.length === 0) return 'There is nothing here';
-
   return (
     <div>
       <Title>Orders</Title>
       <Subtitle>These are your orders</Subtitle>
-      <div className="gap-4">
-        <Tabs>
-          <TabMenu titles={TITLES} />
-          {TITLES.map((title, i) => {
-            let newOrders = orders.filter((order) => order.status === title);
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="gap-4">
+          <Tabs>
+            <TabMenu titles={TITLES} />
+            {TITLES.map((title, i) => {
+              let newOrders = orders.filter((order) => order.status === title);
 
-            return (
-              <TabItem key={title} index={i}>
-                {!newOrders.length
-                  ? 'No orders'
-                  : newOrders.map((order) => (
-                      <OrderDetails key={order.id} {...order} />
-                    ))}
-              </TabItem>
-            );
-          })}
-        </Tabs>
-      </div>
+              return (
+                <TabItem key={title} index={i}>
+                  {!newOrders.length
+                    ? 'No orders'
+                    : newOrders.map((order) => (
+                        <OrderDetails key={order.id} {...order} />
+                      ))}
+                </TabItem>
+              );
+            })}
+          </Tabs>
+        </div>
+      )}
     </div>
   );
 };
