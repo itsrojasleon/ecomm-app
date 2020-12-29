@@ -9,7 +9,10 @@ export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     error: [],
     isLoading: false,
-    products: []
+    products: [],
+    cart: [],
+    wishlist: null,
+    count: 0
   });
 
   const boundActions = {};

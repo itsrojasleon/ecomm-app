@@ -7,7 +7,12 @@ export const reducer = (state, { type, payload }) => {
     case ACTION_TYPES.error:
       return { ...state, isLoading: false, error: payload };
     case ACTION_TYPES.searchProducts:
-      return { ...state, isLoading: false, products: payload };
+      return {
+        ...state,
+        isLoading: false,
+        products: payload.products,
+        count: payload.count
+      };
     case ACTION_TYPES.filterByPrices:
       return {
         ...state,

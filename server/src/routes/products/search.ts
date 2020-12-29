@@ -15,19 +15,30 @@ router.get(
   currentUser,
   requireAuth,
   async (req: Request, res: Response) => {
-    const { term } = req.query;
+    const { term, limit, offset } = req.query;
 
-    console.log('term', term);
-
-    if (!term) {
-      throw new BadRequestError('You must provide a term');
+    if (!term || !limit || !offset) {
+      throw new BadRequestError(
+        'You must provide a term, a limit and a offset query'
+      );
     }
-    const products = await Product.findAll({
+    const { count, rows } = await Product.findAndCountAll({
       where: { name: { [Op.iLike]: `%${term}%` } },
-      include: [Review, User, Wishlist]
+      include: [
+        {
+          model: Wishlist,
+          required: false,
+          where: { userId: req.currentUser!.id }
+        },
+        { model: Review, required: false },
+        { model: User }
+      ],
+      limit: Number(limit),
+      offset: Number(offset),
+      order: [['id', 'DESC']]
     });
 
-    res.send(products);
+    res.send({ count, rows });
   }
 );
 
