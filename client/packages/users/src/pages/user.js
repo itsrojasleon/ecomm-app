@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Title, Subtitle } from '@rlecomm/common';
 import UserDetails from '../components/user-details';
@@ -13,21 +13,28 @@ const User = ({ currentUser }) => {
     fetchUser(username);
   }, [username]);
 
-  if (!user) return 'No user';
-  if (isLoading) return 'Loading User...';
+  if (!user) return <p>No user</p>;
 
   return (
     <>
       <Title>User's page</Title>
       <Subtitle>
-        {user?.id === currentUser.id
+        {user.id === currentUser.id
           ? 'This is your profile'
           : "Here's the profile of this person"}
       </Subtitle>
-      <div className="grid lg:grid-cols-2 md:grid-cols-2 gap-4">
-        <UserDetails user={user} currentUser={currentUser} />
-        <UserProducts products={user.products} />
-      </div>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
+          <div className="lg:col-span-1 col-span-3">
+            <UserDetails user={user} currentUser={currentUser} />
+          </div>
+          <div className="col-span-2">
+            <UserProducts products={user.products} />
+          </div>
+        </div>
+      )}
     </>
   );
 };

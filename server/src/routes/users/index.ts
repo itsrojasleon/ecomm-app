@@ -23,7 +23,7 @@ router.get(
         'updatedAt',
         'bio'
       ],
-      include: [Product]
+      include: [{ model: Product, limit: 15, order: [['id', 'DESC']] }]
     });
 
     if (!user) {
