@@ -49,7 +49,7 @@ const Product = ({ id, name, price, description, imageUrl, user }) => {
           </button>
           <button
             onClick={() => removeFromWishlist(id)}
-            className="flex-none flex items-center justify-center w-9 h-9 rounded-md border-gray-300 border"
+            className="flex-none flex items-center justify-center w-9 h-9 rounded-md border-gray-200 border"
             type="button"
             aria-label="like">
             <Heart color="red" />
