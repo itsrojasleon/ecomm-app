@@ -24,13 +24,15 @@ const Products = () => {
           <Product key={product.id} {...product} />
         ))}
       </div>
-      <div className="flex my-5">
-        <Pagination
-          count={Math.ceil(count / LIMIT)}
-          setCurrentIndex={setCurrentIndex}
-          index={index}
-        />
-      </div>
+      {products.length !== 0 && (
+        <div className="flex my-5">
+          <Pagination
+            count={Math.ceil(count / LIMIT)}
+            setCurrentIndex={setCurrentIndex}
+            index={index}
+          />
+        </div>
+      )}
       {cart.map((product, i) => (
         <div
           key={product.id}
