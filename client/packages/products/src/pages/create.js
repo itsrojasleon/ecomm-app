@@ -26,7 +26,7 @@ const Create = () => {
     });
 
     createProduct({ name, price, description, imageUrl: data.key }).then(() => {
-      history.push('/products');
+      history.push('/');
     });
   };
 
