@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 
-const Pagination = ({ count }) => {
-  const [index, setCurrentIndex] = useState(0);
-
+const Pagination = ({ count, index, setCurrentIndex }) => {
   const handleNext = () => {
     if (index >= count - 1) {
       return;
