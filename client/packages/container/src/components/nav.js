@@ -24,30 +24,30 @@ const Nav = () => {
 
   return (
     <nav className="p-4 border-b mb-4">
-      <ul className="flex justify-between items-center">
+      <ul className="flex md:flex-row flex-col justify-between items-center">
         <Link to="/">
           <li className="text-lg font-bold">Ecomm</li>
         </Link>
-        <div className="flex gap-3">
-          <div>
-            <SearchBar />
+        <div className="flex gap-3 md:flex-row flex-col">
+          <SearchBar />
+          <div className="flex bg-red-100 w-full">
+            {links}
+            {currentUser && (
+              <>
+                <Link to="/wishlist" className="block px-4 py-2 rounded-md">
+                  <Heart />
+                </Link>
+                <Link to="/cart" className="block px-4 py-2 rounded-md">
+                  <Cart />
+                </Link>
+                <Link
+                  to={`/users/${currentUser.username}`}
+                  className="block px-4 py-2 rounded-md">
+                  <User />
+                </Link>
+              </>
+            )}
           </div>
-          {links}
-          {currentUser && (
-            <>
-              <Link to="/wishlist" className="block px-4 py-2 rounded-md">
-                <Heart />
-              </Link>
-              <Link to="/cart" className="block px-4 py-2 rounded-md">
-                <Cart />
-              </Link>
-              <Link
-                to={`/users/${currentUser.username}`}
-                className="block px-4 py-2 rounded-md">
-                <User />
-              </Link>
-            </>
-          )}
         </div>
       </ul>
     </nav>

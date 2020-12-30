@@ -34,7 +34,7 @@ const SearchBar = ({ onSubmit }) => {
         <input
           value={term}
           onChange={handleChange}
-          className="w-full focus:outline-none pl-10 py-2 rounded-lg bg-gray-100 text-black focus:bg-white focus:shadow-lg border border-gray-100 text-medium transition"
+          className="w-96 md:w-full focus:outline-none pl-10 py-2 rounded-lg bg-gray-100 text-black focus:bg-white focus:shadow-lg border border-gray-100 text-medium transition"
           placeholder="Search..."
           autoComplete="off"
         />
