@@ -1,19 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, User, Cart } from '@rlecomm/common';
+import { Heart, User, Cart, Bars, Close } from '@rlecomm/common';
 import NavItem from './nav-item';
 import SearchBar from './search-bar';
 import { Context } from '../context/container-context';
 
 const Nav = () => {
-  const { currentUser, searchProducts } = useContext(Context);
+  const { currentUser } = useContext(Context);
+  const [isOpen, setIsOpen] = useState(false);
 
   const links = [
     { href: '/', label: 'Home' },
     !currentUser && { href: '/auth/signup', label: 'Signup' },
     !currentUser && { href: '/auth/signin', label: 'Signin' },
     currentUser && { href: '/products/create', label: 'Sell' },
-    currentUser && { href: '/orders', label: 'Orders' }
+    currentUser && { href: '/orders', label: 'Orders' },
+    currentUser && { href: '/wishlist', label: <Heart /> },
+    currentUser && { href: '/cart', label: <Cart /> },
+    currentUser && { href: `/users/${currentUser.username}`, label: <User /> }
   ]
     .filter(Boolean)
     .map(({ href, label }) => (
@@ -23,34 +27,33 @@ const Nav = () => {
     ));
 
   return (
-    <nav className="p-4 border-b mb-4">
-      <ul className="flex md:flex-row flex-col justify-between items-center">
-        <Link to="/">
-          <li className="text-lg font-bold">Ecomm</li>
+    <header class="lg:px-16 px-6 bg-white flex flex-wrap items-center lg:py-0 py-2 border-b">
+      <div class="flex-1 flex justify-between items-center">
+        <Link className="text-xl font-bold" to="/">
+          Ecomm
         </Link>
-        <div className="flex gap-3 md:flex-row flex-col">
-          <SearchBar />
-          <div className="flex bg-red-100 w-full">
+      </div>
+
+      <label
+        for="menu-toggle"
+        class="pointer-cursor lg:hidden block"
+        onClick={() => setIsOpen((prev) => !prev)}>
+        {isOpen ? <Close /> : <Bars />}
+      </label>
+      <input class="hidden" type="checkbox" id="menu-toggle" />
+
+      <div
+        class={`lg:flex lg:items-center lg:w-auto w-full ${
+          isOpen ? '' : 'hidden'
+        }`}
+        id="menu">
+        <nav>
+          <ul class="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
             {links}
-            {currentUser && (
-              <>
-                <Link to="/wishlist" className="block px-4 py-2 rounded-md">
-                  <Heart />
-                </Link>
-                <Link to="/cart" className="block px-4 py-2 rounded-md">
-                  <Cart />
-                </Link>
-                <Link
-                  to={`/users/${currentUser.username}`}
-                  className="block px-4 py-2 rounded-md">
-                  <User />
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      </ul>
-    </nav>
+          </ul>
+        </nav>
+      </div>
+    </header>
   );
 };
 

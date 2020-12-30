@@ -6,7 +6,7 @@
     "build": "webpack --config config/webpack.prod.js"
   },
   "dependencies": {
-    "@rlecomm/common": "^1.0.28",
+    "@rlecomm/common": "1.0.29",
     "axios": "^0.21.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

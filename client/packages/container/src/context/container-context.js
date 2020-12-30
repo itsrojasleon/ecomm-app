@@ -6,7 +6,6 @@ Context.displayName = 'ContainerContext';
 
 const containerActions = {
   fetchCurrentUser: 'FETCH_CURRENT_USER',
-  searchProducts: 'SEARCH_PRODUCTS',
   isLoading: 'IS_LOADING',
   error: 'ERROR'
 };
@@ -22,8 +21,6 @@ const containerReducer = (state, { type, payload }) => {
   switch (type) {
     case containerActions.fetchCurrentUser:
       return { ...state, currentUser: payload, isLoading: false };
-    case containerActions.searchProducts:
-      return { ...state, products: payload, isLoading: false };
     case containerActions.isLoading:
       return { ...state, isLoading: true, error: null };
     case containerActions.error:
@@ -48,19 +45,7 @@ export const Provider = ({ children }) => {
     }
   };
 
-  const searchProducts = async (term) => {
-    try {
-      const { data } = await ecomm.get(`/api/search?term=${term}`);
-      dispatch({
-        type: containerActions.searchProducts,
-        payload: data
-      });
-    } catch (err) {
-      dispatch({ type: containerActions.error, payload: err });
-    }
-  };
-
-  const actions = { fetchCurrentUser, searchProducts };
+  const actions = { fetchCurrentUser };
 
   return (
     <Context.Provider value={{ ...state, ...actions }}>
