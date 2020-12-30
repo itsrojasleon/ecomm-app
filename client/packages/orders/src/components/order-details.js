@@ -9,17 +9,57 @@ const OrderDetails = ({
   user,
   id: orderId,
   total,
+  orders,
   createdAt,
   updatedAt
 }) => {
   const { cancelOrder, makePayment } = useContext(Context);
 
-  const createdDate = () => convertDate(createdAt);
-  const updatedDate = () => convertDate(updatedAt);
-
   return (
-    <div className="flex flex-col justify-between sm:flex-row items-center gap-4 border border-gray-100 py-2 px-1 rounded">
-      <p className="uppercase">
+    <div className="p-4 bg-gray-100 rounded">
+      <div className="flex justify-between items-center">
+        <div>
+          <p className="text-gray-400">Status</p>
+          <div className="flex gap-1">
+            <p className="font-semibold uppercase">{status}</p>
+            <p>
+              at{' '}
+              {status === 'created'
+                ? convertDate(createdAt)
+                : convertDate(updatedAt)}
+            </p>
+          </div>
+        </div>
+        <div>
+          <p className="text-gray-400">Products</p>
+          <p className="font-semibold uppercase">{orders.length}</p>
+        </div>
+        <div>
+          <p className="text-gray-400">Total</p>
+          <p className="font-semibold uppercase">{formatMoney(total)}</p>
+        </div>
+        <Link
+          to={`/orders/${orderId}`}
+          className="font-semibold hover:underline cursor-pointer">
+          See details
+        </Link>
+        {status === 'created' && (
+          <>
+            <StripeCheckout
+              token={({ id }) => makePayment({ token: id, orderId })}
+              stripeKey="pk_test_8erx4Kna0PkEURXDsmPxRRc0"
+              amount={total * 100}
+              email={user.email}
+            />
+            <button
+              onClick={() => cancelOrder(orderId)}
+              className="py-1 px-3 rounded-md bg-red-500 text-white font-semibold">
+              Cancel order
+            </button>
+          </>
+        )}
+      </div>
+      {/* <p className="uppercase">
         <strong>{status}</strong> by you (@
         {
           <Link className="hover:underline" to={`/users/${user.username}`}>
@@ -27,12 +67,10 @@ const OrderDetails = ({
           </Link>
         }
         ) on {status === 'created' ? createdDate() : updatedDate()}
-      </p>
-      <span>{formatMoney(total)}</span>
-      <Link className="hover:underline font-semibold" to={`/orders/${orderId}`}>
-        See details
-      </Link>
-      {status === 'created' && (
+      </p> */}
+      {/* <span>{formatMoney(total)}</span> */}
+      {/*  */}
+      {/* {status === 'created' && (
         <>
           <button
             onClick={() => cancelOrder(orderId)}
@@ -46,7 +84,7 @@ const OrderDetails = ({
             email={user.email}
           />
         </>
-      )}
+      )} */}
     </div>
   );
 };

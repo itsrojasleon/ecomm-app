@@ -26,26 +26,26 @@ const Nav = () => {
     ));
 
   return (
-    <header class="lg:px-16 px-6 bg-white flex flex-wrap items-center lg:py-0 py-2 border-b">
-      <div class="flex-1 flex justify-between items-center">
+    <header className="lg:px-16 px-6 bg-white flex flex-wrap items-center lg:py-0 py-2 border-b">
+      <div className="flex-1 flex justify-between items-center">
         <Link className="text-xl font-bold" to="/">
           Ecomm
         </Link>
       </div>
       <label
-        for="menu-toggle"
-        class="pointer-cursor lg:hidden block"
+        htmlFor="menu-toggle"
+        className="pointer-cursor lg:hidden block"
         onClick={() => setIsOpen((prev) => !prev)}>
         {isOpen ? <Close /> : <Bars />}
       </label>
-      <input class="hidden" type="checkbox" id="menu-toggle" />
+      <input className="hidden" type="checkbox" id="menu-toggle" />
       <div
-        class={`lg:flex lg:items-center lg:w-auto w-full ${
+        className={`lg:flex lg:items-center lg:w-auto w-full ${
           isOpen ? '' : 'hidden'
         }`}
         id="menu">
         <nav>
-          <ul class="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
+          <ul className="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
             {links}
           </ul>
         </nav>
