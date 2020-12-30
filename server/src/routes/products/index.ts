@@ -5,6 +5,7 @@ import { Product } from '../../models/product';
 import { Wishlist } from '../../models/wishlist';
 import { Review } from '../../models/review';
 import { BadRequestError } from '../../errors/bad-request';
+import { User } from '../../models/user';
 
 const router = express.Router();
 
@@ -28,6 +29,10 @@ router.get(
         },
         {
           model: Review,
+          required: false
+        },
+        {
+          model: User,
           required: false
         }
       ],
