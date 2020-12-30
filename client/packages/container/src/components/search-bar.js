@@ -17,7 +17,7 @@ const SearchBar = ({ onSubmit }) => {
 
   return (
     <div className="relative text-gray-600 focus-within:text-gray-400">
-      <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+      <span className="sm:hidden lg:block top-2 absolute inset-y-0 left-0 flex items-center pl-2">
         <button
           type="submit"
           className="p-1 focus:outline-none focus:shadow-outline">
@@ -34,10 +34,15 @@ const SearchBar = ({ onSubmit }) => {
         <input
           value={term}
           onChange={handleChange}
-          className="w-96 md:w-full focus:outline-none pl-10 py-2 rounded-lg bg-gray-100 text-black focus:bg-white focus:shadow-lg border border-gray-100 text-medium transition"
-          placeholder="Search..."
+          className="w-full focus:outline-none lg:pl-10 pl-3 py-2 rounded-lg bg-gray-100 text-black focus:bg-white focus:shadow border border-gray-100 text-medium transition"
+          placeholder="Search for products..."
           autoComplete="off"
         />
+        <div className="flex justify-end">
+          <button className="mt-3 lg:hidden py-2 px-4 border border-transparen font-medium rounded-md text-white bg-gray-900 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

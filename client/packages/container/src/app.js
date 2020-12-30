@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect, useContext } from 'react';
 import { Route, Switch, Redirect, Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import Nav from './components/nav';
+import SearchBar from './components/search-bar';
 import Footer from './components/footer';
 import { Context } from './context/container-context';
 import '../styles/tailwind.css';
@@ -39,7 +40,10 @@ const App = () => {
   return (
     <Router history={history}>
       <Nav />
-      <div className="w-11/12 m-auto">
+      <div className="lg:w-2/5 px-6 m-auto pt-4">
+        <SearchBar />
+      </div>
+      <div className="w-11/12 lg: m-auto">
         <Suspense fallback={<h1>Loading...</h1>}>
           <Switch>
             <Route path="/auth">

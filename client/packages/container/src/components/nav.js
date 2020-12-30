@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 import { Heart, User, Cart, Bars, Close } from '@rlecomm/common';
 import NavItem from './nav-item';
-import SearchBar from './search-bar';
 import { Context } from '../context/container-context';
 
 const Nav = () => {
@@ -33,7 +32,6 @@ const Nav = () => {
           Ecomm
         </Link>
       </div>
-
       <label
         for="menu-toggle"
         class="pointer-cursor lg:hidden block"
@@ -41,7 +39,6 @@ const Nav = () => {
         {isOpen ? <Close /> : <Bars />}
       </label>
       <input class="hidden" type="checkbox" id="menu-toggle" />
-
       <div
         class={`lg:flex lg:items-center lg:w-auto w-full ${
           isOpen ? '' : 'hidden'
