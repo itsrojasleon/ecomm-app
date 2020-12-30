@@ -18,9 +18,7 @@ const SearchApp = lazy(() => import('./components/search-app'));
 const history = createBrowserHistory();
 
 const App = () => {
-  const { currentUser, isLoading, error, fetchCurrentUser } = useContext(
-    Context
-  );
+  const { currentUser, error, fetchCurrentUser } = useContext(Context);
 
   useEffect(() => {
     fetchCurrentUser();
@@ -34,41 +32,44 @@ const App = () => {
     };
   }, []);
 
-  if (isLoading) return 'LOADING...';
   if (error) return <div>{JSON.stringify(error)}</div>;
 
   return (
     <Router history={history}>
-      <Nav />
-      <div className="lg:w-2/5 px-6 m-auto pt-4">
-        <SearchBar />
+      <div className="flex flex-col h-screen">
+        <header>
+          <Nav />
+          <div className="lg:w-2/5 px-6 m-auto pt-4">
+            <SearchBar />
+          </div>
+        </header>
+        <div className="w-11/12 lg: m-auto flex-1">
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Switch>
+              <Route path="/auth">
+                {currentUser && <Redirect to="/" />}
+                <AuthApp />
+              </Route>
+              <Route path="/cart" component={CartApp} />
+              <Route path="/orders" component={OrdersApp} />
+              <Route path="/wishlist" component={WishlistApp} />
+              <Route path="/users">
+                <UsersApp currentUser={currentUser} />
+              </Route>
+              <Route path="/search">
+                <SearchApp currentUser={currentUser} />
+              </Route>
+              <Route path="/">
+                <ProductsApp currentUser={currentUser} />
+              </Route>
+              <Route path="*">
+                <Redirect to="/" />
+              </Route>
+            </Switch>
+          </Suspense>
+        </div>
+        <Footer />
       </div>
-      <div className="w-11/12 lg: m-auto">
-        <Suspense fallback={<h1>Loading...</h1>}>
-          <Switch>
-            <Route path="/auth">
-              {currentUser && <Redirect to="/" />}
-              <AuthApp />
-            </Route>
-            <Route path="/cart" component={CartApp} />
-            <Route path="/orders" component={OrdersApp} />
-            <Route path="/wishlist" component={WishlistApp} />
-            <Route path="/users">
-              <UsersApp currentUser={currentUser} />
-            </Route>
-            <Route path="/search">
-              <SearchApp currentUser={currentUser} />
-            </Route>
-            <Route path="/">
-              <ProductsApp currentUser={currentUser} />
-            </Route>
-            <Route path="*">
-              <Redirect to="/" />
-            </Route>
-          </Switch>
-        </Suspense>
-      </div>
-      <Footer />
     </Router>
   );
 };

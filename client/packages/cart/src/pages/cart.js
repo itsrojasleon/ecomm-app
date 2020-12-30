@@ -13,7 +13,12 @@ const Cart = () => {
   }, []);
 
   if (items.length === 0)
-    return <Subtitle>No products added to the shopping cart</Subtitle>;
+    return (
+      <>
+        <Title>Shopping Cart</Title>
+        <Subtitle>No products added to the shopping cart</Subtitle>
+      </>
+    );
 
   const order = async () => {
     const {
