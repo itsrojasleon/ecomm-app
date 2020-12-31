@@ -9,6 +9,7 @@ export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     products: [],
     product: null,
+    topProductsByRating: [],
     count: 0,
     cart: [],
     wishlist: null,

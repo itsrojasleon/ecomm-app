@@ -1,8 +1,8 @@
 export const ACTION_TYPES = {
   isLoading: 'IS_LOADING',
   error: 'ERROR',
-  cleanError: 'CLEAN_ERROR',
   fetchProducts: 'FETCH_PRODUCTS',
+  fetchTopProductsByRating: 'FETCH_TOP_PRODUCTS_BY_RATING',
   fetchProduct: 'FETCH_PRODUCT',
   createProduct: 'CREATE_PRODUCT',
   addToCart: 'ADD_TO_CART',

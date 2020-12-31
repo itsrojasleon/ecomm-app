@@ -36,7 +36,7 @@ const OrderDetails = ({
         </div>
         <div>
           <p className="text-gray-400">Total</p>
-          <p className="font-semibold uppercase">{formatMoney(total)}</p>
+          <p className="font-semibold uppercase">${formatMoney(total)}</p>
         </div>
         <Link
           to={`/orders/${orderId}`}

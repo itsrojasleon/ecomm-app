@@ -13,6 +13,12 @@ export const reducer = (state, { type, payload }) => {
         products: payload.products,
         count: payload.count
       };
+    case ACTION_TYPES.fetchTopProductsByRating:
+      return {
+        ...state,
+        isLoading: false,
+        topProductsByRating: payload
+      };
     case ACTION_TYPES.fetchProduct:
       return { ...state, isLoading: false, product: payload };
     case ACTION_TYPES.createProduct:

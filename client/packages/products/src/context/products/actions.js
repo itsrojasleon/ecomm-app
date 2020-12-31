@@ -2,11 +2,13 @@ import { ecomm } from '@rlecomm/common';
 import { ACTION_TYPES } from './types';
 
 const fetchProducts = (dispatch) => async ({ limit = 10, offset = 0 }) => {
-  dispatch({ type: ACTION_TYPES.isLoading });
   try {
+    dispatch({ type: ACTION_TYPES.isLoading });
+
     const {
       data: { rows: products, count }
     } = await ecomm.get(`/api/products?limit=${limit}&offset=${offset}`);
+
     dispatch({
       type: ACTION_TYPES.fetchProducts,
       payload: { products, count }
@@ -17,10 +19,24 @@ const fetchProducts = (dispatch) => async ({ limit = 10, offset = 0 }) => {
 };
 
 const fetchProduct = (dispatch) => async (id) => {
-  dispatch({ type: ACTION_TYPES.isLoading });
   try {
+    dispatch({ type: ACTION_TYPES.isLoading });
+
     const { data } = await ecomm.get(`/api/products/${id}`);
+
     dispatch({ type: ACTION_TYPES.fetchProduct, payload: data });
+  } catch (err) {
+    dispatch({ type: ACTION_TYPES.error, payload: err.response.data.errors });
+  }
+};
+
+const fetchTopProductsByRating = (dispatch) => async () => {
+  try {
+    dispatch({ type: ACTION_TYPES.isLoading });
+
+    const { data } = await ecomm.get('/api/products/resources/ratings');
+
+    dispatch({ type: ACTION_TYPES.fetchTopProductsByRating, payload: data });
   } catch (err) {
     dispatch({ type: ACTION_TYPES.error, payload: err.response.data.errors });
   }
@@ -124,6 +140,7 @@ const removeReview = (dispatch) => async (id) => {
 
 export {
   fetchProducts,
+  fetchTopProductsByRating,
   fetchProduct,
   createProduct,
   addToCart,
