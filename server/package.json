@@ -2,10 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./build/index.js",
   "scripts": {
     "dev": "ts-node-dev --poll src/index.ts",
-    "test": "jest --no-cache"
+    "start": "node build/index.js",
+    "test": "jest --no-cache",
+    "build": "tsc -p ."
   },
   "jest": {
     "preset": "ts-jest",

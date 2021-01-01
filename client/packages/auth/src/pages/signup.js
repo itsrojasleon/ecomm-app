@@ -26,9 +26,8 @@ const Signup = () => {
       <Title>Signup</Title>
       <Subtitle>Signup to create a new account. It's super easy</Subtitle>
       <div className="flex items-center justify-center">
-        <div className="max-w-md w-full space-y-8">
+        <div className="lg:max-w-md w-full space-y-8">
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            <input type="hidden" name="remember" value="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div className="pb-3">
                 <label className="font-medium pb-2" htmlFor="email">
