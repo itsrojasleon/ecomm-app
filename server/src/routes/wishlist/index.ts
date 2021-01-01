@@ -4,6 +4,7 @@ import { requireAuth } from '../../middlewares/require-auth';
 import { Product } from '../../models/product';
 import { User } from '../../models/user';
 import { Wishlist } from '../../models/wishlist';
+import { Review } from '../../models/review';
 
 const router = express.Router();
 

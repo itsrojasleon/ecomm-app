@@ -22,7 +22,7 @@ const Wishlist = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-4">
           {wishlist.map(({ id, product, user }) => (
             <Product key={id} {...product} user={user} />
           ))}

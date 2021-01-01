@@ -26,7 +26,11 @@ const Products = () => {
 
   return (
     <>
-      <Title>Products</Title>
+      {products.length ? (
+        <Title>Products</Title>
+      ) : (
+        <Title>You need to create an account first 😊</Title>
+      )}
       {topProductsByRating.length ? <Subtitle>Top products</Subtitle> : null}
       <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-4 mb-4">
         {topProductsByRating.map((product) => (
