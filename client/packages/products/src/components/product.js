@@ -58,7 +58,10 @@ const Product = ({
   return (
     <div className="flex">
       <div className="flex-auto">
-        <img className="rounded-xl" src={`${S3_BUCKET_NAME}/${imageUrl}`} />
+        <img
+          className="rounded-xl h-64"
+          src={`${S3_BUCKET_NAME}/${imageUrl}`}
+        />
         <div className="flex flex-wrap mt-3">
           <Link
             to={`/products/${id}`}

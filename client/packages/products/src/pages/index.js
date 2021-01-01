@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import { Title, Subtitle } from '@rlecomm/common';
 import Product from '../components/product';
 import Alert from '../components/alert';
@@ -26,11 +25,7 @@ const Products = () => {
 
   return (
     <>
-      {products.length ? (
-        <Title>Products</Title>
-      ) : (
-        <Title>You need to create an account first 😊</Title>
-      )}
+      <Title>{!products.length ? 'No products' : 'Products'}</Title>
       {topProductsByRating.length ? <Subtitle>Top products</Subtitle> : null}
       <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-4 mb-4">
         {topProductsByRating.map((product) => (

@@ -60,7 +60,11 @@ const App = () => {
                 <SearchApp currentUser={currentUser} />
               </Route>
               <Route path="/">
-                <ProductsApp currentUser={currentUser} />
+                {!currentUser ? (
+                  <h2>You need to create an account first</h2>
+                ) : (
+                  <ProductsApp currentUser={currentUser} />
+                )}
               </Route>
               <Route path="*">
                 <Redirect to="/" />
